@@ -1,28 +1,60 @@
 extends CharacterBody2D
+class_name PLAYER
 
-@export var speed = 500
+var ACC = 1000
+var speed = 700
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
+@onready var thrusters: GPUParticles2D = $Rocket
+@onready var laser_source = $LaserSource
+
+signal laser(pos, dir)
 
 
+func _movement(delta: float) -> void:
+	"""
+	Rörelse för spelaren
+	direction = riktningsvector 
+	"""
+	var direction = Input.get_vector("left", "right", "up", "down")
+	
+	velocity.x = move_toward(velocity.x, speed * direction[0], ACC * delta)
+	velocity.y = move_toward(velocity.y, speed * direction[1], ACC * delta)
+	
+	move_and_slide()
+	#print(direction)
+	
+	#Slår på och stänger av raketens partiklar
+	if direction[0] != 0 or direction[1] != 0:
+		thrusters.emitting = true
+	else:
+		thrusters.emitting = false
+	
+	
+ 	#Horizontal och vertikal
+	if direction[1] == 1:
+		self.rotation_degrees = 180
+		
+	elif direction[1] == -1:
+		self.rotation_degrees = 0
+		
+	elif direction[0] == -1 or direction[0] == 1:
+		self.rotation_degrees = 90*direction[0]
+
+	
+	#diagonal riktning
+	elif direction[0] < 0 and direction[1] < 0 or direction[0] > 0 and direction[1] < 0:
+		self.rotation_degrees = -45*direction[0]/direction[1]
+		
+	elif direction[0] < 0 and direction[1] > 0 or direction[0] > 0 and direction[1] > 0:
+		self.rotation_degrees = 135*direction[0]/direction[1]
+
+
+func _shooting(delta:float) -> void:
+	if Input.is_action_just_pressed("shoot"):
+		laser.emit(laser_source.global_position, self.rotation_degrees)
+	
 
 func _process(delta: float) -> void:
-	var direction = Input.get_vector("left", "right", "up", "down")
-	velocity = direction * speed
-	move_and_slide()
+	_movement(delta)
+	_shooting(delta)
 	
-	var vector_x = Input.get_axis("left", "right")
-	var vector_y = Input.get_axis("up", "down")
-	if vector_x == 0 or vector_y == 0:
-		rotation_degrees = 0
-	if vector_x > 0:
-		rotation_degrees = -90
-	if vector_x < 0:
-		rotation_degrees = 90
-	if vector_y < 0:
-		rotation_degrees = 180
-	
-		
-		

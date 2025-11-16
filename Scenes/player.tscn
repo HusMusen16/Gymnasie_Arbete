@@ -1,14 +1,50 @@
-[gd_scene load_steps=3 format=3 uid="uid://drqkl0c1bf0f8"]
+[gd_scene load_steps=6 format=3 uid="uid://drqkl0c1bf0f8"]
 
 [ext_resource type="Script" uid="uid://7438sawkxa1s" path="res://Scripts/player.gd" id="1_cvnsp"]
 [ext_resource type="Texture2D" uid="uid://b1cqu05b1fm1h" path="res://assets/PNG/playerShip2_green.png" id="2_cvnsp"]
 
+[sub_resource type="Gradient" id="Gradient_cvnsp"]
+offsets = PackedFloat32Array(0, 0.546366, 0.992481)
+colors = PackedColorArray(1, 0.74902, 0, 1, 0.92549, 0, 0.0823529, 0.745098, 0.854902, 0, 0, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_6t5aa"]
+gradient = SubResource("Gradient_cvnsp")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_6t5aa"]
+particle_flag_disable_z = true
+angle_min = -720.0
+angle_max = -530.5
+gravity = Vector3(0, 0, 0)
+scale_min = 0.0
+scale_max = 14.16
+color = Color(1, 0.647059, 0.105882, 0.835294)
+color_ramp = SubResource("GradientTexture1D_6t5aa")
+hue_variation_min = -1.0
+hue_variation_max = -0.84
+
 [node name="Player" type="CharacterBody2D"]
+z_index = 10
+collision_layer = 4
+collision_mask = 11
 script = ExtResource("1_cvnsp")
 
+[node name="Rocket" type="GPUParticles2D" parent="."]
+position = Vector2(0, 36)
+scale = Vector2(0.8, 1.5)
+emitting = false
+amount = 30
+preprocess = 0.32
+speed_scale = 1.5
+process_material = SubResource("ParticleProcessMaterial_6t5aa")
+
+[node name="GunFlash" type="GPUParticles2D" parent="."]
+
 [node name="Sprite2D" type="Sprite2D" parent="."]
-rotation = 3.14159
 texture = ExtResource("2_cvnsp")
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+[node name="ShipCollision" type="CollisionPolygon2D" parent="."]
+rotation = 3.14159
 polygon = PackedVector2Array(4, 38, 13, 18, 56, -5, 37, -35, 18, -30, 13, -38, -12, -37, -16, -30, -37, -35, -56, -6, -14, 17, -4, 38)
+
+[node name="LaserSource" type="Marker2D" parent="."]
+position = Vector2(0, -38)

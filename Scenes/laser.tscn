@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=3 uid="uid://d0ewu0rlouahw"]
+
+[ext_resource type="Script" uid="uid://cyqutf1fihvd2" path="res://Scripts/laser.gd" id="1_r1bh0"]
+
+[sub_resource type="Curve" id="Curve_mou6w"]
+_limits = [0.0, 1.0, 0.129496, 0.866907]
+_data = [Vector2(0.129496, 0.182533), 0.0, 0.0572762, 0, 0, Vector2(0.861601, 0.417176), 0.463236, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_3pc01"]
+colors = PackedColorArray(0, 0.185791, 0.315025, 1, 0.925738, 0.964347, 1, 1)
+metadata/_snap_enabled = true
+metadata/_snap_count = 2
+
+[node name="Laser" type="Line2D"]
+points = PackedVector2Array(0, 27, 0, -26)
+closed = true
+width_curve = SubResource("Curve_mou6w")
+default_color = Color(0.404519, 0.551108, 0.917297, 1)
+gradient = SubResource("Gradient_3pc01")
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+antialiased = true
+script = ExtResource("1_r1bh0")
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+position = Vector2(0, 27)
+rotation = 3.14159
+target_position = Vector2(4.89568e-06, 56)

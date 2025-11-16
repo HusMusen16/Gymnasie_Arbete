@@ -1,0 +1,3 @@
+[gd_scene format=3 uid="uid://5w46ium5pxso"]
+
+[node name="Meteor" type="CharacterBody2D"]
