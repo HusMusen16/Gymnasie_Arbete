@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://drqkl0c1bf0f8"]
+[gd_scene load_steps=9 format=3 uid="uid://drqkl0c1bf0f8"]
 
 [ext_resource type="Script" uid="uid://7438sawkxa1s" path="res://Scripts/player.gd" id="1_cvnsp"]
 [ext_resource type="Texture2D" uid="uid://b1cqu05b1fm1h" path="res://assets/PNG/playerShip2_green.png" id="2_cvnsp"]
@@ -14,6 +14,8 @@ gradient = SubResource("Gradient_cvnsp")
 particle_flag_disable_z = true
 angle_min = -720.0
 angle_max = -530.5
+orbit_velocity_min = -0.2
+orbit_velocity_max = 0.2
 gravity = Vector3(0, 0, 0)
 scale_min = 0.0
 scale_max = 14.16
@@ -21,6 +23,32 @@ color = Color(1, 0.647059, 0.105882, 0.835294)
 color_ramp = SubResource("GradientTexture1D_6t5aa")
 hue_variation_min = -1.0
 hue_variation_max = -0.84
+
+[sub_resource type="Gradient" id="Gradient_6t5aa"]
+offsets = PackedFloat32Array(0, 0.845865, 1)
+colors = PackedColorArray(0.317647, 0.345098, 1, 1, 0.317647, 0.345098, 1, 0.752941, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_vgqql"]
+gradient = SubResource("Gradient_6t5aa")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_cvnsp"]
+particle_flag_align_y = true
+particle_flag_disable_z = true
+angular_velocity_min = -720.0
+angular_velocity_max = 15.5
+orbit_velocity_min = -2.0
+orbit_velocity_max = 2.0
+gravity = Vector3(0, -1000, 0)
+damping_min = 61.4
+damping_max = 61.4
+scale_min = 6.0
+scale_max = 6.0
+scale_over_velocity_min = 1.0
+scale_over_velocity_max = 1.0
+color = Color(0.315971, 0.344875, 1, 1)
+color_ramp = SubResource("GradientTexture1D_vgqql")
+hue_variation_min = -0.2
+hue_variation_max = -2.23517e-08
 
 [node name="Player" type="CharacterBody2D"]
 z_index = 10
@@ -38,6 +66,11 @@ speed_scale = 1.5
 process_material = SubResource("ParticleProcessMaterial_6t5aa")
 
 [node name="GunFlash" type="GPUParticles2D" parent="."]
+position = Vector2(0, -38)
+emitting = false
+lifetime = 0.2
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_cvnsp")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_cvnsp")
@@ -48,3 +81,12 @@ polygon = PackedVector2Array(4, 38, 13, 18, 56, -5, 37, -35, 18, -30, 13, -38, -
 
 [node name="LaserSource" type="Marker2D" parent="."]
 position = Vector2(0, -38)
+
+[node name="ShootTimer" type="Timer" parent="."]
+wait_time = 0.4
+
+[node name="FlashDuration" type="Timer" parent="."]
+wait_time = 0.1
+
+[connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]
+[connection signal="timeout" from="FlashDuration" to="." method="_on_flash_duration_timeout"]

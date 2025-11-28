@@ -23,6 +23,8 @@ texture = ExtResource("2_6phgx")
 
 [node name="Lasers" type="Node" parent="."]
 
+[node name="meteors" type="Node" parent="."]
+
 [node name="Player" parent="." instance=ExtResource("3_6phgx")]
 show_behind_parent = true
 z_index = 0
@@ -81,4 +83,8 @@ offset_right = -1211.0
 offset_bottom = 2999.0
 color = Color(1, 0, 0, 0.172549)
 
+[node name="Meteor_Timer" type="Timer" parent="."]
+autostart = true
+
 [connection signal="laser" from="Player" to="." method="_on_player_laser"]
+[connection signal="timeout" from="Meteor_Timer" to="." method="_on_meteor_timer_timeout"]

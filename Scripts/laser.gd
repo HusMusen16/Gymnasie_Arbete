@@ -1,11 +1,12 @@
 extends Line2D
 class_name LASER
 
-
 const SPEED = 1500
 
+@onready var dissipation_timer: Timer = $"Dissipation Timer"
 
-func _physics_process(delta: float):
+
+func _laser_movement(delta: float):
 	if rotation_degrees == 0:
 		global_position[1] -= SPEED * delta
 		
@@ -22,3 +23,12 @@ func _physics_process(delta: float):
 	elif rotation_degrees == 135 or rotation_degrees == -135:
 		global_position[0] += pow(pow((SPEED * delta), 2)/2,0.5) * rotation_degrees/135
 		global_position[1] += pow(pow((SPEED * delta), 2)/2,0.5)
+
+
+func _physics_process(delta: float):
+	_laser_movement(delta)
+
+
+func _on_dissipation_timer_timeout() -> void:
+	queue_free()
+	

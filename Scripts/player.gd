@@ -3,9 +3,14 @@ class_name PLAYER
 
 var ACC = 1000
 var speed = 700
+var can_shoot: bool = true
 
 @onready var thrusters: GPUParticles2D = $Rocket
-@onready var laser_source = $LaserSource
+@onready var gun_flash:GPUParticles2D = $GunFlash
+@onready var laser_source: Marker2D = $LaserSource
+@onready var shoot_timer: Timer = $ShootTimer
+@onready var flash_duration: Timer = $FlashDuration
+
 
 signal laser(pos, dir)
 
@@ -34,6 +39,7 @@ func _movement(delta: float) -> void:
 	if direction[1] == 1:
 		self.rotation_degrees = 180
 		
+		
 	elif direction[1] == -1:
 		self.rotation_degrees = 0
 		
@@ -50,11 +56,22 @@ func _movement(delta: float) -> void:
 
 
 func _shooting(delta:float) -> void:
-	if Input.is_action_just_pressed("shoot"):
+	if Input.is_action_just_pressed("shoot") and can_shoot:
 		laser.emit(laser_source.global_position, self.rotation_degrees)
-	
+		
+		shoot_timer.start(0)
+		can_shoot = false
+		
+		flash_duration.start(0)
+		gun_flash.emitting = true
 
 func _process(delta: float) -> void:
 	_movement(delta)
 	_shooting(delta)
 	
+
+func _on_shoot_timer_timeout() -> void:
+	can_shoot = true
+
+func _on_flash_duration_timeout() -> void:
+	gun_flash.emitting = false
