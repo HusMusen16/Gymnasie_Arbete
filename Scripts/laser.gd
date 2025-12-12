@@ -4,6 +4,15 @@ class_name LASER
 const SPEED = 1500
 
 @onready var dissipation_timer: Timer = $"Dissipation Timer"
+@onready var ray_cast: RayCast2D = $RayCast2D
+
+
+
+func _laser_colliding():
+	if ray_cast.is_colliding():
+		var collider = ray_cast.get_collider()
+		if collider is METEOR:
+			collider.explode()
 
 
 func _laser_movement(delta: float):
@@ -27,6 +36,7 @@ func _laser_movement(delta: float):
 
 func _physics_process(delta: float):
 	_laser_movement(delta)
+	_laser_colliding()
 
 
 func _on_dissipation_timer_timeout() -> void:

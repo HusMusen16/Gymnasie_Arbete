@@ -1,9 +1,13 @@
 extends CharacterBody2D
 class_name PLAYER
 
+
+
 var ACC = 1000
 var speed = 700
 var can_shoot: bool = true
+
+
 
 @onready var thrusters: GPUParticles2D = $Rocket
 @onready var gun_flash:GPUParticles2D = $GunFlash
@@ -12,7 +16,9 @@ var can_shoot: bool = true
 @onready var flash_duration: Timer = $FlashDuration
 
 
+
 signal laser(pos, dir)
+
 
 
 func _movement(delta: float) -> void:
@@ -65,6 +71,7 @@ func _shooting(delta:float) -> void:
 		flash_duration.start(0)
 		gun_flash.emitting = true
 
+
 func _process(delta: float) -> void:
 	_movement(delta)
 	_shooting(delta)
@@ -72,6 +79,7 @@ func _process(delta: float) -> void:
 
 func _on_shoot_timer_timeout() -> void:
 	can_shoot = true
+
 
 func _on_flash_duration_timeout() -> void:
 	gun_flash.emitting = false

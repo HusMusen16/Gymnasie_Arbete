@@ -1,3 +1,22 @@
-[gd_scene format=3 uid="uid://dmtjp32hn4tcq"]
+[gd_scene load_steps=4 format=3 uid="uid://dmtjp32hn4tcq"]
+
+[ext_resource type="Script" uid="uid://dojj7ml64emxd" path="res://Scripts/enemy_1.gd" id="1_0a874"]
+[ext_resource type="Texture2D" uid="uid://bhcpiepc81wm7" path="res://assets/PNG/ufoRed.png" id="1_jwqgc"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jwqgc"]
+radius = 53.0377
 
 [node name="Enemy1" type="CharacterBody2D"]
+collision_layer = 0
+collision_mask = 7
+script = ExtResource("1_0a874")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_jwqgc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_jwqgc")
+
+[node name="X_timer" type="Timer" parent="."]
+
+[node name="Y_timer" type="Timer" parent="."]
