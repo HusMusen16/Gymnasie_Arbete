@@ -7,7 +7,10 @@ var ACC = 1000
 var speed = 700
 var can_shoot: bool = true
 
-
+"""
+Lägg till en rektangel till spelaren där meteorer och fiender 
+inte kan spawna
+"""
 
 @onready var thrusters: GPUParticles2D = $Rocket
 @onready var gun_flash:GPUParticles2D = $GunFlash

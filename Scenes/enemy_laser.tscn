@@ -1,28 +1,28 @@
-[gd_scene load_steps=4 format=3 uid="uid://d0ewu0rlouahw"]
+[gd_scene load_steps=4 format=3 uid="uid://bb6a0y3akkkix"]
 
-[ext_resource type="Script" uid="uid://cyqutf1fihvd2" path="res://Scripts/laser.gd" id="1_r1bh0"]
+[ext_resource type="Script" uid="uid://bqf5u8bfxvwcq" path="res://Scripts/enemy_laser.gd" id="1_s2mcl"]
 
 [sub_resource type="Curve" id="Curve_mou6w"]
 _limits = [0.0, 1.0, 0.129496, 0.866907]
 _data = [Vector2(0.129496, 0.182533), 0.0, 0.0572762, 0, 0, Vector2(0.861601, 0.417176), 0.463236, 0.0, 0, 0]
 point_count = 2
 
-[sub_resource type="Gradient" id="Gradient_r1bh0"]
-colors = PackedColorArray(0, 0.185791, 0.315025, 1, 0.925738, 0.964347, 1, 1)
+[sub_resource type="Gradient" id="Gradient_3nkkm"]
+colors = PackedColorArray(0.346805, 0.0346831, 0, 1, 1, 0.710861, 0.67109, 1)
 metadata/_snap_enabled = true
 metadata/_snap_count = 2
 
-[node name="Laser" type="Line2D"]
+[node name="E" type="Line2D"]
 points = PackedVector2Array(0, 27, 0, -26)
 closed = true
 width_curve = SubResource("Curve_mou6w")
 default_color = Color(0.404519, 0.551108, 0.917297, 1)
-gradient = SubResource("Gradient_r1bh0")
+gradient = SubResource("Gradient_3nkkm")
 joint_mode = 2
 begin_cap_mode = 2
 end_cap_mode = 2
 antialiased = true
-script = ExtResource("1_r1bh0")
+script = ExtResource("1_s2mcl")
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
 position = Vector2(0, 27)

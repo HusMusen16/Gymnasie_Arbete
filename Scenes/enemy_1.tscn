@@ -7,7 +7,7 @@
 radius = 53.0377
 
 [node name="Enemy1" type="CharacterBody2D"]
-collision_layer = 0
+collision_layer = 2
 collision_mask = 7
 script = ExtResource("1_0a874")
 
@@ -17,6 +17,25 @@ texture = ExtResource("1_jwqgc")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_jwqgc")
 
+[node name="Lasers" type="Node" parent="."]
+
 [node name="X_timer" type="Timer" parent="."]
+wait_time = 0.5
 
 [node name="Y_timer" type="Timer" parent="."]
+wait_time = 0.5
+
+[node name="X_allow_timer" type="Timer" parent="."]
+wait_time = 6.0
+
+[node name="Y_allow_timer" type="Timer" parent="."]
+wait_time = 6.0
+
+[node name="Shoot_timer" type="Timer" parent="."]
+autostart = true
+
+[connection signal="timeout" from="X_timer" to="." method="_on_x_timer_timeout"]
+[connection signal="timeout" from="Y_timer" to="." method="_on_y_timer_timeout"]
+[connection signal="timeout" from="X_allow_timer" to="." method="_on_x_allow_timer_timeout"]
+[connection signal="timeout" from="Y_allow_timer" to="." method="_on_y_allow_timer_timeout"]
+[connection signal="timeout" from="Shoot_timer" to="." method="_on_shoot_timer_timeout"]

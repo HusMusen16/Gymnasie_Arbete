@@ -14,8 +14,6 @@ var enemy_scene: PackedScene = load("res://Scenes/enemy_1.tscn")
 @onready var enemy_timer: Timer = $Enemy_Timer
 	
 
-func _physics_process(_delta: float) -> void:
-	pass
 
 
 func _spawn_enemy():

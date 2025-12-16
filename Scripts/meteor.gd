@@ -15,8 +15,8 @@ var width = [-1000, 5500]
 var hight = [-1000, 3500]
 
 
-var meteor_x = RandomNumberGenerator.new().randf_range(0,500)
-var meteor_y = RandomNumberGenerator.new().randf_range(0,500)
+var meteor_x = RandomNumberGenerator.new().randf_range(-1000, 5500)
+var meteor_y = RandomNumberGenerator.new().randf_range(-1000,3500)
 
 
 @onready var sprite: Sprite2D = $Sprite2D
@@ -34,8 +34,8 @@ const meteors = [preload("res://assets/PNG/Meteors/meteorBrown_big1.png"),
 
 func _ready() -> void:
 	sprite.texture = meteors[random_meteor_number]
-	global_position[0] = meteor_x
-	global_position[1] = meteor_y
+	global_position.x = meteor_x
+	global_position.y = meteor_y
 
 
 func _physics_process(delta: float) -> void:
