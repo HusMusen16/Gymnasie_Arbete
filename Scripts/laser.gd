@@ -13,6 +13,8 @@ func _laser_colliding():
 		var collider = ray_cast.get_collider()
 		if collider is METEOR:
 			collider.explode()
+		if collider is ENEMY:
+			collider.explode()
 
 
 func _laser_movement(delta: float):

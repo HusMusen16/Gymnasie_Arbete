@@ -5,7 +5,7 @@ class_name PLAYER
 
 var ACC = 1000
 var speed = 700
-var can_shoot: bool = true
+var can_shoot_plasma: bool = true
 
 """
 Lägg till en rektangel till spelaren där meteorer och fiender 
@@ -19,9 +19,9 @@ inte kan spawna
 @onready var flash_duration: Timer = $FlashDuration
 
 
-
-signal laser(pos, dir)
-
+signal player_hit(type)
+signal laser(type, pos, dir)
+signal plasma_countdown(time)
 
 
 func _movement(delta: float) -> void:
@@ -64,25 +64,37 @@ func _movement(delta: float) -> void:
 		self.rotation_degrees = 135*direction[0]/direction[1]
 
 
-func _shooting(delta:float) -> void:
-	if Input.is_action_just_pressed("shoot") and can_shoot:
-		laser.emit(laser_source.global_position, self.rotation_degrees)
+func _shooting():
+	if Input.is_action_just_pressed("shoot_laser"):
+		laser.emit("laser", laser_source.global_position, self.rotation_degrees)
 		
-		shoot_timer.start(0)
-		can_shoot = false
 		
 		flash_duration.start(0)
 		gun_flash.emitting = true
-
-
-func _process(delta: float) -> void:
-	_movement(delta)
-	_shooting(delta)
+	
+	if Input.is_action_just_pressed("shoot_plasma") and can_shoot_plasma:
+		laser.emit("plasma", laser_source.global_position, self.rotation_degrees)
+		
+		shoot_timer.start(0)
+		can_shoot_plasma = false
 	
 
+func _physics_process(delta: float) -> void:
+	_movement(delta)
+	_shooting()
+	if not can_shoot_plasma:
+		var time = shoot_timer.time_left
+		plasma_countdown.emit(time)
+	else:
+		plasma_countdown.emit(0)
+
 func _on_shoot_timer_timeout() -> void:
-	can_shoot = true
+	can_shoot_plasma = true
 
 
 func _on_flash_duration_timeout() -> void:
 	gun_flash.emitting = false
+
+
+func damage(type):
+	player_hit.emit(type)

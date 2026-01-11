@@ -83,7 +83,7 @@ polygon = PackedVector2Array(4, 38, 13, 18, 56, -5, 37, -35, 18, -30, 13, -38, -
 position = Vector2(0, -38)
 
 [node name="ShootTimer" type="Timer" parent="."]
-wait_time = 0.4
+wait_time = 4.0
 
 [node name="FlashDuration" type="Timer" parent="."]
 wait_time = 0.1

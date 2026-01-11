@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://hl285pd01d74"]
+[gd_scene load_steps=7 format=3 uid="uid://hl285pd01d74"]
 
 [ext_resource type="Script" uid="uid://c58l75rk0t5by" path="res://Scripts/level.gd" id="1_tumq0"]
 [ext_resource type="Texture2D" uid="uid://dgt74g26115jg" path="res://assets/Backgrounds/360_F_390229338_frGUxS6LBVQjxGJD7FYaSlsnfqGQgnyB.jpg" id="2_6phgx"]
 [ext_resource type="PackedScene" uid="uid://drqkl0c1bf0f8" path="res://Scenes/player.tscn" id="3_6phgx"]
+[ext_resource type="FontFile" uid="uid://cxd5mqvh2vjyw" path="res://assets/Bonus/kenvector_future_thin.ttf" id="3_81xng"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6phgx"]
 size = Vector2(5703, 158)
@@ -20,6 +21,55 @@ layer = -1
 position = Vector2(1057, 633)
 scale = Vector2(3.8, 3.8)
 texture = ExtResource("2_6phgx")
+
+[node name="ColorRect" type="ColorRect" parent="BG"]
+self_modulate = Color(0, 0, 0, 1)
+offset_left = 1513.0
+offset_top = 27.0
+offset_right = 1793.0
+offset_bottom = 58.0
+scale = Vector2(2, 2)
+
+[node name="HealthBar" type="ProgressBar" parent="BG/ColorRect"]
+modulate = Color(0.622606, 0.714168, 0, 1)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -276.5
+offset_top = 1.5
+offset_right = -3.5
+offset_bottom = 28.5
+grow_horizontal = 0
+value = 100.0
+
+[node name="ColorRect2" type="ColorRect" parent="BG"]
+self_modulate = Color(0, 0, 0, 1)
+offset_left = 1532.0
+offset_top = 1162.0
+offset_right = 1812.0
+offset_bottom = 1193.0
+scale = Vector2(2, 2)
+
+[node name="Label" type="Label" parent="BG/ColorRect2"]
+visible = false
+offset_left = 44.0
+offset_top = 3.5
+offset_right = 241.0
+offset_bottom = 26.5
+theme_override_colors/font_color = Color(0.459598, 0.471955, 1, 1)
+theme_override_fonts/font = ExtResource("3_81xng")
+text = "PLASMA-BLAST READY"
+
+[node name="plasma_countdown" type="ProgressBar" parent="BG/ColorRect2"]
+modulate = Color(0.0173024, 0.285851, 1, 1)
+offset_left = 3.5
+offset_top = 2.0
+offset_right = 276.5
+offset_bottom = 29.0
+show_percentage = false
+
+[node name="Plasmas" type="Node" parent="."]
 
 [node name="Lasers" type="Node" parent="."]
 
@@ -41,7 +91,11 @@ rotation_smoothing_enabled = true
 autostart = true
 
 [node name="Enemy_Timer" type="Timer" parent="."]
+wait_time = 2.0
 autostart = true
+
+[node name="Damage_Timer" type="Timer" parent="."]
+wait_time = 0.5
 
 [node name="Barriers" type="StaticBody2D" parent="."]
 collision_layer = 8
@@ -98,5 +152,8 @@ color = Color(1, 0, 0, 0.172549)
 metadata/_edit_use_anchors_ = true
 
 [connection signal="laser" from="Player" to="." method="_on_player_laser"]
+[connection signal="plasma_countdown" from="Player" to="." method="_on_player_plasma_countdown"]
+[connection signal="player_hit" from="Player" to="." method="_on_player_player_hit"]
 [connection signal="timeout" from="Meteor_Timer" to="." method="_on_meteor_timer_timeout"]
 [connection signal="timeout" from="Enemy_Timer" to="." method="_on_enemy_timer_timeout"]
+[connection signal="timeout" from="Damage_Timer" to="." method="_on_damage_timer_timeout"]

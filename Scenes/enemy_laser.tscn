@@ -12,7 +12,7 @@ colors = PackedColorArray(0.346805, 0.0346831, 0, 1, 1, 0.710861, 0.67109, 1)
 metadata/_snap_enabled = true
 metadata/_snap_count = 2
 
-[node name="E" type="Line2D"]
+[node name="Enemy_Laser" type="Line2D"]
 points = PackedVector2Array(0, 27, 0, -26)
 closed = true
 width_curve = SubResource("Curve_mou6w")
@@ -28,7 +28,7 @@ script = ExtResource("1_s2mcl")
 position = Vector2(0, 27)
 rotation = 3.14159
 target_position = Vector2(4.89568e-06, 56)
-collision_mask = 3
+collision_mask = 5
 collide_with_areas = true
 
 [node name="Dissipation Timer" type="Timer" parent="."]
