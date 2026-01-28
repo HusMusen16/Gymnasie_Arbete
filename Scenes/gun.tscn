@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://br7moiw78kg5o"]
+
+[ext_resource type="Texture2D" uid="uid://db3rjkvn87jni" path="res://assets/PNG/Parts/gun09.png" id="1_nxj5y"]
+[ext_resource type="Script" uid="uid://dvdfmk7pgwx3c" path="res://Scripts/gun.gd" id="1_oqrbh"]
+
+[node name="Gun" type="Node2D"]
+scale = Vector2(0.6, 0.7)
+script = ExtResource("1_oqrbh")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, 17)
+texture = ExtResource("1_nxj5y")
+
+[node name="Laser_Source" type="Marker2D" parent="."]
+position = Vector2(3.33333, 38.5714)
+
+[node name="Shoot_Timer" type="Timer" parent="."]
+autostart = true
+
+[node name="Lasers" type="Node" parent="."]
+
+[connection signal="timeout" from="Shoot_Timer" to="." method="_on_shoot_timer_timeout"]

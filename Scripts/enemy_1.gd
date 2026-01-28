@@ -93,7 +93,7 @@ func _physics_process(_delta: float) -> void:
 ####################### STATES ISH ###############################
 func _CHASING(dir):
 	_movement(dir)
-	shoot_timer.wait_time = 3
+	shoot_timer.wait_time = 5
 
 func _ENGAGING(dir):
 	velocity = dir * SPEED * 0.1

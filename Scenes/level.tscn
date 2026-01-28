@@ -1,9 +1,98 @@
-[gd_scene load_steps=7 format=3 uid="uid://hl285pd01d74"]
+[gd_scene load_steps=15 format=3 uid="uid://hl285pd01d74"]
 
 [ext_resource type="Script" uid="uid://c58l75rk0t5by" path="res://Scripts/level.gd" id="1_tumq0"]
-[ext_resource type="Texture2D" uid="uid://dgt74g26115jg" path="res://assets/Backgrounds/360_F_390229338_frGUxS6LBVQjxGJD7FYaSlsnfqGQgnyB.jpg" id="2_6phgx"]
+[ext_resource type="Texture2D" uid="uid://dsxkk6qsvn0hw" path="res://assets/Foozle_2DS0015_Void_EnvironmentPack/Backgrounds/PNGs/Condesed/Starry background  - Layer 01 - Void.png" id="2_wqkje"]
+[ext_resource type="Texture2D" uid="uid://bnrdlcbpmoueu" path="res://assets/Foozle_2DS0015_Void_EnvironmentPack/Backgrounds/PNGs/Condesed/Starry background  - Layer 02 - Stars.png" id="3_0f350"]
 [ext_resource type="PackedScene" uid="uid://drqkl0c1bf0f8" path="res://Scenes/player.tscn" id="3_6phgx"]
 [ext_resource type="FontFile" uid="uid://cxd5mqvh2vjyw" path="res://assets/Bonus/kenvector_future_thin.ttf" id="3_81xng"]
+
+[sub_resource type="Animation" id="Animation_wqkje"]
+resource_name = "Purple"
+length = 1.382
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BG_Purple:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.3, 0.45, 0.6, 0.75, 0.9, 1.05, 1.2, 1.35),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+}
+
+[sub_resource type="Animation" id="Animation_0f350"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BG_Purple:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BG_Stars:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0f350"]
+_data = {
+&"Purple": SubResource("Animation_wqkje"),
+&"RESET": SubResource("Animation_0f350")
+}
+
+[sub_resource type="Animation" id="Animation_8c0lf"]
+resource_name = "Stars"
+length = 0.933
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BG_Stars:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 0]
+}
+
+[sub_resource type="Animation" id="Animation_754fn"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BG_Stars:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bvt00"]
+_data = {
+&"RESET": SubResource("Animation_754fn"),
+&"Stars": SubResource("Animation_8c0lf")
+}
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6phgx"]
 size = Vector2(5703, 158)
@@ -11,16 +100,29 @@ size = Vector2(5703, 158)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_81xng"]
 size = Vector2(406, 3144)
 
+[sub_resource type="Curve2D" id="Curve2D_81xng"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 167, 140, 0, 0, 0, 0, 167, 2556, 0, 0, 0, 0, 4377, 2556, 0, 0, 0, 0, 4377, 140, 0, 0, 0, 0, 167, 140)
+}
+point_count = 5
+
 [node name="Level" type="Node2D"]
 script = ExtResource("1_tumq0")
 
 [node name="BG" type="CanvasLayer" parent="."]
 layer = -1
 
-[node name="Sprite2D" type="Sprite2D" parent="BG"]
+[node name="BG_Purple" type="Sprite2D" parent="BG"]
+position = Vector2(1057, 633)
+scale = Vector2(3.7, 3.5)
+texture = ExtResource("2_wqkje")
+hframes = 10
+
+[node name="BG_Stars" type="Sprite2D" parent="BG"]
 position = Vector2(1057, 633)
 scale = Vector2(3.8, 3.8)
-texture = ExtResource("2_6phgx")
+texture = ExtResource("3_0f350")
+hframes = 9
 
 [node name="ColorRect" type="ColorRect" parent="BG"]
 self_modulate = Color(0, 0, 0, 1)
@@ -53,6 +155,7 @@ scale = Vector2(2, 2)
 
 [node name="Label" type="Label" parent="BG/ColorRect2"]
 visible = false
+layout_mode = 0
 offset_left = 44.0
 offset_top = 3.5
 offset_right = 241.0
@@ -63,11 +166,24 @@ text = "PLASMA-BLAST READY"
 
 [node name="plasma_countdown" type="ProgressBar" parent="BG/ColorRect2"]
 modulate = Color(0.0173024, 0.285851, 1, 1)
+layout_mode = 0
 offset_left = 3.5
 offset_top = 2.0
 offset_right = 276.5
 offset_bottom = 29.0
 show_percentage = false
+
+[node name="BG_purple_anim" type="AnimationPlayer" parent="BG"]
+libraries = {
+&"": SubResource("AnimationLibrary_0f350")
+}
+autoplay = "Purple"
+
+[node name="BG_stars_anim" type="AnimationPlayer" parent="BG"]
+libraries = {
+&"": SubResource("AnimationLibrary_bvt00")
+}
+autoplay = "Stars"
 
 [node name="Plasmas" type="Node" parent="."]
 
@@ -96,6 +212,10 @@ autostart = true
 
 [node name="Damage_Timer" type="Timer" parent="."]
 wait_time = 0.5
+
+[node name="Mother_Timer" type="Timer" parent="."]
+one_shot = true
+autostart = true
 
 [node name="Barriers" type="StaticBody2D" parent="."]
 collision_layer = 8
@@ -151,9 +271,20 @@ offset_bottom = 3743.0
 color = Color(1, 0, 0, 0.172549)
 metadata/_edit_use_anchors_ = true
 
+[node name="MotherPath" type="Path2D" parent="."]
+curve = SubResource("Curve2D_81xng")
+
+[node name="PathFollower" type="PathFollow2D" parent="MotherPath"]
+position = Vector2(167, 140)
+rotation = 1.5708
+
+[node name="MotherShips" type="Node2D" parent="MotherPath/PathFollower"]
+rotation = 4.71239
+
 [connection signal="laser" from="Player" to="." method="_on_player_laser"]
 [connection signal="plasma_countdown" from="Player" to="." method="_on_player_plasma_countdown"]
 [connection signal="player_hit" from="Player" to="." method="_on_player_player_hit"]
 [connection signal="timeout" from="Meteor_Timer" to="." method="_on_meteor_timer_timeout"]
 [connection signal="timeout" from="Enemy_Timer" to="." method="_on_enemy_timer_timeout"]
 [connection signal="timeout" from="Damage_Timer" to="." method="_on_damage_timer_timeout"]
+[connection signal="timeout" from="Mother_Timer" to="." method="_on_mother_timer_timeout"]

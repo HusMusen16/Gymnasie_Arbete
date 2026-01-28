@@ -1,3 +1,8 @@
-[gd_scene format=3 uid="uid://dk18b3myes2o1"]
+[gd_scene load_steps=2 format=3 uid="uid://dk18b3myes2o1"]
+
+[ext_resource type="Texture2D" uid="uid://dsxkk6qsvn0hw" path="res://assets/Foozle_2DS0015_Void_EnvironmentPack/Backgrounds/PNGs/Condesed/Starry background  - Layer 01 - Void.png" id="1_28flt"]
 
 [node name="Main Menu" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_28flt")

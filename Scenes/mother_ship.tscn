@@ -1,0 +1,160 @@
+[gd_scene load_steps=10 format=3 uid="uid://21xssbqflbvy"]
+
+[ext_resource type="Script" uid="uid://n80k6s14hbrc" path="res://Scripts/mother_ship.gd" id="1_01so7"]
+[ext_resource type="Texture2D" uid="uid://ddkyra7nmvt2o" path="res://assets/PNG/Parts/cockpitRed_6.png" id="1_4gswj"]
+[ext_resource type="Texture2D" uid="uid://br4i34drvu6oe" path="res://assets/PNG/Parts/wingRed_0.png" id="1_itvag"]
+[ext_resource type="Texture2D" uid="uid://d3qc8ts14yve2" path="res://assets/PNG/Parts/cockpitRed_1.png" id="2_itvag"]
+[ext_resource type="Texture2D" uid="uid://bpvmkh02yvoqb" path="res://assets/PNG/Parts/engine2.png" id="4_deku5"]
+[ext_resource type="Texture2D" uid="uid://cnfrm80xjo3wp" path="res://assets/PNG/Parts/wingRed_6.png" id="4_itqi5"]
+[ext_resource type="Texture2D" uid="uid://b4vdcg2tawstj" path="res://assets/PNG/Parts/beamLong1.png" id="6_utb55"]
+[ext_resource type="Texture2D" uid="uid://braampgyjejg1" path="res://assets/PNG/Parts/turretBase_big.png" id="7_utb55"]
+[ext_resource type="PackedScene" uid="uid://br7moiw78kg5o" path="res://Scenes/gun.tscn" id="8_01so7"]
+
+[node name="MotherShip" type="CharacterBody2D"]
+scale = Vector2(2, 2)
+script = ExtResource("1_01so7")
+
+[node name="Parts" type="Node2D" parent="."]
+
+[node name="LWing" type="Sprite2D" parent="Parts"]
+position = Vector2(-33, 4)
+rotation = -0.436332
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("1_itvag")
+
+[node name="RWing" type="Sprite2D" parent="Parts"]
+position = Vector2(33, 4)
+rotation = 0.436332
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("1_itvag")
+flip_h = true
+
+[node name="MainBodyRed" type="ColorRect" parent="Parts"]
+offset_left = -40.0
+offset_top = -173.0
+offset_right = 40.0
+offset_bottom = -13.0
+color = Color(0.67451, 0.223529, 0.223529, 1)
+
+[node name="LOutlineRed" type="ColorRect" parent="Parts"]
+offset_left = -40.0
+offset_top = -173.0
+offset_right = -38.0
+offset_bottom = -33.0
+color = Color(0.521569, 0.168627, 0.160784, 1)
+
+[node name="ROutlineRed" type="ColorRect" parent="Parts"]
+offset_left = 40.0
+offset_top = -173.0
+offset_right = 42.0
+offset_bottom = -33.0
+color = Color(0.521569, 0.168627, 0.160784, 1)
+
+[node name="ROutlineRed2" type="ColorRect" parent="Parts"]
+offset_left = -40.0
+offset_top = -173.0
+offset_right = 40.0
+offset_bottom = -171.0
+color = Color(0.521569, 0.168627, 0.160784, 1)
+
+[node name="RBridge" type="Sprite2D" parent="Parts"]
+position = Vector2(37, -20)
+rotation = -1.5708
+texture = ExtResource("2_itvag")
+
+[node name="LBridge" type="Sprite2D" parent="Parts"]
+position = Vector2(-37, -20)
+rotation = 1.5708
+texture = ExtResource("2_itvag")
+
+[node name="MainBridge" type="Sprite2D" parent="Parts"]
+texture = ExtResource("1_4gswj")
+
+[node name="RBottomThruster" type="Sprite2D" parent="Parts"]
+position = Vector2(20, -185)
+scale = Vector2(0.9, 0.9)
+texture = ExtResource("4_deku5")
+
+[node name="LBottomThruster" type="Sprite2D" parent="Parts"]
+position = Vector2(-20, -185)
+scale = Vector2(0.9, 0.9)
+texture = ExtResource("4_deku5")
+
+[node name="TopThruster" type="Sprite2D" parent="Parts"]
+position = Vector2(0, -165)
+texture = ExtResource("4_deku5")
+
+[node name="MainBodyWhite" type="ColorRect" parent="Parts"]
+offset_left = -20.0
+offset_top = -155.0
+offset_right = 20.0
+offset_bottom = -10.0
+color = Color(0.933333, 0.933333, 0.933333, 1)
+
+[node name="LBWing" type="Sprite2D" parent="Parts"]
+position = Vector2(-43, -150)
+rotation = -0.349066
+texture = ExtResource("4_itqi5")
+
+[node name="RBWing" type="Sprite2D" parent="Parts"]
+position = Vector2(43, -150)
+rotation = 0.349066
+texture = ExtResource("4_itqi5")
+flip_h = true
+
+[node name="LPipe" type="Sprite2D" parent="Parts"]
+position = Vector2(-26, -73)
+texture = ExtResource("6_utb55")
+
+[node name="RPipe" type="Sprite2D" parent="Parts"]
+position = Vector2(26, -73)
+texture = ExtResource("6_utb55")
+flip_h = true
+
+[node name="LPipe2" type="Sprite2D" parent="Parts"]
+position = Vector2(-14, -129)
+scale = Vector2(1.05, 1.05)
+texture = ExtResource("6_utb55")
+flip_h = true
+flip_v = true
+
+[node name="RPipe2" type="Sprite2D" parent="Parts"]
+position = Vector2(14, -129)
+scale = Vector2(1.05, 1.05)
+texture = ExtResource("6_utb55")
+flip_v = true
+
+[node name="TurretBase1" type="Sprite2D" parent="Parts"]
+position = Vector2(0, -134)
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("7_utb55")
+
+[node name="TurretBase2" type="Sprite2D" parent="Parts"]
+position = Vector2(0, -82)
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("7_utb55")
+
+[node name="TurretBase3" type="Sprite2D" parent="Parts"]
+position = Vector2(0, -30)
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("7_utb55")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+visible = false
+polygon = PackedVector2Array(-57, -8, -29, 36, 29, 36, 57, -7, 57, -32, 42, -40, 42, -110, 69, -142, 69, -176, 47, -198, -47, -198, -69, -176, -68, -142, -41, -110, -40, -41, -57, -32)
+
+[node name="Guns" type="Node2D" parent="."]
+
+[node name="Gun" parent="Guns" instance=ExtResource("8_01so7")]
+position = Vector2(0, -134)
+
+[node name="Gun2" parent="Guns" instance=ExtResource("8_01so7")]
+position = Vector2(0, -82)
+
+[node name="Gun3" parent="Guns" instance=ExtResource("8_01so7")]
+position = Vector2(0, -30)
+
+[node name="Player_Data_Timer" type="Timer" parent="."]
+autostart = true
+
+[connection signal="timeout" from="Player_Data_Timer" to="." method="_on_player_data_timer_timeout"]
