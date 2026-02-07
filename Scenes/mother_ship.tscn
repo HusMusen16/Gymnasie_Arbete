@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://21xssbqflbvy"]
+[gd_scene load_steps=22 format=3 uid="uid://21xssbqflbvy"]
 
 [ext_resource type="Script" uid="uid://n80k6s14hbrc" path="res://Scripts/mother_ship.gd" id="1_01so7"]
 [ext_resource type="Texture2D" uid="uid://ddkyra7nmvt2o" path="res://assets/PNG/Parts/cockpitRed_6.png" id="1_4gswj"]
@@ -9,6 +9,131 @@
 [ext_resource type="Texture2D" uid="uid://b4vdcg2tawstj" path="res://assets/PNG/Parts/beamLong1.png" id="6_utb55"]
 [ext_resource type="Texture2D" uid="uid://braampgyjejg1" path="res://assets/PNG/Parts/turretBase_big.png" id="7_utb55"]
 [ext_resource type="PackedScene" uid="uid://br7moiw78kg5o" path="res://Scenes/gun.tscn" id="8_01so7"]
+[ext_resource type="Texture2D" uid="uid://g3h4vxary3np" path="res://assets/explosion pack 1/Explosions pack/explosion-1-g/spritesheet.png" id="10_ictbq"]
+[ext_resource type="Texture2D" uid="uid://iecu470emrjw" path="res://assets/PNG/Damage/playerShip1_damage3.png" id="11_m5xac"]
+[ext_resource type="Texture2D" uid="uid://cu1c5ku4rrloo" path="res://assets/explosion pack 1/Explosions pack/explosion-1-d/spritsheet.png" id="12_3vnfb"]
+
+[sub_resource type="Gradient" id="Gradient_ictbq"]
+offsets = PackedFloat32Array(0, 0.4975, 1)
+colors = PackedColorArray(1, 0.74902, 0, 1, 0.92549, 0, 0.0823529, 0.745098, 0.854902, 0, 0, 0)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ictbq"]
+lifetime_randomness = 0.79
+particle_flag_disable_z = true
+emission_shape = 2
+emission_sphere_radius = 14.63
+angle_min = -256.0
+angle_max = 168.0
+gravity = Vector3(0, 0, 0)
+radial_accel_min = -2.23517e-06
+radial_accel_max = -2.23517e-06
+damping_min = 75.084
+damping_max = 75.084
+scale_min = 0.0
+scale_max = 12.11
+color = Color(0.0698073, 0.0618365, 0.0162772, 1)
+
+[sub_resource type="Animation" id="Animation_ictbq"]
+resource_name = "Gun_Explosion"
+length = 0.71
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Gun_explosion_pic:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [6, 0, 1, 2, 3, 4, 5, 6]
+}
+
+[sub_resource type="Animation" id="Animation_m5xac"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Gun_explosion_pic:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [6]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_m5xac"]
+_data = {
+&"Gun_Explosion": SubResource("Animation_ictbq"),
+&"RESET": SubResource("Animation_m5xac")
+}
+
+[sub_resource type="Animation" id="Animation_j5i3c"]
+resource_name = "Big_explosion"
+length = 1.12
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Big_explosion_pic:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+}
+
+[sub_resource type="Animation" id="Animation_himb8"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Big_explosion_pic:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_3vnfb"]
+resource_name = "fade_out"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0.901961), Color(1, 1, 1, 0.803922), Color(1, 1, 1, 0.705882), Color(1, 1, 1, 0.607843), Color(1, 1, 1, 0.509804), Color(1, 1, 1, 0.411765), Color(1, 1, 1, 0.313726), Color(1, 1, 1, 0.215686), Color(1, 1, 1, 0.117647), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_t21sv"]
+_data = {
+&"Big_explosion": SubResource("Animation_j5i3c"),
+&"RESET": SubResource("Animation_himb8"),
+&"fade_out": SubResource("Animation_3vnfb")
+}
 
 [node name="MotherShip" type="CharacterBody2D"]
 scale = Vector2(2, 2)
@@ -70,6 +195,36 @@ texture = ExtResource("2_itvag")
 [node name="MainBridge" type="Sprite2D" parent="Parts"]
 texture = ExtResource("1_4gswj")
 
+[node name="R_thruster_smoke" type="CPUParticles2D" parent="Parts"]
+position = Vector2(20, -185)
+amount = 20
+lifetime = 1.5
+explosiveness = 0.2
+randomness = 0.2
+lifetime_randomness = 0.2
+emission_shape = 1
+emission_sphere_radius = 10.29
+gravity = Vector2(0, 0)
+scale_amount_min = 6.0
+scale_amount_max = 10.0
+color = Color(1, 0.647059, 0.105882, 0.835294)
+color_ramp = SubResource("Gradient_ictbq")
+
+[node name="L_thruster_smoke" type="CPUParticles2D" parent="Parts"]
+position = Vector2(-20, -185)
+amount = 20
+lifetime = 1.5
+explosiveness = 0.2
+randomness = 0.2
+lifetime_randomness = 0.2
+emission_shape = 1
+emission_sphere_radius = 10.29
+gravity = Vector2(0, 0)
+scale_amount_min = 6.0
+scale_amount_max = 10.0
+color = Color(1, 0.647059, 0.105882, 0.835294)
+color_ramp = SubResource("Gradient_ictbq")
+
 [node name="RBottomThruster" type="Sprite2D" parent="Parts"]
 position = Vector2(20, -185)
 scale = Vector2(0.9, 0.9)
@@ -79,6 +234,21 @@ texture = ExtResource("4_deku5")
 position = Vector2(-20, -185)
 scale = Vector2(0.9, 0.9)
 texture = ExtResource("4_deku5")
+
+[node name="M_thruster_smoke" type="CPUParticles2D" parent="Parts"]
+position = Vector2(0, -165)
+amount = 20
+lifetime = 1.5
+explosiveness = 0.2
+randomness = 0.2
+lifetime_randomness = 0.2
+emission_shape = 1
+emission_sphere_radius = 10.29
+gravity = Vector2(0, 0)
+scale_amount_min = 6.0
+scale_amount_max = 10.0
+color = Color(1, 0.647059, 0.105882, 0.835294)
+color_ramp = SubResource("Gradient_ictbq")
 
 [node name="TopThruster" type="Sprite2D" parent="Parts"]
 position = Vector2(0, -165)
@@ -139,7 +309,7 @@ position = Vector2(0, -30)
 scale = Vector2(0.6, 0.6)
 texture = ExtResource("7_utb55")
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+[node name="Ship_Collision" type="CollisionPolygon2D" parent="."]
 visible = false
 polygon = PackedVector2Array(-57, -8, -29, 36, 29, 36, 57, -7, 57, -32, 42, -40, 42, -110, 69, -142, 69, -176, 47, -198, -47, -198, -69, -176, -68, -142, -41, -110, -40, -41, -57, -32)
 
@@ -148,13 +318,106 @@ polygon = PackedVector2Array(-57, -8, -29, 36, 29, 36, 57, -7, 57, -32, 42, -40,
 [node name="Gun" parent="Guns" instance=ExtResource("8_01so7")]
 position = Vector2(0, -134)
 
+[node name="GunParticles" type="GPUParticles2D" parent="Guns"]
+position = Vector2(0, -134)
+emitting = false
+amount = 30
+randomness = 0.87
+process_material = SubResource("ParticleProcessMaterial_ictbq")
+
 [node name="Gun2" parent="Guns" instance=ExtResource("8_01so7")]
 position = Vector2(0, -82)
+
+[node name="Gun2Particles" type="GPUParticles2D" parent="Guns"]
+position = Vector2(0, -82)
+emitting = false
+amount = 30
+randomness = 0.87
+process_material = SubResource("ParticleProcessMaterial_ictbq")
 
 [node name="Gun3" parent="Guns" instance=ExtResource("8_01so7")]
 position = Vector2(0, -30)
 
+[node name="Gun3Particles" type="GPUParticles2D" parent="Guns"]
+position = Vector2(0, -30)
+emitting = false
+amount = 30
+randomness = 0.87
+process_material = SubResource("ParticleProcessMaterial_ictbq")
+
+[node name="Gun_explosion_pic" type="Sprite2D" parent="Guns"]
+position = Vector2(0, -134)
+scale = Vector2(2, 2)
+texture = ExtResource("10_ictbq")
+hframes = 7
+frame = 6
+
+[node name="Explosion_anim" type="AnimationPlayer" parent="Guns"]
+libraries = {
+&"": SubResource("AnimationLibrary_m5xac")
+}
+
 [node name="Player_Data_Timer" type="Timer" parent="."]
 autostart = true
+
+[node name="Damage" type="Node2D" parent="."]
+
+[node name="Damage1" type="Sprite2D" parent="Damage"]
+visible = false
+modulate = Color(0, 0, 0, 0.788235)
+position = Vector2(32.125, -148.25)
+scale = Vector2(0.2375, 0.598684)
+texture = ExtResource("11_m5xac")
+
+[node name="Damage1_1" type="Sprite2D" parent="Damage"]
+visible = false
+modulate = Color(0, 0, 0, 0.788235)
+position = Vector2(1.00002, -134.5)
+scale = Vector2(0.2375, 0.240132)
+texture = ExtResource("11_m5xac")
+
+[node name="Damage2" type="Sprite2D" parent="Damage"]
+visible = false
+modulate = Color(0, 0, 0, 0.788235)
+position = Vector2(-32.2215, -93.5293)
+rotation = 1.5708
+scale = Vector2(0.306914, 0.204285)
+texture = ExtResource("11_m5xac")
+
+[node name="Damage2_1" type="Sprite2D" parent="Damage"]
+visible = false
+modulate = Color(0, 0, 0, 0.788235)
+position = Vector2(-19.5, -170.5)
+rotation = 1.5708
+scale = Vector2(0.209103, 0.436773)
+texture = ExtResource("11_m5xac")
+
+[node name="Damage3" type="Sprite2D" parent="Damage"]
+visible = false
+modulate = Color(0, 0, 0, 0.788235)
+position = Vector2(-8.375, -20.9375)
+scale = Vector2(0.6675, 0.261513)
+texture = ExtResource("11_m5xac")
+
+[node name="Damage3_1" type="Sprite2D" parent="Damage"]
+visible = false
+modulate = Color(0, 0, 0, 0.788235)
+position = Vector2(23.5509, -62.8982)
+rotation = 1.91986
+scale = Vector2(0.480709, 0.248703)
+texture = ExtResource("11_m5xac")
+
+[node name="Big_explosion_anim" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_t21sv")
+}
+autoplay = "Big_explosion"
+
+[node name="Big_explosion_pic" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(0, -100)
+scale = Vector2(2, 2)
+texture = ExtResource("12_3vnfb")
+hframes = 12
 
 [connection signal="timeout" from="Player_Data_Timer" to="." method="_on_player_data_timer_timeout"]

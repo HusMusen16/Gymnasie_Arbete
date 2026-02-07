@@ -68,7 +68,7 @@ func explode():
 		sprite.hide()
 		explosion_pic.show()
 		anim.play("exploding")
-		await  anim.animation_finished
+		await anim.animation_finished
 		queue_free()
 
 func damage():
@@ -85,4 +85,6 @@ func _on_collision_area_body_entered(body: Node2D) -> void:
 		body.explode()
 	elif body is PLAYER:
 		body.damage(METEOR)
+		explode()
+	elif body is MOTHERSHIP:
 		explode()

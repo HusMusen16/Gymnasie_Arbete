@@ -60,3 +60,5 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 		body.explode()
 	if body is METEOR:
 		body.explode()
+	if body is MOTHERSHIP:
+		body.damage()

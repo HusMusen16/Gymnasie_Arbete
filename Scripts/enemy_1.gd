@@ -20,6 +20,7 @@ var dead:bool = false
 var player = null
 var choice = [0,1,2,3,4,5]
 
+
 var pause_x = false
 var pause_y = false
 
@@ -99,6 +100,7 @@ func _ENGAGING(dir):
 	velocity = dir * SPEED * 0.1
 	move_and_slide()
 	shoot_timer.wait_time = 1
+	
 
 
 #################### TIMER TIMEOUTS ########################

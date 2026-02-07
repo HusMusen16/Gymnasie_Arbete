@@ -7,9 +7,9 @@ var laser_scene: PackedScene = load("res://Scenes/enemy_laser.tscn")
 @onready var laser_source: Marker2D = $Laser_Source
 @onready var shoot_timer: Timer = $Shoot_Timer
 
-var dead: bool = false 
+var broken: bool = false 
 var player = null
-var fire_rates = [0.6,0.8,1,1.2,1.4]
+var fire_rates = [1,1.2,1.4,1.6,1.8]
 var rotation_adjustment = null
 
 
@@ -18,13 +18,13 @@ func _ready() -> void:
 	shoot_timer.wait_time = random_fire_rate
 
 func _physics_process(delta: float) -> void:
-	if player:
+	if player and not broken:
 		var rotation_adjustment_in_radians = deg_to_rad(rotation_adjustment.rotation_degrees)
 		var dir = global_position.direction_to(player.global_position)
 		rotation = dir.angle() - rotation_adjustment_in_radians
 
 func _on_shoot_timer_timeout() -> void:
-	if player and not dead:
+	if player and not broken:
 		var laser = laser_scene.instantiate()
 		lasers.add_child(laser)
 		laser.type = MOTHERSHIP

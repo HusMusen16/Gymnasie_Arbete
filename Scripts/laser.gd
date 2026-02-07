@@ -15,6 +15,9 @@ func _laser_colliding():
 			collider.explode()
 		if collider is ENEMY:
 			collider.explode()
+		if collider is MOTHERSHIP:
+			pass
+		
 
 
 func _laser_movement(delta: float):

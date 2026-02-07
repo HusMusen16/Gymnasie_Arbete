@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://b1cqu05b1fm1h" path="res://assets/PNG/playerShip2_green.png" id="2_cvnsp"]
 
 [sub_resource type="Gradient" id="Gradient_cvnsp"]
-offsets = PackedFloat32Array(0, 0.546366, 0.992481)
+offsets = PackedFloat32Array(0, 0.546366, 0.996875)
 colors = PackedColorArray(1, 0.74902, 0, 1, 0.92549, 0, 0.0823529, 0.745098, 0.854902, 0, 0, 0)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_6t5aa"]

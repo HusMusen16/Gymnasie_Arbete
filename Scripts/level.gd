@@ -32,7 +32,8 @@ var mother_ship_scene: PackedScene = load("res://Scenes/mother_ship.tscn")
 
 
 var health = 100
-
+var allow_mothership_spawn: bool = true
+var mothership_spawned: bool = false
 var safe: bool = false
 
 
@@ -41,7 +42,8 @@ func _spawn_enemy():
 	enemies.add_child(enemy)
 	enemy.player = player
 
-func _spawn_mother_ship():
+func _spawn_mother_ship(): 
+	mothership_spawned = false
 	var mother_ship = mother_ship_scene.instantiate()
 	motherships.add_child(mother_ship)
 	mother_ship.Player = player
@@ -51,8 +53,21 @@ func _spawn_mother_ship():
 	
 	
 func _physics_process(delta: float) -> void:
-	path_follower.progress_ratio += 0.0005
+	path_follower.progress_ratio += 0.0002
 	motherships.global_position = path_follower.global_position
+	
+	var mothershipcount = motherships.get_children()
+	
+	if len(mothershipcount) == 0 and not mothership_spawned:
+		allow_mothership_spawn = true
+		
+	if allow_mothership_spawn:
+		mother_timer.start(-1)
+		allow_mothership_spawn = false
+		mothership_spawned = true
+	
+	
+		
 	
 		
 
