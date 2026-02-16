@@ -17,11 +17,13 @@ func _ready() -> void:
 	var random_fire_rate = fire_rates.pick_random()
 	shoot_timer.wait_time = random_fire_rate
 
-func _physics_process(delta: float) -> void:
+
+func _physics_process(_delta: float) -> void:
 	if player and not broken:
 		var rotation_adjustment_in_radians = deg_to_rad(rotation_adjustment.rotation_degrees)
 		var dir = global_position.direction_to(player.global_position)
 		rotation = dir.angle() - rotation_adjustment_in_radians
+
 
 func _on_shoot_timer_timeout() -> void:
 	if player and not broken:

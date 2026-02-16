@@ -35,9 +35,44 @@ var enemy_y = RandomNumberGenerator.new().randf_range(-1000,3500)
 const SPEED = 500
 
 
-func _ready() -> void:
-	global_position.x = enemy_x
-	global_position.y = enemy_y
+################# GENERAL FUNKTIONS ##############
+func explode():
+	if not dead:
+		LevelManager.kills += 1
+		dead = true
+		ship_collision.set_deferred("disabled", true)
+		main_sprite.hide()
+		debris.show()
+		explosion_picture.show()
+		anim.play("Exploding")
+		await anim.animation_finished
+		var tween = create_tween()
+		tween.tween_property(debris, "modulate:a", 0, 1)
+		await tween.finished
+		queue_free()
+
+
+func _physics_process(_delta: float) -> void:
+	if player and not dead:
+		var dir = global_position.direction_to(player.global_position)
+		var distance = global_position.distance_to(player.global_position)
+		if distance > 500:
+			_CHASING(dir)
+		else:
+			_ENGAGING(dir)
+
+
+
+################## MOVEMENT FUNKTIONS #####################
+func _CHASING(dir):
+	_movement(dir)
+	shoot_timer.wait_time = 5
+
+
+func _ENGAGING(dir):
+	velocity = dir * SPEED * 0.1
+	move_and_slide()
+	shoot_timer.wait_time = 1
 
 
 func _movement(dir):
@@ -65,45 +100,9 @@ func _movement(dir):
 			
 	move_and_slide()
 
-func explode():
-	if not dead:
-		dead = true
-		ship_collision.set_deferred("disabled", true)
-		main_sprite.hide()
-		debris.show()
-		explosion_picture.show()
-		anim.play("Exploding")
-		await anim.animation_finished
-		var tween = create_tween()
-		tween.tween_property(debris, "modulate:a", 0, 1)
-		await tween.finished
-		queue_free()
 
 
-#################### STATE MACHINE ISH #########################
-func _physics_process(_delta: float) -> void:
-	if player and not dead:
-		var dir = global_position.direction_to(player.global_position)
-		var distance = global_position.distance_to(player.global_position)
-		if distance > 500:
-			_CHASING(dir)
-		else:
-			_ENGAGING(dir)
-
-
-####################### STATES ISH ###############################
-func _CHASING(dir):
-	_movement(dir)
-	shoot_timer.wait_time = 5
-
-func _ENGAGING(dir):
-	velocity = dir * SPEED * 0.1
-	move_and_slide()
-	shoot_timer.wait_time = 1
-	
-
-
-#################### TIMER TIMEOUTS ########################
+#################### TIMERS ########################
 func _on_x_timer_timeout() -> void:
 	pause_x = false
 

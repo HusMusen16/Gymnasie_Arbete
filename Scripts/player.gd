@@ -24,6 +24,8 @@ signal laser(type, pos, dir)
 signal plasma_countdown(time)
 
 
+
+############### GENERAL FUNKTIONS ###############
 func _movement(delta: float) -> void:
 	"""
 	Rörelse för spelaren
@@ -64,6 +66,18 @@ func _movement(delta: float) -> void:
 		self.rotation_degrees = 135*direction[0]/direction[1]
 
 
+func _physics_process(delta: float) -> void:
+	_movement(delta)
+	_shooting()
+	if not can_shoot_plasma:
+		var time = shoot_timer.time_left
+		plasma_countdown.emit(time)
+	else:
+		plasma_countdown.emit(0)
+
+
+
+################### DAMAGE FUNKTIONS ###################
 func _shooting():
 	if Input.is_action_just_pressed("shoot_laser"):
 		laser.emit("laser", laser_source.global_position, self.rotation_degrees)
@@ -77,24 +91,17 @@ func _shooting():
 		
 		shoot_timer.start(0)
 		can_shoot_plasma = false
-	
 
-func _physics_process(delta: float) -> void:
-	_movement(delta)
-	_shooting()
-	if not can_shoot_plasma:
-		var time = shoot_timer.time_left
-		plasma_countdown.emit(time)
-	else:
-		plasma_countdown.emit(0)
 
+func damage(type):
+	player_hit.emit(type)
+
+
+
+###################### TIMERS ###################
 func _on_shoot_timer_timeout() -> void:
 	can_shoot_plasma = true
 
 
 func _on_flash_duration_timeout() -> void:
 	gun_flash.emitting = false
-
-
-func damage(type):
-	player_hit.emit(type)

@@ -33,24 +33,17 @@ var health = 4
 @onready var ship_collision: CollisionPolygon2D = $Ship_Collision
 
 
-func _physics_process(delta: float) -> void:
+############### GENERAL FUNKTIOSN ###############
+func _physics_process(_delta: float) -> void:
 	if rotation_comparison != null and not rotation_checked: 
 		gun1.rotation_adjustment = rotation_comparison
 		gun2.rotation_adjustment = rotation_comparison
 		gun3.rotation_adjustment = rotation_comparison
 		rotation_checked = true
-			
-		
-
-func _on_player_data_timer_timeout() -> void:
-	if Player != null:
-		gun1.player = Player
-		gun2.player = Player
-		gun3.player = Player
-		player_checked = true
-		player_data_timer.stop()
 
 
+
+################# DAMAGE FUNKTIONS ##############
 func damage_progress():
 	if health == 2:
 		gun1.hide()
@@ -76,10 +69,13 @@ func damage_progress():
 		damage3.show()
 		damage3_1.show()
 
+
 func damage():
 	if health > 0:
 		health -= 1
 	else:
+		LevelManager.mothership_kills += 1
+		LevelManager.kills += 5
 		ship_collision.set_deferred("disabled", true)
 		big_explosion_pic.show()
 		big_explosion_anim.play("Big_explosion")
@@ -90,3 +86,14 @@ func damage():
 		queue_free()
 		
 	damage_progress()
+
+
+
+#################### TIMERS ##################
+func _on_player_data_timer_timeout() -> void:
+	if Player != null:
+		gun1.player = Player
+		gun2.player = Player
+		gun3.player = Player
+		player_checked = true
+		player_data_timer.stop()

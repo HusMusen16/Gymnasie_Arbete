@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://p60gfqncu3bo"]
+
+[ext_resource type="PackedScene" uid="uid://hl285pd01d74" path="res://Scenes/level.tscn" id="1_ng0s0"]
+
+[node name="LEVEL_3" instance=ExtResource("1_ng0s0")]
+level_number = 3
+
+[node name="SurgeFollower" parent="MotherPath" index="1"]
+position = Vector2(4377, 2556)

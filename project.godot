@@ -11,9 +11,13 @@ config_version=5
 [application]
 
 config/name="Gymnasie_arbete"
-run/main_scene="uid://hl285pd01d74"
+run/main_scene="uid://dk18b3myes2o1"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="uid://bhcpiepc81wm7"
+
+[autoload]
+
+LevelManager="*res://Scenes/level_manager.tscn"
 
 [display]
 

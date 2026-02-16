@@ -11,10 +11,9 @@ const SPEED = 1500
 
 var moving: bool = true
 
-func _plasma_colliding():
-	pass
 
 
+################# MOVEMENT FUNKTIONS #################
 func _plasma_movement(delta: float):
 	if rotation_degrees == 0:
 		global_position[1] -= SPEED * delta
@@ -35,16 +34,28 @@ func _plasma_movement(delta: float):
 
 
 
+################ GENERAL FUNKTIONS ################
 func _physics_process(delta: float):
 	if moving:
 		_plasma_movement(delta)
 	if ray_cast.is_colliding():
 		explosion_timer.stop()
 		explosion_timer.timeout.emit()
-		
 
 
 
+############### DAMAGE FUNKTIONS #################
+func _on_area_2d_body_entered(body: Node2D) -> void:
+	if body is ENEMY:
+		body.explode()
+	if body is METEOR:
+		body.explode()
+	if body is MOTHERSHIP:
+		body.damage()
+
+
+
+#################### TIMERS ####################
 func _on_explosion_timer_timeout() -> void:
 	moving = false
 	explosion_area.monitoring = true
@@ -53,12 +64,3 @@ func _on_explosion_timer_timeout() -> void:
 	anim.play("plasma_explosion")
 	await  anim.animation_finished
 	queue_free()
-
-
-func _on_area_2d_body_entered(body: Node2D) -> void:
-	if body is ENEMY:
-		body.explode()
-	if body is METEOR:
-		body.explode()
-	if body is MOTHERSHIP:
-		body.damage()

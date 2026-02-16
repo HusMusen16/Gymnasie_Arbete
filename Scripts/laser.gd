@@ -6,6 +6,22 @@ const SPEED = 1500
 @onready var dissipation_timer: Timer = $"Dissipation Timer"
 @onready var ray_cast: RayCast2D = $RayCast2D
 
+var has_ricochet = false
+
+
+
+################ GENERAL FUNKTIONS #################
+func _physics_process(delta: float):
+	if not has_ricochet:
+		_laser_movement(delta)
+	else:
+		ricochet(delta)
+		
+	_laser_colliding()
+
+
+func _on_dissipation_timer_timeout() -> void:
+	queue_free()
 
 
 func _laser_colliding():
@@ -16,10 +32,11 @@ func _laser_colliding():
 		if collider is ENEMY:
 			collider.explode()
 		if collider is MOTHERSHIP:
-			pass
-		
+			has_ricochet = true
 
 
+
+################ MOVEMENT FUNKTIONS ####################
 func _laser_movement(delta: float):
 	if rotation_degrees == 0:
 		global_position[1] -= SPEED * delta
@@ -39,11 +56,21 @@ func _laser_movement(delta: float):
 		global_position[1] += pow(pow((SPEED * delta), 2)/2,0.5)
 
 
-func _physics_process(delta: float):
-	_laser_movement(delta)
-	_laser_colliding()
-
-
-func _on_dissipation_timer_timeout() -> void:
-	queue_free()
-	
+func ricochet(delta):
+	#Identical to _laser_movement but the + and - are reversed
+	if rotation_degrees == 0:
+		global_position[1] += SPEED * delta
+		
+	elif rotation_degrees == 180 or rotation_degrees == -180:
+		global_position[1] -= SPEED * delta
+		
+	elif rotation_degrees == 45 or rotation_degrees == -45:
+		global_position[0] -= pow(pow((SPEED * delta), 2)/2,0.5) * rotation_degrees/45
+		global_position[1] += pow(pow((SPEED * delta), 2)/2,0.5)
+		
+	elif rotation_degrees == 90 or rotation_degrees == -90:
+		global_position[0] -= SPEED * delta * rotation_degrees/90
+		
+	elif rotation_degrees == 135 or rotation_degrees == -135:
+		global_position[0] -= pow(pow((SPEED * delta), 2)/2,0.5) * rotation_degrees/135
+		global_position[1] -= pow(pow((SPEED * delta), 2)/2,0.5)
