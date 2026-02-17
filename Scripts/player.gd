@@ -4,7 +4,7 @@ class_name PLAYER
 
 
 var ACC = 1000
-var speed = 700
+var speed = 900
 var can_shoot_plasma: bool = true
 
 """

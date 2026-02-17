@@ -89,6 +89,7 @@ func _ready() -> void:
 	if level_number == 2:
 		kill_progress_bg.show()
 
+
 func _physics_process(_delta: float) -> void:
 	################ MOTHER SHIP CODE ################
 	if level_number != 3:
@@ -151,7 +152,7 @@ func defeat():
 
 ################## SPAWN FUNKTIONS ###################
 func _spawn_enemy():
-	if len(enemies.get_children()) >= 60:
+	if len(enemies.get_children()) <= 60:
 		var enemy = enemy_scene.instantiate()
 		enemies.add_child(enemy)
 		enemy.player = player
@@ -204,7 +205,7 @@ func _mothership_spawn_manager():
 
 
 func _spawn_meteor():
-	if len(meteors.get_children()) >= 60:
+	if len(meteors.get_children()) <= 60:
 		var meteor = meteor_scene.instantiate()
 		meteors.add_child(meteor)
 		meteor.global_position.x = randf_range(-100, 4600)
