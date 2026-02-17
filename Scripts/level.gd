@@ -40,6 +40,8 @@ var defeat_screen: PackedScene = load("res://Scenes/defeat_screen.tscn")
 #Nodes specific for level 1
 @onready var kills_text = $UI/ColorRect4/Kills
 @onready var kills_text_bg = $UI/ColorRect4
+@onready var difficulty_timer = $Difficulty_timer
+
 
 #Nodes specific for level 2
 @onready var surge_follower: PathFollow2D = $MotherPath/SurgeFollower
@@ -57,7 +59,7 @@ level_number = 3  Defend space station mode
 @export var level_number = 0
 @export var enemy_spawnrate = 2
 @export var mothership_spawnrate = 10
-
+@export var meteor_spawnrate = 2
 
 var health = 100
 var allow_mothership_spawn: bool = true
@@ -77,8 +79,12 @@ func _ready() -> void:
 	enemy_timer.wait_time = enemy_spawnrate
 	mother_timer.wait_time = mothership_spawnrate
 	surge_mother_timer.wait_time = mothership_spawnrate
+	meteor_timer.wait_time = meteor_spawnrate
+	
 	if level_number == 1:
 		kills_text_bg.show()
+		difficulty_timer.autostart = true
+		difficulty_timer.start(-1)
 		
 	if level_number == 2:
 		kill_progress_bg.show()
@@ -145,14 +151,15 @@ func defeat():
 
 ################## SPAWN FUNKTIONS ###################
 func _spawn_enemy():
-	var enemy = enemy_scene.instantiate()
-	enemies.add_child(enemy)
-	enemy.player = player
-	enemy.global_position.x = randf_range(-100, 4600)
-	enemy.global_position.y = randf_range(-100, 2800)
-	while enemy.global_position.distance_to(player.global_position) < 1220:
+	if len(enemies.get_children()) >= 60:
+		var enemy = enemy_scene.instantiate()
+		enemies.add_child(enemy)
+		enemy.player = player
 		enemy.global_position.x = randf_range(-100, 4600)
 		enemy.global_position.y = randf_range(-100, 2800)
+		while enemy.global_position.distance_to(player.global_position) < 1220:
+			enemy.global_position.x = randf_range(-100, 4600)
+			enemy.global_position.y = randf_range(-100, 2800)
 
 
 func _spawn_mothership(): 
@@ -197,13 +204,14 @@ func _mothership_spawn_manager():
 
 
 func _spawn_meteor():
-	var meteor = meteor_scene.instantiate()
-	meteors.add_child(meteor)
-	meteor.global_position.x = randf_range(-100, 4600)
-	meteor.global_position.y = randf_range(-100, 2800)
-	while meteor.global_position.distance_to(player.global_position) < 1220:
+	if len(meteors.get_children()) >= 60:
+		var meteor = meteor_scene.instantiate()
+		meteors.add_child(meteor)
 		meteor.global_position.x = randf_range(-100, 4600)
 		meteor.global_position.y = randf_range(-100, 2800)
+		while meteor.global_position.distance_to(player.global_position) < 1220:
+			meteor.global_position.x = randf_range(-100, 4600)
+			meteor.global_position.y = randf_range(-100, 2800)
 
 
 
@@ -270,3 +278,13 @@ func _on_player_player_hit(type: Variant) -> void:
 		else:
 			safe = true
 			damage_timer.start(-1)
+
+
+func _on_difficulty_timer_timeout() -> void:
+	if enemy_timer.wait_time > 0.1:
+		enemy_timer.wait_time -= 0.1
+	if mother_timer.wait_time >= 0.2:
+		mother_timer.wait_time -= 0.2
+	if meteor_timer.wait_time >= 0.1:
+		meteor_timer.wait_time -= 0.1
+	print("timer working")

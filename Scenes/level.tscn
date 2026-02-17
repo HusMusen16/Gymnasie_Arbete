@@ -169,6 +169,9 @@ one_shot = true
 [node name="Surge_Mother_Timer" type="Timer" parent="."]
 one_shot = true
 
+[node name="Difficulty_timer" type="Timer" parent="."]
+wait_time = 50.0
+
 [node name="Barriers" type="StaticBody2D" parent="."]
 collision_layer = 8
 collision_mask = 4
@@ -335,3 +338,4 @@ text = "21313"
 [connection signal="timeout" from="Damage_Timer" to="." method="_on_damage_timer_timeout"]
 [connection signal="timeout" from="Mother_Timer" to="." method="_on_mother_timer_timeout"]
 [connection signal="timeout" from="Surge_Mother_Timer" to="." method="_on_surge_mother_timer_timeout"]
+[connection signal="timeout" from="Difficulty_timer" to="." method="_on_difficulty_timer_timeout"]
