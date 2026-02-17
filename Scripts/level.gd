@@ -17,8 +17,8 @@ var defeat_screen: PackedScene = load("res://Scenes/defeat_screen.tscn")
 
 #Plasma Nodes
 @onready var plasmas: Node = $Plasmas
-@onready var plasma_countdown_bar: ProgressBar = $UI/ColorRect2/plasma_countdown
-@onready var plasma_label: Label = $UI/ColorRect2/Label
+@onready var plasma_countdown_bar: ProgressBar = $HUD/ColorRect2/plasma_countdown
+@onready var plasma_label: Label = $HUD/ColorRect2/Label
 
 #Meteor Nodes 
 @onready var meteors: Node = $Meteors
@@ -34,12 +34,12 @@ var defeat_screen: PackedScene = load("res://Scenes/defeat_screen.tscn")
 @onready var path_follower: PathFollow2D = $MotherPath/PathFollower
 
 #Health related Nodes
-@onready var health_bar: ProgressBar = $UI/ColorRect/HealthBar
+@onready var health_bar: ProgressBar = $HUD/ColorRect/HealthBar
 @onready var damage_timer: Timer = $Damage_Timer
 
 #Nodes specific for level 1
-@onready var kills_text = $UI/ColorRect4/Kills
-@onready var kills_text_bg = $UI/ColorRect4
+@onready var kills_text = $HUD/ColorRect4/Kills
+@onready var kills_text_bg = $HUD/ColorRect4
 @onready var difficulty_timer = $Difficulty_timer
 
 
@@ -47,8 +47,8 @@ var defeat_screen: PackedScene = load("res://Scenes/defeat_screen.tscn")
 @onready var surge_follower: PathFollow2D = $MotherPath/SurgeFollower
 @onready var surge_motherships: Node2D = $MotherPath/SurgeFollower/SurgeMotherShips
 @onready var surge_mother_timer: Timer = $Surge_Mother_Timer
-@onready var kill_progress: Label = $UI/ColorRect3/Label
-@onready var kill_progress_bg: ColorRect = $UI/ColorRect3
+@onready var kill_progress: Label = $HUD/ColorRect3/Label
+@onready var kill_progress_bg: ColorRect = $HUD/ColorRect3
 
 
 """
