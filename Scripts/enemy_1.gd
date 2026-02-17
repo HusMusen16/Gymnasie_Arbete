@@ -13,6 +13,8 @@ class_name ENEMY
 @onready var main_sprite: Sprite2D = $Main_Sprite
 @onready var debris: Node2D = $Debris_sprites
 @onready var ship_collision: CollisionShape2D = $CollisionShape2D
+@onready var gun_audio: AudioStreamPlayer2D = $GunSound
+
 
 var laser_scene: PackedScene = load("res://Scenes/enemy_laser.tscn")
 
@@ -117,6 +119,7 @@ func _on_y_allow_timer_timeout() -> void:
 
 func _on_shoot_timer_timeout() -> void:
 	if player and not dead:
+		gun_audio.play()
 		var laser = laser_scene.instantiate()
 		lasers.add_child(laser)
 		laser.global_position = self.global_position

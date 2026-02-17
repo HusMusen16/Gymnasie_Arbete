@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://dmtjp32hn4tcq"]
+[gd_scene load_steps=13 format=3 uid="uid://dmtjp32hn4tcq"]
 
 [ext_resource type="Script" uid="uid://dojj7ml64emxd" path="res://Scripts/enemy_1.gd" id="1_0a874"]
 [ext_resource type="Texture2D" uid="uid://bhcpiepc81wm7" path="res://assets/PNG/ufoRed.png" id="1_jwqgc"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://b8771eswgghfc" path="res://assets/PNG/Damage/playerShip2_damage1.png" id="5_arec4"]
 [ext_resource type="Texture2D" uid="uid://i7h4x0vce5ne" path="res://assets/PNG/Damage/playerShip3_damage3.png" id="6_v73nf"]
 [ext_resource type="Texture2D" uid="uid://1auncpim6wl4" path="res://assets/PNG/Damage/playerShip3_damage2.png" id="7_ya6xy"]
+[ext_resource type="AudioStream" uid="uid://bormopoax63kj" path="res://assets/Bonus/sfx_laser2.ogg" id="8_ya6xy"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_jwqgc"]
 radius = 53.0377
@@ -111,6 +112,11 @@ position = Vector2(5, 1)
 rotation = 1.88146
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("7_ya6xy")
+
+[node name="GunSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("8_ya6xy")
+pitch_scale = 3.5
+max_distance = 4000.0
 
 [connection signal="timeout" from="X_timer" to="." method="_on_x_timer_timeout"]
 [connection signal="timeout" from="Y_timer" to="." method="_on_y_timer_timeout"]

@@ -5,6 +5,3 @@
 [node name="LEVEL_1" instance=ExtResource("1_vk57k")]
 level_number = 1
 mothership_spawnrate = 30
-
-[node name="SurgeFollower" parent="MotherPath" index="1"]
-position = Vector2(4377, 2556)

@@ -6,6 +6,7 @@ var laser_scene: PackedScene = load("res://Scenes/enemy_laser.tscn")
 @onready var lasers: Node = $Lasers
 @onready var laser_source: Marker2D = $Laser_Source
 @onready var shoot_timer: Timer = $Shoot_Timer
+@onready var gun_audio: AudioStreamPlayer2D = $GunSound
 
 var broken: bool = false 
 var player = null
@@ -27,6 +28,7 @@ func _physics_process(_delta: float) -> void:
 
 func _on_shoot_timer_timeout() -> void:
 	if player and not broken:
+		gun_audio.play()
 		var laser = laser_scene.instantiate()
 		lasers.add_child(laser)
 		laser.type = MOTHERSHIP

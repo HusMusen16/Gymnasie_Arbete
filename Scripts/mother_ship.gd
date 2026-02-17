@@ -32,7 +32,6 @@ var health = 4
 @onready var big_explosion_anim: AnimationPlayer = $Big_explosion_anim
 @onready var ship_collision: CollisionPolygon2D = $Ship_Collision
 
-
 ############### GENERAL FUNKTIOSN ###############
 func _physics_process(_delta: float) -> void:
 	if rotation_comparison != null and not rotation_checked: 

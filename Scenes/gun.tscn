@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://br7moiw78kg5o"]
+[gd_scene load_steps=4 format=3 uid="uid://br7moiw78kg5o"]
 
 [ext_resource type="Texture2D" uid="uid://db3rjkvn87jni" path="res://assets/PNG/Parts/gun09.png" id="1_nxj5y"]
 [ext_resource type="Script" uid="uid://dvdfmk7pgwx3c" path="res://Scripts/gun.gd" id="1_oqrbh"]
+[ext_resource type="AudioStream" uid="uid://bormopoax63kj" path="res://assets/Bonus/sfx_laser2.ogg" id="3_t6ynv"]
 
 [node name="Gun" type="Node2D"]
 scale = Vector2(0.6, 0.7)
@@ -18,5 +19,10 @@ position = Vector2(3.33333, 38.5714)
 autostart = true
 
 [node name="Lasers" type="Node" parent="."]
+
+[node name="GunSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_t6ynv")
+pitch_scale = 2.5
+max_distance = 4000.0
 
 [connection signal="timeout" from="Shoot_Timer" to="." method="_on_shoot_timer_timeout"]

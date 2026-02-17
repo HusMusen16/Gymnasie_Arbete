@@ -17,6 +17,8 @@ inte kan spawna
 @onready var laser_source: Marker2D = $LaserSource
 @onready var shoot_timer: Timer = $ShootTimer
 @onready var flash_duration: Timer = $FlashDuration
+@onready var gun_audio: AudioStreamPlayer2D = $GunSound
+@onready var plasma_gun_audio: AudioStreamPlayer2D = $PlasmaGunSound
 
 
 signal player_hit(type)
@@ -82,13 +84,14 @@ func _shooting():
 	if Input.is_action_just_pressed("shoot_laser"):
 		laser.emit("laser", laser_source.global_position, self.rotation_degrees)
 		
-		
+		gun_audio.play()
 		flash_duration.start(0)
 		gun_flash.emitting = true
 	
 	if Input.is_action_just_pressed("shoot_plasma") and can_shoot_plasma:
 		laser.emit("plasma", laser_source.global_position, self.rotation_degrees)
 		
+		plasma_gun_audio.play()
 		shoot_timer.start(0)
 		can_shoot_plasma = false
 
