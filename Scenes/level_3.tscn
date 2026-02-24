@@ -4,3 +4,6 @@
 
 [node name="LEVEL_3" instance=ExtResource("1_ng0s0")]
 level_number = 3
+
+[node name="SurgeFollower" parent="MotherPath" index="1"]
+position = Vector2(4377, 2556)

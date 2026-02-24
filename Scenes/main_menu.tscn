@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://c6a4rmqyoh03m" path="res://Scripts/main_menu.gd" id="1_ce3w2"]
 [ext_resource type="Texture2D" uid="uid://bbarwl0lj48df" path="res://assets/Foozle_2DS0015_Void_EnvironmentPack/Backgrounds/PNGs/Split up/Starry background  - Layer 03 - Stars.png" id="2_48xlc"]
 [ext_resource type="FontFile" uid="uid://7aq2omfr4iba" path="res://assets/Bonus/kenvector_future.ttf" id="3_1ehe0"]
-[ext_resource type="Texture2D" uid="uid://4c3oc63m1doi" path="res://assets/PNG/playerShip2_blue.png" id="5_n45e2"]
+[ext_resource type="PackedScene" uid="uid://drqkl0c1bf0f8" path="res://Scenes/player.tscn" id="5_n45e2"]
 
 [sub_resource type="Animation" id="Animation_ce3w2"]
 length = 0.001
@@ -116,12 +116,16 @@ text = "SPACESTATION
 DEFENSE
 "
 
-[node name="Sprite2D" type="Sprite2D" parent="UI"]
-position = Vector2(787, 64)
+[node name="Player" parent="." instance=ExtResource("5_n45e2")]
+position = Vector2(787, 66)
 rotation = 3.14159
-scale = Vector2(0.55, 0.55)
-texture = ExtResource("5_n45e2")
+scale = Vector2(0.6, 0.6)
+
+[node name="Lasers" type="Node" parent="."]
+
+[node name="Plasmas" type="Node" parent="."]
 
 [connection signal="pressed" from="UI/Endless_button" to="." method="_on_endless_button_pressed"]
 [connection signal="pressed" from="UI/Mothership_surge_button" to="." method="_on_mothership_surge_button_pressed"]
 [connection signal="pressed" from="UI/Spacestation_defense_button" to="." method="_on_spacestation_defense_button_pressed"]
+[connection signal="laser" from="Player" to="." method="_on_player_laser"]
