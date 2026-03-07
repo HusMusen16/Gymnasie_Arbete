@@ -111,7 +111,6 @@ func destroyed():
 	player_sprite.hide()
 	anim.play("exploding")
 	await anim.animation_finished
-	queue_free()
 
 
 ###################### TIMERS ###################

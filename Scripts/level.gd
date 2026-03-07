@@ -169,9 +169,10 @@ func _physics_process(_delta: float) -> void:
 
 func _victory():
 	victorious = true
+	LevelManager.current_gamemode = level_number
 	var victoryscreen = victory_screen.instantiate()
 	self.add_child(victoryscreen)
-	LevelManager.current_gamemode = level_number
+	
 	
 	var enemy = enemies.get_children()
 	enemy_timer.stop()
@@ -194,6 +195,8 @@ func _victory():
 	for i in range(len(mothership)):
 		mothership[i].health = 0
 		mothership[i].damage()
+		if level_number == 2:
+			LevelManager.mothership_kills -= 1
 		
 	if level_number == 2:
 		var surge_mothership = surge_motherships.get_children()
@@ -201,6 +204,7 @@ func _victory():
 		for i in range(len(surge_mothership)):
 			surge_mothership[i].health = 0
 			surge_mothership[i].damage()
+			LevelManager.mothership_kills -= 1
 
 
 func _defeat():
@@ -227,9 +231,9 @@ func _defeat():
 	has_lost = true
 	player.dead = true
 	player.destroyed()
+	LevelManager.current_gamemode = level_number
 	var defeatscreen = defeat_screen.instantiate()
 	self.add_child(defeatscreen)
-	LevelManager.current_gamemode = level_number
 
 
 
@@ -260,7 +264,7 @@ func _spawn_surge_mothership():
 		surge_mothership_spawning = false
 		var surge_mothership = mother_ship_scene.instantiate()
 		surge_motherships.add_child(surge_mothership)
-		surge_mothership.Player = player
+		surge_mothership.player = player
 		surge_mothership.rotation_comparison = surge_follower
 
 

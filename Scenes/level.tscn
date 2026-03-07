@@ -377,6 +377,12 @@ offset_bottom = 33.0
 theme_override_fonts/font = ExtResource("3_81xng")
 text = "21313"
 
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = 1997.0
+offset_top = 1208.0
+offset_right = 2520.0
+offset_bottom = 1452.0
+
 [connection signal="laser" from="Player" to="." method="_on_player_laser"]
 [connection signal="plasma_countdown" from="Player" to="." method="_on_player_plasma_countdown"]
 [connection signal="player_hit" from="Player" to="." method="_on_player_player_hit"]
