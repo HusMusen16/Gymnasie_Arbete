@@ -1,0 +1,255 @@
+[gd_scene load_steps=10 format=3 uid="uid://7l486sw4a2l0"]
+
+[ext_resource type="Texture2D" uid="uid://b4vdcg2tawstj" path="res://assets/PNG/Parts/beamLong1.png" id="1_xo6ra"]
+[ext_resource type="Script" uid="uid://ub0epl7kbm2" path="res://Scripts/space_station.gd" id="1_xqfik"]
+[ext_resource type="Texture2D" uid="uid://braampgyjejg1" path="res://assets/PNG/Parts/turretBase_big.png" id="2_k14jf"]
+[ext_resource type="Texture2D" uid="uid://cftochexo5abc" path="res://assets/PNG/Parts/cockpitYellow_0.png" id="3_y30kr"]
+[ext_resource type="Texture2D" uid="uid://dg8q48kiqd7r8" path="res://assets/PNG/Parts/turretBase_small.png" id="4_y30kr"]
+[ext_resource type="Texture2D" uid="uid://1b5r4ldw2q6v" path="res://assets/PNG/Parts/gun03.png" id="5_xqfik"]
+
+[sub_resource type="Animation" id="Animation_xqfik"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_y30kr"]
+resource_name = "Rotation"
+length = 1.8
+loop_mode = 1
+step = 0.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4, 1.6, 1.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.174533, 0.349066, 0.523599, 0.698132, 0.872665, 1.0472, 1.22173, 1.39626, 1.5708]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_41kta"]
+_data = {
+&"RESET": SubResource("Animation_xqfik"),
+&"Rotation": SubResource("Animation_y30kr")
+}
+
+[node name="Space Station" type="CharacterBody2D"]
+scale = Vector2(5, 5)
+collision_layer = 16
+collision_mask = 2
+script = ExtResource("1_xqfik")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-68, 26, -26, 68, 26, 68, 68, 26, 68, -26, 26, -68, -26, -68, -68, -26)
+
+[node name="Shapes" type="Node2D" parent="."]
+modulate = Color(0.875456, 0.875457, 0.875456, 1)
+
+[node name="ColorRect" type="ColorRect" parent="Shapes"]
+offset_left = -30.0
+offset_top = 56.0
+offset_right = 30.0
+offset_bottom = 66.0
+
+[node name="ColorRect2" type="ColorRect" parent="Shapes"]
+offset_left = -30.0
+offset_top = -66.0
+offset_right = 30.0
+offset_bottom = -56.0
+
+[node name="ColorRect3" type="ColorRect" parent="Shapes"]
+offset_left = -66.0
+offset_top = -30.0
+offset_right = -56.0
+offset_bottom = 30.0
+
+[node name="ColorRect4" type="ColorRect" parent="Shapes"]
+offset_left = 56.0
+offset_top = -30.0
+offset_right = 66.0
+offset_bottom = 30.0
+
+[node name="ColorRect5" type="ColorRect" parent="Shapes"]
+offset_left = 70.0
+offset_top = -28.0
+offset_right = 80.0
+offset_bottom = 31.0
+rotation = 2.35619
+
+[node name="ColorRect6" type="ColorRect" parent="Shapes"]
+offset_left = -21.0
+offset_top = 63.0
+offset_right = -11.0
+offset_bottom = 122.0
+rotation = 2.35619
+
+[node name="ColorRect7" type="ColorRect" parent="Shapes"]
+offset_left = 63.0
+offset_top = 21.0
+offset_right = 73.0
+offset_bottom = 80.0
+rotation = 0.785398
+
+[node name="ColorRect8" type="ColorRect" parent="Shapes"]
+offset_left = -28.0
+offset_top = -70.0
+offset_right = -18.0
+offset_bottom = -11.0
+rotation = 0.785398
+
+[node name="ColorRect9" type="ColorRect" parent="Shapes"]
+offset_left = -56.0
+offset_top = -3.0
+offset_right = 56.0
+offset_bottom = 3.0
+
+[node name="ColorRect10" type="ColorRect" parent="Shapes"]
+offset_left = 3.0
+offset_top = -56.0
+offset_right = 115.0
+offset_bottom = -50.0
+rotation = 1.5708
+
+[node name="YellowBottom" type="ColorRect" parent="Shapes"]
+offset_left = -30.0
+offset_top = 59.0
+offset_right = 30.0
+offset_bottom = 63.0
+color = Color(1, 0.8, 0.00784314, 1)
+
+[node name="YellowTop" type="ColorRect" parent="Shapes"]
+offset_left = -30.0
+offset_top = -63.0
+offset_right = 30.0
+offset_bottom = -59.0
+color = Color(1, 0.8, 0.00784314, 1)
+
+[node name="YellowL" type="ColorRect" parent="Shapes"]
+offset_left = -63.0
+offset_top = -30.0
+offset_right = -59.0
+offset_bottom = 30.0
+color = Color(1, 0.8, 0.00784314, 1)
+
+[node name="YellowR" type="ColorRect" parent="Shapes"]
+offset_left = 59.0
+offset_top = -30.0
+offset_right = 63.0
+offset_bottom = 30.0
+color = Color(1, 0.8, 0.00784314, 1)
+
+[node name="Sprites" type="Node2D" parent="."]
+scale = Vector2(0.75, 0.75)
+
+[node name="BarTop" type="Sprite2D" parent="Sprites"]
+position = Vector2(1.33333, -42.6667)
+scale = Vector2(0.4, 0.933333)
+texture = ExtResource("1_xo6ra")
+
+[node name="BarBottom" type="Sprite2D" parent="Sprites"]
+position = Vector2(-1.333, 42.667)
+rotation = 3.14159
+scale = Vector2(0.4, 0.933333)
+texture = ExtResource("1_xo6ra")
+
+[node name="BarR" type="Sprite2D" parent="Sprites"]
+position = Vector2(42.667, 1.333)
+rotation = 1.5708
+scale = Vector2(0.4, 0.933333)
+texture = ExtResource("1_xo6ra")
+
+[node name="BarL" type="Sprite2D" parent="Sprites"]
+position = Vector2(-42.667, -1.333)
+rotation = 4.71239
+scale = Vector2(0.4, 0.933333)
+texture = ExtResource("1_xo6ra")
+
+[node name="Sprite2D" type="Sprite2D" parent="Sprites"]
+modulate = Color(0.916968, 0.773661, 0.167246, 1)
+texture = ExtResource("2_k14jf")
+
+[node name="Sprite2D2" type="Sprite2D" parent="Sprites"]
+position = Vector2(-16, 93)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("3_y30kr")
+
+[node name="Sprite2D3" type="Sprite2D" parent="Sprites"]
+position = Vector2(-93, -16)
+rotation = 1.5708
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("3_y30kr")
+
+[node name="Sprite2D4" type="Sprite2D" parent="Sprites"]
+position = Vector2(16, -93)
+rotation = 3.14159
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("3_y30kr")
+
+[node name="Sprite2D5" type="Sprite2D" parent="Sprites"]
+position = Vector2(93, 16)
+rotation = 4.71239
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("3_y30kr")
+
+[node name="Sprite2D10" type="Sprite2D" parent="Sprites"]
+
+[node name="Sprite2D6" type="Sprite2D" parent="Sprites"]
+position = Vector2(-60, 60)
+rotation = 0.785398
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("4_y30kr")
+
+[node name="Sprite2D11" type="Sprite2D" parent="Sprites/Sprite2D6"]
+position = Vector2(0, 10)
+texture = ExtResource("5_xqfik")
+
+[node name="Sprite2D7" type="Sprite2D" parent="Sprites"]
+position = Vector2(60, 60)
+rotation = -0.785398
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("4_y30kr")
+
+[node name="Sprite2D12" type="Sprite2D" parent="Sprites/Sprite2D7"]
+position = Vector2(0, 10)
+texture = ExtResource("5_xqfik")
+
+[node name="Sprite2D8" type="Sprite2D" parent="Sprites"]
+position = Vector2(60, -60)
+rotation = 0.785398
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("4_y30kr")
+
+[node name="Sprite2D13" type="Sprite2D" parent="Sprites/Sprite2D8"]
+position = Vector2(0, -10)
+rotation = 3.14159
+texture = ExtResource("5_xqfik")
+
+[node name="Sprite2D9" type="Sprite2D" parent="Sprites"]
+position = Vector2(-60, -60)
+rotation = -0.785398
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("4_y30kr")
+
+[node name="Sprite2D14" type="Sprite2D" parent="Sprites/Sprite2D9"]
+position = Vector2(0, -10)
+rotation = 3.14159
+texture = ExtResource("5_xqfik")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_41kta")
+}
+autoplay = "Rotation"

@@ -48,12 +48,12 @@ func _physics_process(_delta: float) -> void:
 	global_rotation += random_rotation_number
 	_movement()
 	if not dead:
-		outside_play_area()
+		_outside_play_area()
 
 
 
 ################## MOVEMENT FUNKTIONS ##################
-func outside_play_area():
+func _outside_play_area():
 	if (width[0] > self.global_position.x or self.global_position.x > width[1]) or (hight[0] > self.global_position.y or self.global_position.y > hight[1]):
 		queue_free()
 
@@ -89,7 +89,7 @@ func damage():
 
 
 func _on_collision_area_body_entered(body: Node2D) -> void:
-	if body is ENEMY: 
+	if body is ENEMY or body is ENEMY_CHASER: 
 		body.explode()
 		LevelManager.kills -= 1
 	elif body is PLAYER:

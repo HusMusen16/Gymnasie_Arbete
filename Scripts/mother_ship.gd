@@ -1,11 +1,12 @@
 extends CharacterBody2D
 class_name  MOTHERSHIP
 
-var Player = null
+var player = null
 var player_checked = false
 var number = 0
 var rotation_comparison = null
 var rotation_checked: bool = false
+var player_lost: bool = false
 
 #Sätt health 1 lägre än det rätta värdet
 var health = 4
@@ -39,11 +40,12 @@ func _physics_process(_delta: float) -> void:
 		gun2.rotation_adjustment = rotation_comparison
 		gun3.rotation_adjustment = rotation_comparison
 		rotation_checked = true
-
+	if player_lost:
+		_on_player_data_timer_timeout()
 
 
 ################# DAMAGE FUNKTIONS ##############
-func damage_progress():
+func _damage_progress():
 	if health == 2:
 		gun1.hide()
 		gun_anim.play("Gun_Explosion")
@@ -84,15 +86,15 @@ func damage():
 		await big_explosion_anim.animation_finished
 		queue_free()
 		
-	damage_progress()
+	_damage_progress()
 
 
 
 #################### TIMERS ##################
 func _on_player_data_timer_timeout() -> void:
-	if Player != null:
-		gun1.player = Player
-		gun2.player = Player
-		gun3.player = Player
+	if player != null:
+		gun1.player = player
+		gun2.player = player
+		gun3.player = player
 		player_checked = true
 		player_data_timer.stop()

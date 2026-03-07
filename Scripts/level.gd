@@ -9,16 +9,20 @@ var plasma_scene: PackedScene = load("res://Scenes/plasma_blast.tscn")
 var mother_ship_scene: PackedScene = load("res://Scenes/mother_ship.tscn")
 var victory_screen: PackedScene = load("res://Scenes/victory_screen.tscn")
 var defeat_screen: PackedScene = load("res://Scenes/defeat_screen.tscn")
+var spacestation_scene: PackedScene = load("res://Scenes/space_station.tscn")
+var chaser_scene: PackedScene = load("res://Scenes/enemy_chaser.tscn")
 
 
 #Player nodes
 @onready var player: PLAYER = $Player
 @onready var lasers: Node = $Lasers
+@onready var health_bar: ProgressBar = $HUD/PlayerHealth/HealthBar
+@onready var damage_timer: Timer = $Damage_Timer
 
 #Plasma Nodes
 @onready var plasmas: Node = $Plasmas
-@onready var plasma_countdown_bar: ProgressBar = $HUD/ColorRect2/plasma_countdown
-@onready var plasma_label: Label = $HUD/ColorRect2/Label
+@onready var plasma_countdown_bar: ProgressBar = $HUD/PlasmaBlastCooldown/plasma_countdown
+@onready var plasma_label: Label = $HUD/PlasmaBlastCooldown/Label
 
 #Meteor Nodes 
 @onready var meteors: Node = $Meteors
@@ -33,22 +37,24 @@ var defeat_screen: PackedScene = load("res://Scenes/defeat_screen.tscn")
 @onready var mother_timer: Timer = $Mother_Timer
 @onready var path_follower: PathFollow2D = $MotherPath/PathFollower
 
-#Health related Nodes
-@onready var health_bar: ProgressBar = $HUD/ColorRect/HealthBar
-@onready var damage_timer: Timer = $Damage_Timer
 
 #Nodes specific for level 1
-@onready var kills_text = $HUD/ColorRect4/Kills
-@onready var kills_text_bg = $HUD/ColorRect4
+@onready var kills_text = $HUD/Kills/KillsText
+@onready var kills_text_bg = $HUD/Kills
 @onready var difficulty_timer = $Difficulty_timer
-
 
 #Nodes specific for level 2
 @onready var surge_follower: PathFollow2D = $MotherPath/SurgeFollower
 @onready var surge_motherships: Node2D = $MotherPath/SurgeFollower/SurgeMotherShips
 @onready var surge_mother_timer: Timer = $Surge_Mother_Timer
-@onready var kill_progress: Label = $HUD/ColorRect3/Label
-@onready var kill_progress_bg: ColorRect = $HUD/ColorRect3
+@onready var kill_progress: Label = $HUD/MothershipKills/Label
+@onready var kill_progress_bg: ColorRect = $HUD/MothershipKills
+
+#Nodes specific for level 3
+@onready var chasers: Node = $Chasers
+@onready var chaser_timer: Timer = $Chaser_Timer
+@onready var space_station_health_bar = $HUD/SpaceStationHealth/SpaceStationHealthBar
+@onready var space_station_health_bar_bg = $HUD/SpaceStationHealth
 
 
 """
@@ -56,22 +62,37 @@ level_number = 1  endless mode
 level_number = 2  Mothership surge mode
 level_number = 3  Defend space station mode
 """
-@export var level_number = 0
-@export var enemy_spawnrate = 2
-@export var mothership_spawnrate = 10
-@export var meteor_spawnrate = 2
+
+##The number of the level, see further info in the level.gd script.
+@export var level_number: int = 0
+##Spawnrate of the standard enemy in seconds.
+@export var enemy_spawnrate: float = 2
+##Spawnrate of the chaser enemy in seconds. Does not affect level 2.
+@export var chaser_spawnrate: float = 5
+##Spawnrate of the mothership enemy in seconds. Does not affect level 3.
+@export var mothership_spawnrate: float = 10
+##Spawnrate of the meteors in seconds.
+@export var meteor_spawnrate: float = 2
+##Time until spawnrates increase in seconds. Is stackable.
+@export var difficulty_timer_time: float = 50
 
 var health = 100
 var allow_mothership_spawn: bool = true
 var mothership_spawning: bool = false
 var safe: bool = false
 var victorious: bool = false
-var has_not_won: bool = true
+
+var has_lost: bool = false
 
 #Variabler för level 2
 var allow_surge_mothership_spawn: bool = true
 var surge_mothership_spawning: bool = false
 var mothership_kills = 0
+
+#Variabler för level 3
+var spacestation_position = Vector2(0,0)
+var spacestation = null
+var win_timer = null
 
 
 ################# GENERAL FUNKTIONS #################
@@ -80,50 +101,89 @@ func _ready() -> void:
 	mother_timer.wait_time = mothership_spawnrate
 	surge_mother_timer.wait_time = mothership_spawnrate
 	meteor_timer.wait_time = meteor_spawnrate
+	chaser_timer.wait_time = chaser_spawnrate
 	
 	if level_number == 1:
 		kills_text_bg.show()
-		difficulty_timer.autostart = true
-		difficulty_timer.start(-1)
 		
-	if level_number == 2:
+		chaser_timer.autostart = true
+		chaser_timer.start(-1)
+	
+	elif level_number == 2:
 		kill_progress_bg.show()
+	
+	elif level_number == 3:
+		space_station_health_bar_bg.show()
+		
+		mother_timer.stop()
+		
+		spacestation = spacestation_scene.instantiate()
+		self.add_child(spacestation)
+		spacestation.global_position = Vector2(2300,1225)
+		spacestation_position = spacestation.global_position
+		
+		chaser_timer.autostart = true
+		chaser_timer.start(-1)
+		
+		#Time until you win
+		win_timer = Timer.new()
+		add_child(win_timer)
+		win_timer.wait_time = 180
+		win_timer.one_shot = true
+		win_timer.start()
+		win_timer.timeout.connect(_on_win_timer_timeout)
 
 
 func _physics_process(_delta: float) -> void:
-	################ MOTHER SHIP CODE ################
+	############# GENERAL ###############
 	if level_number != 3:
 		path_follower.progress_ratio += 0.0002
 		motherships.global_position = path_follower.global_position
 	
-	if level_number == 2:
+	if not victorious and level_number != 3:
+		_mothership_spawn_manager()
+	
+	
+	############# LEVEL 1 ###############
+	if level_number == 1:
+		kills_text.text = str(LevelManager.kills)
+	
+	############ LEVEL 2 ##############
+	elif level_number == 2:
 		mothership_kills = LevelManager.mothership_kills
 		kill_progress.text = (str(mothership_kills) + "/3 motherships")
 		surge_follower.progress_ratio += 0.0002
 		surge_motherships.global_position = surge_follower.global_position
 		
-		if mothership_kills >= 3 and has_not_won:
-			has_not_won = false
-			victory()
-	
-	if level_number == 1:
-		kills_text.text = str(LevelManager.kills)
-	
-	if not victorious or level_number != 3:
-		_mothership_spawn_manager()
+		if mothership_kills >= 3 and not victorious:
+			victorious = true
+			_victory()
+			
+	########### LEVEL 3 ##############
+	elif level_number == 3:
+		if spacestation.health <= 0 and not has_lost:
+			has_lost = true
+			_defeat()
+		space_station_health_bar.value = spacestation.health
 
 
-func victory():
+func _victory():
 	victorious = true
 	var victoryscreen = victory_screen.instantiate()
 	self.add_child(victoryscreen)
-	victoryscreen.current_level = level_number
+	LevelManager.current_gamemode = level_number
 	
 	var enemy = enemies.get_children()
 	enemy_timer.stop()
 	for i in range(len(enemy)):
 		enemy[i].explode()
-		
+	
+	if level_number != 2:
+		var chaser = chasers.get_children()
+		chaser_timer.stop()
+		for i in range(len(chaser)):
+			chaser[i].explode()
+	
 	var meteor = meteors.get_children()
 	meteor_timer.stop()
 	for i in range(len(meteor)):
@@ -143,16 +203,39 @@ func victory():
 			surge_mothership[i].damage()
 
 
-func defeat():
+func _defeat():
+	var enemy = enemies.get_children()
+	for i in range(len(enemy)):
+		enemy[i].player = null
+	
+	if level_number != 2:
+		var chaser = chasers.get_children()
+		for i in range(len(chaser)):
+			chaser[i].target = null
+	
+	var mothership = motherships.get_children()
+	for i in range(len(mothership)):
+		mothership[i].player = null
+		mothership[i].player_lost = true
+		
+	if level_number == 2:
+		var surge_mothership = surge_motherships.get_children()
+		for i in range(len(surge_mothership)):
+			surge_mothership[i].player = null
+			mothership[i].player_lost = true
+			
+	has_lost = true
+	player.dead = true
+	player.destroyed()
 	var defeatscreen = defeat_screen.instantiate()
 	self.add_child(defeatscreen)
-	defeatscreen.current_level = level_number
+	LevelManager.current_gamemode = level_number
 
 
 
 ################## SPAWN FUNKTIONS ###################
 func _spawn_enemy():
-	if len(enemies.get_children()) <= 60:
+	if len(enemies.get_children()) <= 60 and not has_lost:
 		var enemy = enemy_scene.instantiate()
 		enemies.add_child(enemy)
 		enemy.player = player
@@ -168,7 +251,7 @@ func _spawn_mothership():
 		mothership_spawning = false
 		var mother_ship = mother_ship_scene.instantiate()
 		motherships.add_child(mother_ship)
-		mother_ship.Player = player
+		mother_ship.player = player
 		mother_ship.rotation_comparison = path_follower
 
 
@@ -205,7 +288,7 @@ func _mothership_spawn_manager():
 
 
 func _spawn_meteor():
-	if len(meteors.get_children()) <= 60:
+	if len(meteors.get_children()) <= 60 and not has_lost:
 		var meteor = meteor_scene.instantiate()
 		meteors.add_child(meteor)
 		meteor.global_position.x = randf_range(-100, 4600)
@@ -213,6 +296,18 @@ func _spawn_meteor():
 		while meteor.global_position.distance_to(player.global_position) < 1220:
 			meteor.global_position.x = randf_range(-100, 4600)
 			meteor.global_position.y = randf_range(-100, 2800)
+
+
+func _spawn_enemy_chaser(target):
+	if len(chasers.get_children()) <= 60 and not has_lost:
+		var chaser = chaser_scene.instantiate()
+		chasers.add_child(chaser)
+		chaser.target = target
+		chaser.global_position.x = randf_range(-100, 4600)
+		chaser.global_position.y = randf_range(-100, 2800)
+		while chaser.global_position.distance_to(target.global_position) < 2000:
+			chaser.global_position.x = randf_range(-100, 4600)
+			chaser.global_position.y = randf_range(-100, 2800)
 
 
 
@@ -236,6 +331,17 @@ func _on_mother_timer_timeout() -> void:
 func _on_surge_mother_timer_timeout() -> void:
 	_spawn_surge_mothership()
 
+
+func _on_chaser_timer_timeout() -> void:
+	if level_number == 1:
+		_spawn_enemy_chaser(player)
+	
+	elif level_number == 3:
+		_spawn_enemy_chaser(spacestation)
+
+
+func _on_win_timer_timeout():
+	_victory()
 
 
 ###################### SIGNALS ###########################
@@ -263,18 +369,21 @@ func _on_player_plasma_countdown(time: Variant) -> void:
 func _on_player_player_hit(type: Variant) -> void:
 	if not safe and not victorious:
 		if type == ENEMY:
-			health -= 5
+			health -= 3
+		elif type == ENEMY_CHASER:
+			health -= 10
 		elif type == METEOR:
 			health -= 10
 		elif type == MOTHERSHIP:
-			health -= 10
+			health -= 7
 		health_bar.value = health
 		
-		if health <= 0 and level_number != 3:
-			defeat()
+		if health <= 0 and level_number != 3 and not has_lost :
+			_defeat()
 			
 		elif health <= 0 and level_number == 3:
-			pass
+			health = 100
+			player.global_position = spacestation_position
 			
 		else:
 			safe = true
@@ -284,6 +393,8 @@ func _on_player_player_hit(type: Variant) -> void:
 func _on_difficulty_timer_timeout() -> void:
 	if enemy_timer.wait_time > 0.1:
 		enemy_timer.wait_time -= 0.1
+	if chaser_timer.wait_time > 0.1:
+		chaser_timer.wait_time -= 0.1
 	if mother_timer.wait_time >= 0.2:
 		mother_timer.wait_time -= 0.2
 	if meteor_timer.wait_time >= 0.1:

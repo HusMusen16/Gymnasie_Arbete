@@ -13,11 +13,13 @@ LEVEL_3 = Defend space stations mode
 
 
 func return_to_main_menu():
+	kills = 0
 	mothership_kills = 0
 	get_tree().change_scene_to_file("res://Scenes/main_menu.tscn")
 
 
 func restart_current_gamemode():
+	kills = 0
 	mothership_kills = 0
 	get_tree().change_scene_to_file("res://Scenes/level_" + str(current_gamemode) + ".tscn")
 
@@ -25,7 +27,6 @@ func restart_current_gamemode():
 
 func start_endless_mode():
 	get_tree().change_scene_to_file("res://Scenes/level_1.tscn")
-
 
 func start_mothership_surge_mode():
 	get_tree().change_scene_to_file("res://Scenes/level_2.tscn")

@@ -47,7 +47,7 @@ _data = {
 }
 
 [node name="Meteor" type="CharacterBody2D"]
-collision_mask = 6
+collision_mask = 38
 script = ExtResource("1_wm1ig")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -57,7 +57,7 @@ texture = ExtResource("1_5civa")
 shape = SubResource("CircleShape2D_wm1ig")
 
 [node name="CollisionArea" type="Area2D" parent="."]
-collision_mask = 7
+collision_mask = 39
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionArea"]
 shape = SubResource("CircleShape2D_bgiwl")

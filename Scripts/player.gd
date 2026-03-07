@@ -6,6 +6,8 @@ class_name PLAYER
 var ACC = 1000
 var speed = 900
 var can_shoot_plasma: bool = true
+var dead: bool = false
+var has_died: bool = false
 
 """
 Lägg till en rektangel till spelaren där meteorer och fiender 
@@ -19,7 +21,9 @@ inte kan spawna
 @onready var flash_duration: Timer = $FlashDuration
 @onready var gun_audio: AudioStreamPlayer2D = $GunSound
 @onready var plasma_gun_audio: AudioStreamPlayer2D = $PlasmaGunSound
-
+@onready var explosion_pic: Sprite2D = $Explosion_Pic
+@onready var anim: AnimationPlayer = $Explosion_animation
+@onready var player_sprite: Sprite2D = $Sprite2D
 
 signal player_hit(type)
 signal laser(type, pos, dir)
@@ -69,13 +73,15 @@ func _movement(delta: float) -> void:
 
 
 func _physics_process(delta: float) -> void:
-	_movement(delta)
-	_shooting()
-	if not can_shoot_plasma:
-		var time = shoot_timer.time_left
-		plasma_countdown.emit(time)
-	else:
-		plasma_countdown.emit(0)
+	if not dead:
+		_movement(delta)
+		_shooting()
+		if not can_shoot_plasma:
+			var time = shoot_timer.time_left
+			plasma_countdown.emit(time)
+		else:
+			plasma_countdown.emit(0)
+
 
 
 
@@ -99,6 +105,13 @@ func _shooting():
 func damage(type):
 	player_hit.emit(type)
 
+
+func destroyed():
+	explosion_pic.show()
+	player_sprite.hide()
+	anim.play("exploding")
+	await anim.animation_finished
+	queue_free()
 
 
 ###################### TIMERS ###################

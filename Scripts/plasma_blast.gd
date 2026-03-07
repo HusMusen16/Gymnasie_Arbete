@@ -46,7 +46,7 @@ func _physics_process(delta: float):
 
 ############### DAMAGE FUNKTIONS #################
 func _on_area_2d_body_entered(body: Node2D) -> void:
-	if body is ENEMY:
+	if body is ENEMY or body is ENEMY_CHASER:
 		body.explode()
 	if body is METEOR:
 		body.explode()

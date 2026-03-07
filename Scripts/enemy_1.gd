@@ -14,11 +14,16 @@ class_name ENEMY
 @onready var debris: Node2D = $Debris_sprites
 @onready var ship_collision: CollisionShape2D = $CollisionShape2D
 @onready var gun_audio: AudioStreamPlayer2D = $GunSound
+@onready var targeting_swap_timer: Timer = $Targeting_swap_timer
 
+
+enum {IDLE, CHASING, ENGAGING, DEAD}
+
+var state = IDLE
+var allow_targeting_swap: bool = true
 
 var laser_scene: PackedScene = load("res://Scenes/enemy_laser.tscn")
 
-var dead:bool = false
 var player = null
 var choice = [0,1,2,3,4,5]
 
@@ -33,15 +38,30 @@ var enemy_x = RandomNumberGenerator.new().randf_range(-1000, 5500)
 var enemy_y = RandomNumberGenerator.new().randf_range(-1000,3500)
 
 
-
 const SPEED = 500
+
+##################### GAME LOOP ########################
+func _physics_process(_delta: float) -> void:
+	if player:
+		var dir = global_position.direction_to(player.global_position)
+		var distance = global_position.distance_to(player.global_position)
+		
+		match state:
+			CHASING:
+				_CHASING_STATE(dir, distance)
+			ENGAGING:
+				_ENGAGING_STATE(dir, distance)
+			IDLE:
+				_IDLE_STATE()
+			DEAD:
+				_DEAD_STATE()
 
 
 ################# GENERAL FUNKTIONS ##############
 func explode():
-	if not dead:
+	if state != DEAD:
+		state = DEAD
 		LevelManager.kills += 1
-		dead = true
 		ship_collision.set_deferred("disabled", true)
 		main_sprite.hide()
 		debris.show()
@@ -52,29 +72,6 @@ func explode():
 		tween.tween_property(debris, "modulate:a", 0, 1)
 		await tween.finished
 		queue_free()
-
-
-func _physics_process(_delta: float) -> void:
-	if player and not dead:
-		var dir = global_position.direction_to(player.global_position)
-		var distance = global_position.distance_to(player.global_position)
-		if distance > 500:
-			_CHASING(dir)
-		else:
-			_ENGAGING(dir)
-
-
-
-################## MOVEMENT FUNKTIONS #####################
-func _CHASING(dir):
-	_movement(dir)
-	shoot_timer.wait_time = 5
-
-
-func _ENGAGING(dir):
-	velocity = dir * SPEED * 0.1
-	move_and_slide()
-	shoot_timer.wait_time = 1
 
 
 func _movement(dir):
@@ -103,6 +100,59 @@ func _movement(dir):
 	move_and_slide()
 
 
+################## STATE FUNKTIONS #####################
+func _CHASING_STATE(dir,distance):
+	if distance <= 500 and allow_targeting_swap:
+		_enter_engaging_state()
+	else:
+		_movement(dir)
+
+
+func _ENGAGING_STATE(dir,distance):
+	if distance > 500 and allow_targeting_swap:
+		_enter_chasing_state()
+	else:
+		velocity = dir * SPEED * 0.1
+		move_and_slide()
+
+
+func _IDLE_STATE():
+	if player:
+		state = CHASING
+		shoot_timer.paused = false
+	else:
+		shoot_timer.paused = true
+
+
+func _DEAD_STATE():
+	shoot_timer.paused = true
+
+
+################# ENTER STATE FUNKTIONS ###################
+func _enter_chasing_state():
+	state = CHASING
+	allow_targeting_swap = false
+	targeting_swap_timer.start(-1)
+	
+	shoot_timer.stop()
+	shoot_timer.wait_time = 2
+	shoot_timer.start(-1)
+
+
+func _enter_engaging_state():
+	state = ENGAGING
+	allow_targeting_swap = false
+	targeting_swap_timer.start(-1)
+	
+	shoot_timer.stop()
+	shoot_timer.wait_time = 0.5
+	shoot_timer.start(-1)
+
+
+func _enter_idle_state():
+	state = IDLE
+	shoot_timer.stop()
+
 
 #################### TIMERS ########################
 func _on_x_timer_timeout() -> void:
@@ -118,9 +168,12 @@ func _on_y_allow_timer_timeout() -> void:
 	y_pause_allowed = true
 
 func _on_shoot_timer_timeout() -> void:
-	if player and not dead:
+	if player:
 		gun_audio.play()
 		var laser = laser_scene.instantiate()
 		lasers.add_child(laser)
 		laser.global_position = self.global_position
 		laser.dir = global_position.direction_to(player.global_position)
+
+func _on_targeting_swap_timer_timeout() -> void:
+	allow_targeting_swap = true

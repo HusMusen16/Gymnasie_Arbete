@@ -1,10 +1,8 @@
 extends CanvasLayer
 
-var current_level = null
 
 
 func _on_play_again_pressed() -> void:
-	LevelManager.current_gamemode = current_level
 	LevelManager.restart_current_gamemode()
 	queue_free()
 	

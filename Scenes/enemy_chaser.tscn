@@ -1,0 +1,123 @@
+[gd_scene load_steps=14 format=3 uid="uid://crlds6r8dcdyu"]
+
+[ext_resource type="Texture2D" uid="uid://bhcpiepc81wm7" path="res://assets/PNG/ufoRed.png" id="1_cw31k"]
+[ext_resource type="Script" uid="uid://cwn67hamtsc3b" path="res://Scripts/enemy_chaser.gd" id="1_t2thj"]
+[ext_resource type="Texture2D" uid="uid://g3h4vxary3np" path="res://assets/explosion pack 1/Explosions pack/explosion-1-g/spritesheet.png" id="2_t2thj"]
+[ext_resource type="Texture2D" uid="uid://c8svevupmdflk" path="res://assets/PNG/Damage/playerShip1_damage2.png" id="3_ftkdp"]
+[ext_resource type="Texture2D" uid="uid://b8771eswgghfc" path="res://assets/PNG/Damage/playerShip2_damage1.png" id="4_02w76"]
+[ext_resource type="Texture2D" uid="uid://i7h4x0vce5ne" path="res://assets/PNG/Damage/playerShip3_damage3.png" id="5_wdc5b"]
+[ext_resource type="Texture2D" uid="uid://1auncpim6wl4" path="res://assets/PNG/Damage/playerShip3_damage2.png" id="6_yg6pa"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jwqgc"]
+radius = 53.0377
+
+[sub_resource type="Animation" id="Animation_wlnc2"]
+resource_name = "Exploding"
+length = 0.5
+step = 0.0166667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Explosion_Picture:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0833333, 0.166667, 0.25, 0.333333, 0.416667, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6]
+}
+
+[sub_resource type="Animation" id="Animation_hmo6u"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Explosion_Picture:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_arec4"]
+_data = {
+&"Exploding": SubResource("Animation_wlnc2"),
+&"RESET": SubResource("Animation_hmo6u")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_cw31k"]
+radius = 92.0054
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_t2thj"]
+radius = 124.064
+
+[node name="Enemy_Chaser" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 23
+script = ExtResource("1_t2thj")
+
+[node name="Main_Sprite" type="Sprite2D" parent="."]
+modulate = Color(0.999714, 0.125718, 0.0874258, 1)
+texture = ExtResource("1_cw31k")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_jwqgc")
+
+[node name="ExplosionAnimation" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_arec4")
+}
+
+[node name="Explosion_Picture" type="Sprite2D" parent="."]
+visible = false
+scale = Vector2(10, 10)
+texture = ExtResource("2_t2thj")
+hframes = 7
+
+[node name="Debris_sprites" type="Node2D" parent="."]
+visible = false
+
+[node name="debris1" type="Sprite2D" parent="Debris_sprites"]
+position = Vector2(7, 0)
+texture = ExtResource("3_ftkdp")
+
+[node name="debris2" type="Sprite2D" parent="Debris_sprites"]
+position = Vector2(2, 16)
+rotation = -1.24093
+texture = ExtResource("4_02w76")
+
+[node name="debris4" type="Sprite2D" parent="Debris_sprites"]
+position = Vector2(0, 4)
+rotation = -2.25671
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("5_wdc5b")
+
+[node name="debris3" type="Sprite2D" parent="Debris_sprites"]
+position = Vector2(5, 1)
+rotation = 1.88146
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("6_yg6pa")
+
+[node name="DetonationSensor" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 21
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetonationSensor"]
+shape = SubResource("CircleShape2D_cw31k")
+
+[node name="ExplosionRadius" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 23
+monitoring = false
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ExplosionRadius"]
+shape = SubResource("CircleShape2D_t2thj")
+
+[connection signal="body_entered" from="DetonationSensor" to="." method="_on_detonation_sensor_body_entered"]
+[connection signal="body_entered" from="ExplosionRadius" to="." method="_on_explosion_radius_body_entered"]

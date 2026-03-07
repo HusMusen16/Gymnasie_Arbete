@@ -29,8 +29,9 @@ func _laser_colliding():
 		var collider = ray_cast.get_collider()
 		if collider is METEOR:
 			collider.explode()
-		if collider is ENEMY:
+		if collider is ENEMY or collider is ENEMY_CHASER:
 			collider.explode()
+			queue_free()
 		if collider is MOTHERSHIP:
 			has_ricochet = true
 

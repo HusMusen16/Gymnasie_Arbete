@@ -137,6 +137,8 @@ _data = {
 
 [node name="MotherShip" type="CharacterBody2D"]
 scale = Vector2(2, 2)
+collision_layer = 32
+collision_mask = 0
 script = ExtResource("1_01so7")
 
 [node name="Parts" type="Node2D" parent="."]
