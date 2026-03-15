@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://db3rjkvn87jni" path="res://assets/PNG/Parts/gun09.png" id="1_nxj5y"]
 [ext_resource type="Script" uid="uid://dvdfmk7pgwx3c" path="res://Scripts/gun.gd" id="1_oqrbh"]
-[ext_resource type="AudioStream" uid="uid://bormopoax63kj" path="res://assets/Sounds and fonts/sfx_laser2.ogg" id="3_t6ynv"]
+[ext_resource type="AudioStream" uid="uid://bormopoax63kj" path="res://assets/Used Sounds/sfx_laser2.ogg" id="3_t6ynv"]
 
 [node name="Gun" type="Node2D"]
 scale = Vector2(0.6, 0.7)

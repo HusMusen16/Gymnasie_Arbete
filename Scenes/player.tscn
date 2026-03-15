@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" uid="uid://7438sawkxa1s" path="res://Scripts/player.gd" id="1_cvnsp"]
 [ext_resource type="Texture2D" uid="uid://4c3oc63m1doi" path="res://assets/PNG/playerShip2_blue.png" id="2_cvnsp"]
-[ext_resource type="AudioStream" uid="uid://cejh4m4q3fsup" path="res://assets/Sounds and fonts/sfx_laser1.ogg" id="3_vgqql"]
-[ext_resource type="AudioStream" uid="uid://bormopoax63kj" path="res://assets/Sounds and fonts/sfx_laser2.ogg" id="4_fkybt"]
+[ext_resource type="AudioStream" uid="uid://cejh4m4q3fsup" path="res://assets/Used Sounds/sfx_laser1.ogg" id="3_vgqql"]
+[ext_resource type="AudioStream" uid="uid://bormopoax63kj" path="res://assets/Used Sounds/sfx_laser2.ogg" id="4_fkybt"]
 [ext_resource type="Texture2D" uid="uid://buk40s8iosbyo" path="res://assets/explosion pack 1/Explosions pack/explosion-1-f/Sprites.png" id="5_fkybt"]
 
 [sub_resource type="Gradient" id="Gradient_cvnsp"]
