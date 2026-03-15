@@ -15,7 +15,7 @@ class_name ENEMY
 @onready var ship_collision: CollisionShape2D = $CollisionShape2D
 @onready var gun_audio: AudioStreamPlayer2D = $GunSound
 @onready var targeting_swap_timer: Timer = $Targeting_swap_timer
-
+@onready var destruction_audio: AudioStreamPlayer2D = $Destruction_Audio
 
 enum {IDLE, CHASING, ENGAGING, DEAD}
 
@@ -67,6 +67,7 @@ func explode():
 		debris.show()
 		explosion_picture.show()
 		anim.play("Exploding")
+		destruction_audio.play()
 		await anim.animation_finished
 		var tween = create_tween()
 		tween.tween_property(debris, "modulate:a", 0, 1)

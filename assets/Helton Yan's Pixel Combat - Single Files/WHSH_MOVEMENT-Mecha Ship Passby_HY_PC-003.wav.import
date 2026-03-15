@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://b77ms2w8ghf3t"
+path="res://.godot/imported/WHSH_MOVEMENT-Mecha Ship Passby_HY_PC-003.wav-37782be3af3a58a29e5de962b90ef488.sample"
+
+[deps]
+
+source_file="res://assets/Helton Yan's Pixel Combat - Single Files/WHSH_MOVEMENT-Mecha Ship Passby_HY_PC-003.wav"
+dest_files=["res://.godot/imported/WHSH_MOVEMENT-Mecha Ship Passby_HY_PC-003.wav-37782be3af3a58a29e5de962b90ef488.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

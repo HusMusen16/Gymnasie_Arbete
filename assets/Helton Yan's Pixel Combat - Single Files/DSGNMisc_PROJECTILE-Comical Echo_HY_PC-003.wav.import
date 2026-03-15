@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bjbfkb8g0m8wp"
+path="res://.godot/imported/DSGNMisc_PROJECTILE-Comical Echo_HY_PC-003.wav-0f13ff16094c57e1110c08b8599adfc5.sample"
+
+[deps]
+
+source_file="res://assets/Helton Yan's Pixel Combat - Single Files/DSGNMisc_PROJECTILE-Comical Echo_HY_PC-003.wav"
+dest_files=["res://.godot/imported/DSGNMisc_PROJECTILE-Comical Echo_HY_PC-003.wav-0f13ff16094c57e1110c08b8599adfc5.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

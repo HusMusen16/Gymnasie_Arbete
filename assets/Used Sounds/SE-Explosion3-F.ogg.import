@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://bjkofgmmfk6e8"
+path="res://.godot/imported/SE-Explosion3-F.ogg-b3ec55d4e707174049ddb4ef59122076.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/Used Sounds/SE-Explosion3-F.ogg"
+dest_files=["res://.godot/imported/SE-Explosion3-F.ogg-b3ec55d4e707174049ddb4ef59122076.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

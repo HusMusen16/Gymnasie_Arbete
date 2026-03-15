@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://baf71w0rxlg7v"
+path="res://.godot/imported/DSGNImpt_EXPLOSION-Mana Bomb_HY_PC-004.wav-9049f34cc161df1fb3f08a12ee503cd5.sample"
+
+[deps]
+
+source_file="res://assets/Helton Yan's Pixel Combat - Single Files/DSGNImpt_EXPLOSION-Mana Bomb_HY_PC-004.wav"
+dest_files=["res://.godot/imported/DSGNImpt_EXPLOSION-Mana Bomb_HY_PC-004.wav-9049f34cc161df1fb3f08a12ee503cd5.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

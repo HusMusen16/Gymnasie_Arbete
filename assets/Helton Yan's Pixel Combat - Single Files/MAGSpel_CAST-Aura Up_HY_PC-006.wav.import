@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://pbqrl1y5ym8o"
+path="res://.godot/imported/MAGSpel_CAST-Aura Up_HY_PC-006.wav-eb9c47af8535bffa2b98d87053df4b26.sample"
+
+[deps]
+
+source_file="res://assets/Helton Yan's Pixel Combat - Single Files/MAGSpel_CAST-Aura Up_HY_PC-006.wav"
+dest_files=["res://.godot/imported/MAGSpel_CAST-Aura Up_HY_PC-006.wav-eb9c47af8535bffa2b98d87053df4b26.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

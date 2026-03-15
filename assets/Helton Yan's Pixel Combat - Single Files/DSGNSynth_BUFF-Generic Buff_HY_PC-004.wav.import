@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bey8pdmsi04p1"
+path="res://.godot/imported/DSGNSynth_BUFF-Generic Buff_HY_PC-004.wav-fc7790cb1fb7cdad387ffc8265fd1ede.sample"
+
+[deps]
+
+source_file="res://assets/Helton Yan's Pixel Combat - Single Files/DSGNSynth_BUFF-Generic Buff_HY_PC-004.wav"
+dest_files=["res://.godot/imported/DSGNSynth_BUFF-Generic Buff_HY_PC-004.wav-fc7790cb1fb7cdad387ffc8265fd1ede.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

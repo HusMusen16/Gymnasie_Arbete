@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://coxto02i8w26f"
+path="res://.godot/imported/DSGNMisc_CAST-Mecha Vibration_HY_PC-006.wav-58b583490ee9fb8147593db467c7a5c4.sample"
+
+[deps]
+
+source_file="res://assets/Helton Yan's Pixel Combat - Single Files/DSGNMisc_CAST-Mecha Vibration_HY_PC-006.wav"
+dest_files=["res://.godot/imported/DSGNMisc_CAST-Mecha Vibration_HY_PC-006.wav-58b583490ee9fb8147593db467c7a5c4.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

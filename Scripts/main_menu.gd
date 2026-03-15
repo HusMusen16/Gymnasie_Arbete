@@ -4,9 +4,13 @@ extends Node2D
 @onready var button = $UI/Endless_button
 @onready var lasers = $Lasers
 @onready var plasmas = $Plasmas
+@onready var endless_highscore_label: Label = $UI/Endless_button/Highscore_label
 
 var plasma_scene: PackedScene = load("res://Scenes/plasma_blast.tscn")
 var laser_scene: PackedScene = load("res://Scenes/laser.tscn")
+
+func _ready() -> void:
+	endless_highscore_label.text = "Current Highscore: %s" %[str(LevelManager.endless_highscore)]
 
 func _physics_process(_delta: float) -> void:
 	pass

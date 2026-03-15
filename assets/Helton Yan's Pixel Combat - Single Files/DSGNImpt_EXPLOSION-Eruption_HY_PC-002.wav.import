@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://c8ft15ef4ooq6"
+path="res://.godot/imported/DSGNImpt_EXPLOSION-Eruption_HY_PC-002.wav-4f59374ac7101c3234b44cf479fe09d1.sample"
+
+[deps]
+
+source_file="res://assets/Helton Yan's Pixel Combat - Single Files/DSGNImpt_EXPLOSION-Eruption_HY_PC-002.wav"
+dest_files=["res://.godot/imported/DSGNImpt_EXPLOSION-Eruption_HY_PC-002.wav-4f59374ac7101c3234b44cf479fe09d1.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

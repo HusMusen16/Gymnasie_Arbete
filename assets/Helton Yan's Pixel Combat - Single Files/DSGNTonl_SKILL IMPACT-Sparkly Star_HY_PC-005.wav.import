@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://b146gga3iev64"
+path="res://.godot/imported/DSGNTonl_SKILL IMPACT-Sparkly Star_HY_PC-005.wav-7de8f734cad37054cb7f589417f261fd.sample"
+
+[deps]
+
+source_file="res://assets/Helton Yan's Pixel Combat - Single Files/DSGNTonl_SKILL IMPACT-Sparkly Star_HY_PC-005.wav"
+dest_files=["res://.godot/imported/DSGNTonl_SKILL IMPACT-Sparkly Star_HY_PC-005.wav-7de8f734cad37054cb7f589417f261fd.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

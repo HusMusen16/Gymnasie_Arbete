@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://b8nxejv3j7l27"
+path="res://.godot/imported/DSGNMisc_MOVEMENT-Rhythm Laser_HY_PC-003.wav-f7b40892d3b28fb41d79f522cfc493ee.sample"
+
+[deps]
+
+source_file="res://assets/Helton Yan's Pixel Combat - Single Files/DSGNMisc_MOVEMENT-Rhythm Laser_HY_PC-003.wav"
+dest_files=["res://.godot/imported/DSGNMisc_MOVEMENT-Rhythm Laser_HY_PC-003.wav-f7b40892d3b28fb41d79f522cfc493ee.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

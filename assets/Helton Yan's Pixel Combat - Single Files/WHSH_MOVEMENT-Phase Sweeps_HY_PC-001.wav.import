@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://uchov7cudtdu"
+path="res://.godot/imported/WHSH_MOVEMENT-Phase Sweeps_HY_PC-001.wav-7f0153f22873e36374805a76fdfe54e4.sample"
+
+[deps]
+
+source_file="res://assets/Helton Yan's Pixel Combat - Single Files/WHSH_MOVEMENT-Phase Sweeps_HY_PC-001.wav"
+dest_files=["res://.godot/imported/WHSH_MOVEMENT-Phase Sweeps_HY_PC-001.wav-7f0153f22873e36374805a76fdfe54e4.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

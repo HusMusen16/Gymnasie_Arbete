@@ -8,6 +8,7 @@ class_name ENEMY_CHASER
 @onready var debris: Node2D = $Debris_sprites
 @onready var ship_collision: CollisionShape2D = $CollisionShape2D
 @onready var explosion_radius: Area2D = $ExplosionRadius
+@onready var explosion_audio: AudioStreamPlayer2D = $Explosion_Audio
 
 var dead:bool = false
 var target = null
@@ -21,11 +22,14 @@ func explode():
 		dead = true
 		explosion_radius.monitoring = true
 		LevelManager.kills += 1
+		
 		ship_collision.set_deferred("disabled", true)
 		main_sprite.hide()
 		debris.show()
 		explosion_picture.show()
+		
 		anim.play("Exploding")
+		explosion_audio.play()
 		await anim.animation_finished
 		explosion_radius.monitoring = false
 		var tween = create_tween()
@@ -56,13 +60,12 @@ func _on_detonation_sensor_body_entered(body: Node2D) -> void:
 func _on_explosion_radius_body_entered(body: Node2D) -> void:
 	if body is PLAYER:
 		body.damage(ENEMY_CHASER)
-		print("player")
+
 	elif body is SPACESTATION:
 		body.health -= 5
-		print("spacestation")
+		
 	elif body is METEOR:
 		body.explode()
-		print("Meteor")
+
 	elif body is ENEMY:
 		body.explode()
-		print("enemy")

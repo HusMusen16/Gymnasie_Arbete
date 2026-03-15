@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://r6e3bcp2rjl8"
+path="res://.godot/imported/DSGNMisc_HIT-Mecha Downer_HY_PC-004.wav-28c9b4e81f9ed20876a2465b17834f87.sample"
+
+[deps]
+
+source_file="res://assets/Helton Yan's Pixel Combat - Single Files/DSGNMisc_HIT-Mecha Downer_HY_PC-004.wav"
+dest_files=["res://.godot/imported/DSGNMisc_HIT-Mecha Downer_HY_PC-004.wav-28c9b4e81f9ed20876a2465b17834f87.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

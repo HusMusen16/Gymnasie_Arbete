@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://cs6tq2mdcm8n0"
+path="res://.godot/imported/MAGAngl_BUFF-Shimmer Tone_HY_PC-001.wav-c6e093d1b153cf7c8d78112eb5bb5038.sample"
+
+[deps]
+
+source_file="res://assets/Helton Yan's Pixel Combat - Single Files/MAGAngl_BUFF-Shimmer Tone_HY_PC-001.wav"
+dest_files=["res://.godot/imported/MAGAngl_BUFF-Shimmer Tone_HY_PC-001.wav-c6e093d1b153cf7c8d78112eb5bb5038.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://b0i0ah3q3v7y"
+path="res://.godot/imported/DSGNMisc_HIT-Sweep Hit_HY_PC-006.wav-bc3772ed4525a6142d57d9e93c4f1748.sample"
+
+[deps]
+
+source_file="res://assets/Helton Yan's Pixel Combat - Single Files/DSGNMisc_HIT-Sweep Hit_HY_PC-006.wav"
+dest_files=["res://.godot/imported/DSGNMisc_HIT-Sweep Hit_HY_PC-006.wav-bc3772ed4525a6142d57d9e93c4f1748.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

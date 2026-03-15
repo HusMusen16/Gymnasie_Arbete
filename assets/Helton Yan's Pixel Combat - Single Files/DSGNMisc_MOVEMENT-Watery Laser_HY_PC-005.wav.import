@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://cb6ldu37t33lt"
+path="res://.godot/imported/DSGNMisc_MOVEMENT-Watery Laser_HY_PC-005.wav-b2cf68b4919aaea0ca1af340f959fb60.sample"
+
+[deps]
+
+source_file="res://assets/Helton Yan's Pixel Combat - Single Files/DSGNMisc_MOVEMENT-Watery Laser_HY_PC-005.wav"
+dest_files=["res://.godot/imported/DSGNMisc_MOVEMENT-Watery Laser_HY_PC-005.wav-b2cf68b4919aaea0ca1af340f959fb60.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

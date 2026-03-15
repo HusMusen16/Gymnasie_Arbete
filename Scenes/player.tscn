@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" uid="uid://7438sawkxa1s" path="res://Scripts/player.gd" id="1_cvnsp"]
 [ext_resource type="Texture2D" uid="uid://4c3oc63m1doi" path="res://assets/PNG/playerShip2_blue.png" id="2_cvnsp"]
-[ext_resource type="AudioStream" uid="uid://cejh4m4q3fsup" path="res://assets/Bonus/sfx_laser1.ogg" id="3_vgqql"]
-[ext_resource type="AudioStream" uid="uid://bormopoax63kj" path="res://assets/Bonus/sfx_laser2.ogg" id="4_fkybt"]
+[ext_resource type="AudioStream" uid="uid://cejh4m4q3fsup" path="res://assets/Sounds and fonts/sfx_laser1.ogg" id="3_vgqql"]
+[ext_resource type="AudioStream" uid="uid://bormopoax63kj" path="res://assets/Sounds and fonts/sfx_laser2.ogg" id="4_fkybt"]
 [ext_resource type="Texture2D" uid="uid://buk40s8iosbyo" path="res://assets/explosion pack 1/Explosions pack/explosion-1-f/Sprites.png" id="5_fkybt"]
 
 [sub_resource type="Gradient" id="Gradient_cvnsp"]
@@ -127,15 +127,16 @@ wait_time = 4.0
 [node name="FlashDuration" type="Timer" parent="."]
 wait_time = 0.1
 
-[node name="GunSound" type="AudioStreamPlayer2D" parent="."]
+[node name="Speed_Boost" type="Timer" parent="."]
+wait_time = 4.0
+
+[node name="GunSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_vgqql")
 pitch_scale = 3.0
-max_distance = 1000.0
 
-[node name="PlasmaGunSound" type="AudioStreamPlayer2D" parent="."]
+[node name="PlasmaGunSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_fkybt")
 pitch_scale = 1.5
-max_distance = 1000.0
 
 [node name="Explosion_Pic" type="Sprite2D" parent="."]
 visible = false
@@ -150,3 +151,4 @@ libraries = {
 
 [connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]
 [connection signal="timeout" from="FlashDuration" to="." method="_on_flash_duration_timeout"]
+[connection signal="timeout" from="Speed_Boost" to="." method="_on_speed_boost_timeout"]

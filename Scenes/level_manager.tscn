@@ -3,4 +3,5 @@
 [ext_resource type="Script" uid="uid://b6nioagxha34a" path="res://Scripts/level_manager.gd" id="1_f6wcy"]
 
 [node name="Level_Manager" type="Node2D"]
+process_mode = 3
 script = ExtResource("1_f6wcy")

@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://cl47l1rlugjqo"
+path="res://.godot/imported/sfx_lose.ogg-f8e6d6b774926c3b89a32b1ee1d33f80.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/Used Sounds/sfx_lose.ogg"
+dest_files=["res://.godot/imported/sfx_lose.ogg-f8e6d6b774926c3b89a32b1ee1d33f80.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

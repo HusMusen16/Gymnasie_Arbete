@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://cwqy8ik4rv0bx"
+path="res://.godot/imported/DSGNMisc_HIT-Laser Electric Zap_HY_PC-005.wav-83019efe829e29da4625df5aecc53aa4.sample"
+
+[deps]
+
+source_file="res://assets/Helton Yan's Pixel Combat - Single Files/DSGNMisc_HIT-Laser Electric Zap_HY_PC-005.wav"
+dest_files=["res://.godot/imported/DSGNMisc_HIT-Laser Electric Zap_HY_PC-005.wav-83019efe829e29da4625df5aecc53aa4.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

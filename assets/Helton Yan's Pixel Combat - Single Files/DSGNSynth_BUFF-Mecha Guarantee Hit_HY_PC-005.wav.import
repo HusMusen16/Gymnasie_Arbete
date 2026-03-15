@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://cv17jvmk3c3eh"
+path="res://.godot/imported/DSGNSynth_BUFF-Mecha Guarantee Hit_HY_PC-005.wav-5de2898793841da3c0069fea1013f268.sample"
+
+[deps]
+
+source_file="res://assets/Helton Yan's Pixel Combat - Single Files/DSGNSynth_BUFF-Mecha Guarantee Hit_HY_PC-005.wav"
+dest_files=["res://.godot/imported/DSGNSynth_BUFF-Mecha Guarantee Hit_HY_PC-005.wav-5de2898793841da3c0069fea1013f268.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

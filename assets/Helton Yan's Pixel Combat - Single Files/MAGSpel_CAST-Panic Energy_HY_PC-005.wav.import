@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dvsh2pqhoemvc"
+path="res://.godot/imported/MAGSpel_CAST-Panic Energy_HY_PC-005.wav-6cc5e90b71992eb67bcef9f0b9b93351.sample"
+
+[deps]
+
+source_file="res://assets/Helton Yan's Pixel Combat - Single Files/MAGSpel_CAST-Panic Energy_HY_PC-005.wav"
+dest_files=["res://.godot/imported/MAGSpel_CAST-Panic Energy_HY_PC-005.wav-6cc5e90b71992eb67bcef9f0b9b93351.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

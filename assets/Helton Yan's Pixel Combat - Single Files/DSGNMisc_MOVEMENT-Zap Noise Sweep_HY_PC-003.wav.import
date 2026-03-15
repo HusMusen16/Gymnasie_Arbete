@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bbb4i2gp5ke3j"
+path="res://.godot/imported/DSGNMisc_MOVEMENT-Zap Noise Sweep_HY_PC-003.wav-a3816e927b012cee420aee3d892acc2e.sample"
+
+[deps]
+
+source_file="res://assets/Helton Yan's Pixel Combat - Single Files/DSGNMisc_MOVEMENT-Zap Noise Sweep_HY_PC-003.wav"
+dest_files=["res://.godot/imported/DSGNMisc_MOVEMENT-Zap Noise Sweep_HY_PC-003.wav-a3816e927b012cee420aee3d892acc2e.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

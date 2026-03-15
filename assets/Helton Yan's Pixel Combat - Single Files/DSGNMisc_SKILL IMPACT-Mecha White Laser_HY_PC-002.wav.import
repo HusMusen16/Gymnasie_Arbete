@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dlnyi14gl1vlj"
+path="res://.godot/imported/DSGNMisc_SKILL IMPACT-Mecha White Laser_HY_PC-002.wav-ca3540a082f688886de1c35518aac40b.sample"
+
+[deps]
+
+source_file="res://assets/Helton Yan's Pixel Combat - Single Files/DSGNMisc_SKILL IMPACT-Mecha White Laser_HY_PC-002.wav"
+dest_files=["res://.godot/imported/DSGNMisc_SKILL IMPACT-Mecha White Laser_HY_PC-002.wav-ca3540a082f688886de1c35518aac40b.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

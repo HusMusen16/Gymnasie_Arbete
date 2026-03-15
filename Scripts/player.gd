@@ -8,6 +8,7 @@ var speed = 900
 var can_shoot_plasma: bool = true
 var dead: bool = false
 var has_died: bool = false
+var speed_boost_allowed: bool = true
 
 """
 Lägg till en rektangel till spelaren där meteorer och fiender 
@@ -19,16 +20,17 @@ inte kan spawna
 @onready var laser_source: Marker2D = $LaserSource
 @onready var shoot_timer: Timer = $ShootTimer
 @onready var flash_duration: Timer = $FlashDuration
-@onready var gun_audio: AudioStreamPlayer2D = $GunSound
-@onready var plasma_gun_audio: AudioStreamPlayer2D = $PlasmaGunSound
+@onready var gun_audio: AudioStreamPlayer = $GunSound
+@onready var plasma_gun_audio: AudioStreamPlayer = $PlasmaGunSound
 @onready var explosion_pic: Sprite2D = $Explosion_Pic
 @onready var anim: AnimationPlayer = $Explosion_animation
 @onready var player_sprite: Sprite2D = $Sprite2D
+@onready var speed_boost_timer: Timer = $Speed_Boost
 
 signal player_hit(type)
 signal laser(type, pos, dir)
 signal plasma_countdown(time)
-
+signal speed_boost_countdown(time)
 
 
 ############### GENERAL FUNKTIONS ###############
@@ -52,10 +54,9 @@ func _movement(delta: float) -> void:
 		thrusters.emitting = false
 	
 	
- 	#Horizontal och vertikal
+ 	#Horizontal och vertikal rotation
 	if direction[1] == 1:
 		self.rotation_degrees = 180
-		
 		
 	elif direction[1] == -1:
 		self.rotation_degrees = 0
@@ -74,15 +75,49 @@ func _movement(delta: float) -> void:
 
 func _physics_process(delta: float) -> void:
 	if not dead:
-		_movement(delta)
-		_shooting()
-		if not can_shoot_plasma:
-			var time = shoot_timer.time_left
-			plasma_countdown.emit(time)
+		if Input.is_action_just_pressed("Speed boost") and speed_boost_allowed:
+			speed_boost_allowed = false
+			_speed_boost()
+			speed_boost_timer.start()
+			
 		else:
-			plasma_countdown.emit(0)
+			_movement(delta)
+			_shooting()
+			if not can_shoot_plasma:
+				var time = shoot_timer.time_left
+				plasma_countdown.emit(time)
+			else:
+				plasma_countdown.emit(0)
+				
+			if not speed_boost_allowed:
+				var time = speed_boost_timer.time_left
+				speed_boost_countdown.emit(time)
+			else:
+				speed_boost_countdown.emit(0)
 
-
+func _speed_boost():
+	#Möjliga vinklar 0, 180, 90, -90, 45, -45, 135, -135
+	var boost_factor = 2
+	if self.global_rotation_degrees == 0:
+		velocity.y = move_toward(velocity.y, -speed * boost_factor, ACC)
+		
+	elif self.global_rotation_degrees == -180:
+		velocity.y = move_toward(velocity.y, speed * boost_factor, ACC)
+		
+	elif self.global_rotation_degrees == -90 or self.global_rotation_degrees == 90:
+		velocity.x = move_toward(velocity.x, speed * self.global_rotation_degrees/90 * boost_factor, ACC)
+		
+	elif self.global_rotation_degrees == -45 or self.global_rotation_degrees == 45:
+		var direction = sqrt(2)/2
+		velocity.x = move_toward(velocity.x, speed * direction * self.global_rotation_degrees/45 * boost_factor, ACC)
+		velocity.y = move_toward(velocity.y, speed * -direction * boost_factor, ACC)
+		
+	elif self.global_rotation_degrees == -135 or self.global_rotation_degrees == 135:
+		var direction = sqrt(2)/2
+		velocity.x = move_toward(velocity.x, speed * direction * self.global_rotation_degrees/135 * boost_factor, ACC)
+		velocity.y = move_toward(velocity.y, speed * direction * boost_factor, ACC)
+		
+	move_and_slide()
 
 
 ################### DAMAGE FUNKTIONS ###################
@@ -120,3 +155,7 @@ func _on_shoot_timer_timeout() -> void:
 
 func _on_flash_duration_timeout() -> void:
 	gun_flash.emitting = false
+
+
+func _on_speed_boost_timeout() -> void:
+	speed_boost_allowed = true

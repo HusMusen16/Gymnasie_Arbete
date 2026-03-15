@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://b47m2k8veemr"
+path="res://.godot/imported/DSGNMisc_HIT-Zap Metal_HY_PC-006.wav-0049cef29f9c9190bb0675e2b0097f5b.sample"
+
+[deps]
+
+source_file="res://assets/Helton Yan's Pixel Combat - Single Files/DSGNMisc_HIT-Zap Metal_HY_PC-006.wav"
+dest_files=["res://.godot/imported/DSGNMisc_HIT-Zap Metal_HY_PC-006.wav-0049cef29f9c9190bb0675e2b0097f5b.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

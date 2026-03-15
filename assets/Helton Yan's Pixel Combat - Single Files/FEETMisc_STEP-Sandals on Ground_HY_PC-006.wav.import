@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://8x7ulm0tmq7"
+path="res://.godot/imported/FEETMisc_STEP-Sandals on Ground_HY_PC-006.wav-e0dc5640d2e60db1d3d496aa16fba2fa.sample"
+
+[deps]
+
+source_file="res://assets/Helton Yan's Pixel Combat - Single Files/FEETMisc_STEP-Sandals on Ground_HY_PC-006.wav"
+dest_files=["res://.godot/imported/FEETMisc_STEP-Sandals on Ground_HY_PC-006.wav-e0dc5640d2e60db1d3d496aa16fba2fa.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

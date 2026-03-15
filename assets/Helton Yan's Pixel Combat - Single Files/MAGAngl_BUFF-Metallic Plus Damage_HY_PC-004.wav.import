@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://c86yewj1pjwct"
+path="res://.godot/imported/MAGAngl_BUFF-Metallic Plus Damage_HY_PC-004.wav-bb635a2c2a759f5d85c0ba00f2fe3ade.sample"
+
+[deps]
+
+source_file="res://assets/Helton Yan's Pixel Combat - Single Files/MAGAngl_BUFF-Metallic Plus Damage_HY_PC-004.wav"
+dest_files=["res://.godot/imported/MAGAngl_BUFF-Metallic Plus Damage_HY_PC-004.wav-bb635a2c2a759f5d85c0ba00f2fe3ade.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

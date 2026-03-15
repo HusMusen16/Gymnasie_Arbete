@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://upfa3o125lsh"
+path="res://.godot/imported/SWSH_MOVEMENT-Sparkle Zap_HY_PC-002.wav-9ae50a6f80f961d781f576ac4fa4644c.sample"
+
+[deps]
+
+source_file="res://assets/Helton Yan's Pixel Combat - Single Files/SWSH_MOVEMENT-Sparkle Zap_HY_PC-002.wav"
+dest_files=["res://.godot/imported/SWSH_MOVEMENT-Sparkle Zap_HY_PC-002.wav-9ae50a6f80f961d781f576ac4fa4644c.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

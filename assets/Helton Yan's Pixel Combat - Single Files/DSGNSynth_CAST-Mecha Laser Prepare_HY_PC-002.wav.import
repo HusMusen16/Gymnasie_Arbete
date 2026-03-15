@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bqgpul5r26rav"
+path="res://.godot/imported/DSGNSynth_CAST-Mecha Laser Prepare_HY_PC-002.wav-8222f1813cb61d8e2354aed183471e42.sample"
+
+[deps]
+
+source_file="res://assets/Helton Yan's Pixel Combat - Single Files/DSGNSynth_CAST-Mecha Laser Prepare_HY_PC-002.wav"
+dest_files=["res://.godot/imported/DSGNSynth_CAST-Mecha Laser Prepare_HY_PC-002.wav-8222f1813cb61d8e2354aed183471e42.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

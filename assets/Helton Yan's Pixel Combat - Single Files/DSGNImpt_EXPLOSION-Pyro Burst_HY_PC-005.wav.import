@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bk4r5e2os0yq7"
+path="res://.godot/imported/DSGNImpt_EXPLOSION-Pyro Burst_HY_PC-005.wav-15a40ef4465b365d1b08eab94c7095d7.sample"
+
+[deps]
+
+source_file="res://assets/Helton Yan's Pixel Combat - Single Files/DSGNImpt_EXPLOSION-Pyro Burst_HY_PC-005.wav"
+dest_files=["res://.godot/imported/DSGNImpt_EXPLOSION-Pyro Burst_HY_PC-005.wav-15a40ef4465b365d1b08eab94c7095d7.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

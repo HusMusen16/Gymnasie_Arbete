@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://d4bcgy7win0g0"
+path="res://.godot/imported/DSGNMisc_SKILL IMPACT-Glassy Sprites_HY_PC-003.wav-f7614a5518eef6840810b7d40f89a5d0.sample"
+
+[deps]
+
+source_file="res://assets/Helton Yan's Pixel Combat - Single Files/DSGNMisc_SKILL IMPACT-Glassy Sprites_HY_PC-003.wav"
+dest_files=["res://.godot/imported/DSGNMisc_SKILL IMPACT-Glassy Sprites_HY_PC-003.wav-f7614a5518eef6840810b7d40f89a5d0.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

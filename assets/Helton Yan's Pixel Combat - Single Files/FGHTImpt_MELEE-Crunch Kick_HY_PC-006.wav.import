@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://b8p6vb7doyo5n"
+path="res://.godot/imported/FGHTImpt_MELEE-Crunch Kick_HY_PC-006.wav-b8cf339712c88f276d99df5d06a174c3.sample"
+
+[deps]
+
+source_file="res://assets/Helton Yan's Pixel Combat - Single Files/FGHTImpt_MELEE-Crunch Kick_HY_PC-006.wav"
+dest_files=["res://.godot/imported/FGHTImpt_MELEE-Crunch Kick_HY_PC-006.wav-b8cf339712c88f276d99df5d06a174c3.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

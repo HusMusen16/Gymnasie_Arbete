@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://ceavpdovp2tyx"
+path="res://.godot/imported/DSGNTonl_MOVEMENT-Retro Jump_HY_PC-005.wav-c92c0fb7325d680a3c87c17b98d0cd6e.sample"
+
+[deps]
+
+source_file="res://assets/Helton Yan's Pixel Combat - Single Files/DSGNTonl_MOVEMENT-Retro Jump_HY_PC-005.wav"
+dest_files=["res://.godot/imported/DSGNTonl_MOVEMENT-Retro Jump_HY_PC-005.wav-c92c0fb7325d680a3c87c17b98d0cd6e.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

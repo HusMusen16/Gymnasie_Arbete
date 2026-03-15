@@ -13,11 +13,16 @@ var spacestation_scene: PackedScene = load("res://Scenes/space_station.tscn")
 var chaser_scene: PackedScene = load("res://Scenes/enemy_chaser.tscn")
 
 
+@onready var pause_scene = $"Pause menu"
+
 #Player nodes
 @onready var player: PLAYER = $Player
 @onready var lasers: Node = $Lasers
 @onready var health_bar: ProgressBar = $HUD/PlayerHealth/HealthBar
 @onready var damage_timer: Timer = $Damage_Timer
+@onready var damage_audio: AudioStreamPlayer = $DamageSound
+@onready var speed_boost_countdown_bar: ProgressBar = $HUD/SpeedBoostCooldown/SpeedBoost_countdown
+@onready var speed_boost_label: Label = $HUD/SpeedBoostCooldown/Label
 
 #Plasma Nodes
 @onready var plasmas: Node = $Plasmas
@@ -36,7 +41,6 @@ var chaser_scene: PackedScene = load("res://Scenes/enemy_chaser.tscn")
 @onready var motherships: Node = $MotherPath/PathFollower/MotherShips
 @onready var mother_timer: Timer = $Mother_Timer
 @onready var path_follower: PathFollow2D = $MotherPath/PathFollower
-
 
 #Nodes specific for level 1
 @onready var kills_text = $HUD/Kills/KillsText
@@ -84,6 +88,8 @@ var victorious: bool = false
 
 var has_lost: bool = false
 
+var paused: bool = false
+
 #Variabler för level 2
 var allow_surge_mothership_spawn: bool = true
 var surge_mothership_spawning: bool = false
@@ -97,6 +103,7 @@ var win_timer = null
 
 ################# GENERAL FUNKTIONS #################
 func _ready() -> void:
+	LevelManager.current_gamemode = level_number
 	enemy_timer.wait_time = enemy_spawnrate
 	mother_timer.wait_time = mothership_spawnrate
 	surge_mother_timer.wait_time = mothership_spawnrate
@@ -136,13 +143,16 @@ func _ready() -> void:
 
 func _physics_process(_delta: float) -> void:
 	############# GENERAL ###############
-	if level_number != 3:
+	if level_number != 3 and not paused:
 		path_follower.progress_ratio += 0.0002
 		motherships.global_position = path_follower.global_position
 	
 	if not victorious and level_number != 3:
 		_mothership_spawn_manager()
 	
+	if Input.is_action_just_pressed("Pause"):
+		_pause_game()
+			
 	
 	############# LEVEL 1 ###############
 	if level_number == 1:
@@ -152,9 +162,9 @@ func _physics_process(_delta: float) -> void:
 	elif level_number == 2:
 		mothership_kills = LevelManager.mothership_kills
 		kill_progress.text = (str(mothership_kills) + "/3 motherships")
-		surge_follower.progress_ratio += 0.0002
-		surge_motherships.global_position = surge_follower.global_position
-		
+		if not paused:
+			surge_follower.progress_ratio += 0.0002
+			surge_motherships.global_position = surge_follower.global_position
 		if mothership_kills >= 3 and not victorious:
 			victorious = true
 			_victory()
@@ -169,40 +179,43 @@ func _physics_process(_delta: float) -> void:
 
 func _victory():
 	victorious = true
-	LevelManager.current_gamemode = level_number
 	var victoryscreen = victory_screen.instantiate()
 	self.add_child(victoryscreen)
 	
-	
+	#tar bort standard fiender
 	var enemy = enemies.get_children()
 	enemy_timer.stop()
 	for i in range(len(enemy)):
 		enemy[i].explode()
 	
+	#tar bort chasers
 	if level_number != 2:
 		var chaser = chasers.get_children()
 		chaser_timer.stop()
 		for i in range(len(chaser)):
 			chaser[i].explode()
 	
+	#tar bort meteorer
 	var meteor = meteors.get_children()
 	meteor_timer.stop()
 	for i in range(len(meteor)):
 		meteor[i].explode()
 	
+	#tar bort motherships
 	var mothership = motherships.get_children()
 	mother_timer.stop()
 	for i in range(len(mothership)):
-		mothership[i].health = 0
+		mothership[i].health = 1
 		mothership[i].damage()
 		if level_number == 2:
 			LevelManager.mothership_kills -= 1
-		
+	
+	#tar bort motherships
 	if level_number == 2:
 		var surge_mothership = surge_motherships.get_children()
 		surge_mother_timer.stop()
 		for i in range(len(surge_mothership)):
-			surge_mothership[i].health = 0
+			surge_mothership[i].health = 1
 			surge_mothership[i].damage()
 			LevelManager.mothership_kills -= 1
 
@@ -226,15 +239,32 @@ func _defeat():
 		var surge_mothership = surge_motherships.get_children()
 		for i in range(len(surge_mothership)):
 			surge_mothership[i].player = null
-			mothership[i].player_lost = true
+			surge_mothership[i].player_lost = true
 			
 	has_lost = true
 	player.dead = true
 	player.destroyed()
-	LevelManager.current_gamemode = level_number
+	
+	if level_number == 1:
+		LevelManager.check_highscore()
+		
 	var defeatscreen = defeat_screen.instantiate()
 	self.add_child(defeatscreen)
 
+
+func _pause_game():
+	if not paused and not has_lost:
+			for child in self.get_children():
+				child.process_mode = Node.PROCESS_MODE_DISABLED
+			pause_scene.process_mode = Node.PROCESS_MODE_INHERIT
+			paused = true
+			pause_scene.show()
+			
+	elif paused:
+		for child in self.get_children():
+			child.process_mode = Node.PROCESS_MODE_INHERIT
+		paused = false
+		pause_scene.hide()
 
 
 ################## SPAWN FUNKTIONS ###################
@@ -255,8 +285,10 @@ func _spawn_mothership():
 		mothership_spawning = false
 		var mother_ship = mother_ship_scene.instantiate()
 		motherships.add_child(mother_ship)
-		mother_ship.player = player
+		if not has_lost:
+			mother_ship.player = player
 		mother_ship.rotation_comparison = path_follower
+		mother_ship.ftl_jump()
 
 
 func _spawn_surge_mothership():
@@ -264,8 +296,10 @@ func _spawn_surge_mothership():
 		surge_mothership_spawning = false
 		var surge_mothership = mother_ship_scene.instantiate()
 		surge_motherships.add_child(surge_mothership)
-		surge_mothership.player = player
+		if not has_lost:
+			surge_mothership.player = player
 		surge_mothership.rotation_comparison = surge_follower
+		surge_mothership.ftl_jump()
 
 
 func _mothership_spawn_manager():
@@ -374,12 +408,16 @@ func _on_player_player_hit(type: Variant) -> void:
 	if not safe and not victorious:
 		if type == ENEMY:
 			health -= 3
+			damage_audio.play()
 		elif type == ENEMY_CHASER:
 			health -= 10
+			damage_audio.play()
 		elif type == METEOR:
 			health -= 10
+			damage_audio.play()
 		elif type == MOTHERSHIP:
 			health -= 7
+			damage_audio.play()
 		health_bar.value = health
 		
 		if health <= 0 and level_number != 3 and not has_lost :
@@ -395,12 +433,26 @@ func _on_player_player_hit(type: Variant) -> void:
 
 
 func _on_difficulty_timer_timeout() -> void:
-	if enemy_timer.wait_time > 0.1:
-		enemy_timer.wait_time -= 0.1
-	if chaser_timer.wait_time > 0.1:
-		chaser_timer.wait_time -= 0.1
-	if mother_timer.wait_time >= 0.2:
-		mother_timer.wait_time -= 0.2
-	if meteor_timer.wait_time >= 0.1:
-		meteor_timer.wait_time -= 0.1
-	print("timer working")
+	if enemy_timer.wait_time > 0.2:
+		enemy_timer.wait_time -= 0.2
+	if chaser_timer.wait_time > 0.2:
+		chaser_timer.wait_time -= 0.2
+	if mother_timer.wait_time >= 0.3:
+		mother_timer.wait_time -= 0.3
+	if meteor_timer.wait_time >= 0.2:
+		meteor_timer.wait_time -= 0.2
+	if level_number == 2:
+		if surge_mother_timer.wait_time >= 0.3:
+			surge_mother_timer.wait_time -= 0.3
+
+
+func _on_pause_menu_unpause_game() -> void:
+	_pause_game()
+
+
+func _on_player_speed_boost_countdown(time: Variant) -> void:
+	speed_boost_countdown_bar.value = time * 25
+	if speed_boost_countdown_bar.value <= 0:
+		speed_boost_label.show()
+	else:
+		speed_boost_label.hide()

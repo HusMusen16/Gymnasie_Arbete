@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://cd2am6ffgypb2"
+path="res://.godot/imported/DSGNTonl_SKILL RELEASE-Laser Whoosh 1_HY_PC-005.wav-ff8153f289e368faf3fde4839f45236d.sample"
+
+[deps]
+
+source_file="res://assets/Helton Yan's Pixel Combat - Single Files/DSGNTonl_SKILL RELEASE-Laser Whoosh 1_HY_PC-005.wav"
+dest_files=["res://.godot/imported/DSGNTonl_SKILL RELEASE-Laser Whoosh 1_HY_PC-005.wav-ff8153f289e368faf3fde4839f45236d.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://caddyxpend6l4"
+path="res://.godot/imported/DSGNMisc_CAST-Bubblewrap_HY_PC-004.wav-d29143b1bc2319ae14a410f428f0e377.sample"
+
+[deps]
+
+source_file="res://assets/Helton Yan's Pixel Combat - Single Files/DSGNMisc_CAST-Bubblewrap_HY_PC-004.wav"
+dest_files=["res://.godot/imported/DSGNMisc_CAST-Bubblewrap_HY_PC-004.wav-d29143b1bc2319ae14a410f428f0e377.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://b6pdu20uv5a5o"
+path="res://.godot/imported/DSGNMisc_CAST-Slime Ball_HY_PC-006.wav-be6f036debdb3aeebaab46b8fa81ca22.sample"
+
+[deps]
+
+source_file="res://assets/Helton Yan's Pixel Combat - Single Files/DSGNMisc_CAST-Slime Ball_HY_PC-006.wav"
+dest_files=["res://.godot/imported/DSGNMisc_CAST-Slime Ball_HY_PC-006.wav-be6f036debdb3aeebaab46b8fa81ca22.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

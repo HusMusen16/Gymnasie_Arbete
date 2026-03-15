@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bwlt0k4fa3am2"
+path="res://.godot/imported/MAGSpel_CAST-Zippy Particle_HY_PC-005.wav-7540276c7f9ff649ca7f924e09641089.sample"
+
+[deps]
+
+source_file="res://assets/Helton Yan's Pixel Combat - Single Files/MAGSpel_CAST-Zippy Particle_HY_PC-005.wav"
+dest_files=["res://.godot/imported/MAGSpel_CAST-Zippy Particle_HY_PC-005.wav-7540276c7f9ff649ca7f924e09641089.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

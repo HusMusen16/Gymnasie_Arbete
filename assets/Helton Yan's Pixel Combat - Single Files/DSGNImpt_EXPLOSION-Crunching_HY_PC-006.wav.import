@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bve165ujqpjaa"
+path="res://.godot/imported/DSGNImpt_EXPLOSION-Crunching_HY_PC-006.wav-d6e1cd14eb2abb1b961ed1dd807fb09a.sample"
+
+[deps]
+
+source_file="res://assets/Helton Yan's Pixel Combat - Single Files/DSGNImpt_EXPLOSION-Crunching_HY_PC-006.wav"
+dest_files=["res://.godot/imported/DSGNImpt_EXPLOSION-Crunching_HY_PC-006.wav-d6e1cd14eb2abb1b961ed1dd807fb09a.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://c2mmvf845cadn"
+path="res://.godot/imported/DSGNImpt_EXPLOSION-Shimmer Electric_HY_PC-006.wav-1d913ebcfeac7689019feb2070f19268.sample"
+
+[deps]
+
+source_file="res://assets/Helton Yan's Pixel Combat - Single Files/DSGNImpt_EXPLOSION-Shimmer Electric_HY_PC-006.wav"
+dest_files=["res://.godot/imported/DSGNImpt_EXPLOSION-Shimmer Electric_HY_PC-006.wav-1d913ebcfeac7689019feb2070f19268.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

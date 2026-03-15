@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://d2gbyjbkvaj3d"
+path="res://.godot/imported/DSGNTonl_SKILL IMPACT-Energetic Impact_HY_PC-002.wav-fa4e85ca671653b9832b3dd3d9784841.sample"
+
+[deps]
+
+source_file="res://assets/Helton Yan's Pixel Combat - Single Files/DSGNTonl_SKILL IMPACT-Energetic Impact_HY_PC-002.wav"
+dest_files=["res://.godot/imported/DSGNTonl_SKILL IMPACT-Energetic Impact_HY_PC-002.wav-fa4e85ca671653b9832b3dd3d9784841.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

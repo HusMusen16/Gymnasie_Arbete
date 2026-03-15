@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://b154bdwuhk1pw"
+path="res://.godot/imported/DSGNSynth_BUFF-Invigoration_HY_PC-001.wav-72f99ed9f8d4ea2c8c6c64cadc9f76d6.sample"
+
+[deps]
+
+source_file="res://assets/Helton Yan's Pixel Combat - Single Files/DSGNSynth_BUFF-Invigoration_HY_PC-001.wav"
+dest_files=["res://.godot/imported/DSGNSynth_BUFF-Invigoration_HY_PC-001.wav-72f99ed9f8d4ea2c8c6c64cadc9f76d6.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

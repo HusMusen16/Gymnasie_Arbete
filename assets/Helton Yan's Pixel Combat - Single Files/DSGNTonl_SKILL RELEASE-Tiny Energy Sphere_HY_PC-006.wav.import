@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://diw7jrv6cxfxi"
+path="res://.godot/imported/DSGNTonl_SKILL RELEASE-Tiny Energy Sphere_HY_PC-006.wav-db3f69ebcd01cad351a603a69829fc1f.sample"
+
+[deps]
+
+source_file="res://assets/Helton Yan's Pixel Combat - Single Files/DSGNTonl_SKILL RELEASE-Tiny Energy Sphere_HY_PC-006.wav"
+dest_files=["res://.godot/imported/DSGNTonl_SKILL RELEASE-Tiny Energy Sphere_HY_PC-006.wav-db3f69ebcd01cad351a603a69829fc1f.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

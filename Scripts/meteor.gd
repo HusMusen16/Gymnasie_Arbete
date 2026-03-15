@@ -25,7 +25,7 @@ var hight = [-1000, 3500]
 @onready var anim: AnimationPlayer = $Explosion_animation
 @onready var meteor_collision: CollisionShape2D = $CollisionShape2D
 @onready var collision_area: Area2D = $CollisionArea
-
+@onready var destuction_audio: AudioStreamPlayer2D = $Destruction_Audio
 
 """Eventuellt ta bort big2 meteor då kollisionskroppen ej stämmer"""
 const meteors = [preload("res://assets/PNG/Meteors/meteorBrown_big1.png"),
@@ -75,6 +75,7 @@ func explode():
 		sprite.hide()
 		explosion_pic.show()
 		anim.play("exploding")
+		destuction_audio.play()
 		await anim.animation_finished
 		queue_free()
 

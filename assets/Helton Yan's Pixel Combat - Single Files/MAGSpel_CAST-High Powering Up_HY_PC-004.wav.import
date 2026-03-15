@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dj1mygoym3ad8"
+path="res://.godot/imported/MAGSpel_CAST-High Powering Up_HY_PC-004.wav-f21ab76c85b6afbc5da7d2503eb6cfee.sample"
+
+[deps]
+
+source_file="res://assets/Helton Yan's Pixel Combat - Single Files/MAGSpel_CAST-High Powering Up_HY_PC-004.wav"
+dest_files=["res://.godot/imported/MAGSpel_CAST-High Powering Up_HY_PC-004.wav-f21ab76c85b6afbc5da7d2503eb6cfee.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

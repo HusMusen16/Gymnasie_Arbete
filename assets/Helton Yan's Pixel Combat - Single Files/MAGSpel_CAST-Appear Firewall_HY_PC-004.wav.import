@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://btkl41m7u801p"
+path="res://.godot/imported/MAGSpel_CAST-Appear Firewall_HY_PC-004.wav-e99efc76ee0934116b18297ec884e2ce.sample"
+
+[deps]
+
+source_file="res://assets/Helton Yan's Pixel Combat - Single Files/MAGSpel_CAST-Appear Firewall_HY_PC-004.wav"
+dest_files=["res://.godot/imported/MAGSpel_CAST-Appear Firewall_HY_PC-004.wav-e99efc76ee0934116b18297ec884e2ce.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

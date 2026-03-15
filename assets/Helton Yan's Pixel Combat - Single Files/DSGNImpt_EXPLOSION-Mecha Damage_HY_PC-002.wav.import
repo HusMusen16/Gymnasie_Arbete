@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://d4famq342vyil"
+path="res://.godot/imported/DSGNImpt_EXPLOSION-Mecha Damage_HY_PC-002.wav-e7b09c53c8f06a1c4df4c7c98c35fe6c.sample"
+
+[deps]
+
+source_file="res://assets/Helton Yan's Pixel Combat - Single Files/DSGNImpt_EXPLOSION-Mecha Damage_HY_PC-002.wav"
+dest_files=["res://.godot/imported/DSGNImpt_EXPLOSION-Mecha Damage_HY_PC-002.wav-e7b09c53c8f06a1c4df4c7c98c35fe6c.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

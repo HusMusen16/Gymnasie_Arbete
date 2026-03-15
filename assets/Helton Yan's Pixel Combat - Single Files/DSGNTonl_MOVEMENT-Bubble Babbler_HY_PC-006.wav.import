@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bjlkw0t4g1tit"
+path="res://.godot/imported/DSGNTonl_MOVEMENT-Bubble Babbler_HY_PC-006.wav-ebbea7ea409a006ec00bfdd9ea948dfd.sample"
+
+[deps]
+
+source_file="res://assets/Helton Yan's Pixel Combat - Single Files/DSGNTonl_MOVEMENT-Bubble Babbler_HY_PC-006.wav"
+dest_files=["res://.godot/imported/DSGNTonl_MOVEMENT-Bubble Babbler_HY_PC-006.wav-ebbea7ea409a006ec00bfdd9ea948dfd.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

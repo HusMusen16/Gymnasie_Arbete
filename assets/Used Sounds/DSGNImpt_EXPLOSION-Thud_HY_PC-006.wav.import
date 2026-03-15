@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dru4p3lspxy5y"
+path="res://.godot/imported/DSGNImpt_EXPLOSION-Thud_HY_PC-006.wav-1b926a3562f89390a1e7a20964a7e9a9.sample"
+
+[deps]
+
+source_file="res://assets/Used Sounds/DSGNImpt_EXPLOSION-Thud_HY_PC-006.wav"
+dest_files=["res://.godot/imported/DSGNImpt_EXPLOSION-Thud_HY_PC-006.wav-1b926a3562f89390a1e7a20964a7e9a9.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

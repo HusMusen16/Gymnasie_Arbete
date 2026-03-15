@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://5w46ium5pxso"]
+[gd_scene load_steps=10 format=3 uid="uid://5w46ium5pxso"]
 
 [ext_resource type="Texture2D" uid="uid://drrmfor042klf" path="res://assets/PNG/Meteors/meteorBrown_big1.png" id="1_5civa"]
 [ext_resource type="Script" uid="uid://bcgxdsuah426s" path="res://Scripts/meteor.gd" id="1_wm1ig"]
 [ext_resource type="Texture2D" uid="uid://buk40s8iosbyo" path="res://assets/explosion pack 1/Explosions pack/explosion-1-f/Sprites.png" id="3_bgiwl"]
+[ext_resource type="AudioStream" uid="uid://dru4p3lspxy5y" path="res://assets/Used Sounds/DSGNImpt_EXPLOSION-Thud_HY_PC-006.wav" id="4_aq33g"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_wm1ig"]
 radius = 49.0408
@@ -72,5 +73,10 @@ hframes = 8
 libraries = {
 &"": SubResource("AnimationLibrary_d1487")
 }
+
+[node name="Destruction_Audio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_aq33g")
+volume_db = 2.0
+max_distance = 3000.0
 
 [connection signal="body_entered" from="CollisionArea" to="." method="_on_collision_area_body_entered"]
