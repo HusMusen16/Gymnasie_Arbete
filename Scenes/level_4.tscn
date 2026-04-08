@@ -1,0 +1,371 @@
+[gd_scene load_steps=25 format=3 uid="uid://d0b70vgsfllp8"]
+
+[ext_resource type="Script" uid="uid://oiobsy3iu82p" path="res://Scripts/tutorial.gd" id="1_wk15n"]
+[ext_resource type="AudioStream" uid="uid://csdfjmx0om1c5" path="res://assets/Used Sounds/DSGNImpt_EXPLOSION-Laser Impact_HY_PC-006.wav" id="2_5a8oa"]
+[ext_resource type="Texture2D" uid="uid://dsxkk6qsvn0hw" path="res://assets/Foozle_2DS0015_Void_EnvironmentPack/Backgrounds/PNGs/Condesed/Starry background  - Layer 01 - Void.png" id="3_3ntyy"]
+[ext_resource type="Texture2D" uid="uid://bbarwl0lj48df" path="res://assets/Foozle_2DS0015_Void_EnvironmentPack/Backgrounds/PNGs/Split up/Starry background  - Layer 03 - Stars.png" id="4_7huqf"]
+[ext_resource type="PackedScene" uid="uid://drqkl0c1bf0f8" path="res://Scenes/player.tscn" id="5_di0d6"]
+[ext_resource type="FontFile" uid="uid://cxd5mqvh2vjyw" path="res://assets/Sounds and fonts/kenvector_future_thin.ttf" id="6_54c2w"]
+[ext_resource type="PackedScene" uid="uid://dmp7uigcx27sy" path="res://Scenes/pause_menu.tscn" id="7_3v663"]
+[ext_resource type="FontFile" uid="uid://char6vsrnv4ll" path="res://assets/Sounds and fonts/PixeloidSans-lxa3y.ttf" id="7_5a8oa"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ha31o"]
+atlas = ExtResource("3_3ntyy")
+region = Rect2(0, 0, 576, 360)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pa6b8"]
+atlas = ExtResource("3_3ntyy")
+region = Rect2(576, 0, 576, 360)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_crh0w"]
+atlas = ExtResource("3_3ntyy")
+region = Rect2(1152, 0, 576, 360)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c7le1"]
+atlas = ExtResource("3_3ntyy")
+region = Rect2(1728, 0, 576, 360)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2klc5"]
+atlas = ExtResource("3_3ntyy")
+region = Rect2(2304, 0, 576, 360)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nngtn"]
+atlas = ExtResource("3_3ntyy")
+region = Rect2(2880, 0, 576, 360)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vofx3"]
+atlas = ExtResource("3_3ntyy")
+region = Rect2(3456, 0, 576, 360)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_00k4y"]
+atlas = ExtResource("3_3ntyy")
+region = Rect2(4032, 0, 576, 360)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3a44l"]
+atlas = ExtResource("3_3ntyy")
+region = Rect2(4608, 0, 576, 360)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0cmrb"]
+atlas = ExtResource("3_3ntyy")
+region = Rect2(5184, 0, 576, 360)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_bsk3x"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ha31o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pa6b8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_crh0w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c7le1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2klc5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nngtn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vofx3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_00k4y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3a44l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0cmrb")
+}],
+"loop": true,
+"name": &"default",
+"speed": 30.0
+}]
+
+[sub_resource type="Animation" id="Animation_754fn"]
+length = 1.1
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BG_Stars:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.166667, 0.266667, 0.366667, 0.5, 0.633333, 0.8, 0.966667, 1.1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8]
+}
+
+[sub_resource type="Animation" id="Animation_8c0lf"]
+resource_name = "Stars"
+length = 0.933
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BG_Stars:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bvt00"]
+_data = {
+&"RESET": SubResource("Animation_754fn"),
+&"Stars": SubResource("Animation_8c0lf")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5mrt3"]
+size = Vector2(4752, 79)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rwowx"]
+size = Vector2(279, 3144)
+
+[node name="Level_4" type="Node2D"]
+script = ExtResource("1_wk15n")
+
+[node name="DamageSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_5a8oa")
+volume_db = -15.0
+pitch_scale = 2.0
+
+[node name="BG" type="CanvasLayer" parent="."]
+layer = -1
+
+[node name="BG_Purple" type="AnimatedSprite2D" parent="BG"]
+position = Vector2(1050, 625)
+scale = Vector2(3.7, 3.5)
+sprite_frames = SubResource("SpriteFrames_bsk3x")
+
+[node name="BG_Stars" type="Sprite2D" parent="BG"]
+position = Vector2(1050, 625)
+scale = Vector2(3.8, 3.8)
+texture = ExtResource("4_7huqf")
+hframes = 9
+
+[node name="BG_stars_anim" type="AnimationPlayer" parent="BG"]
+libraries = {
+&"": SubResource("AnimationLibrary_bvt00")
+}
+autoplay = "RESET"
+
+[node name="Plasmas" type="Node" parent="."]
+
+[node name="Lasers" type="Node" parent="."]
+
+[node name="Player" parent="." instance=ExtResource("5_di0d6")]
+show_behind_parent = true
+position = Vector2(1065, 616)
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+limit_smoothed = true
+position_smoothing_enabled = true
+rotation_smoothing_enabled = true
+
+[node name="Barriers" type="StaticBody2D" parent="."]
+collision_layer = 8
+collision_mask = 4
+
+[node name="Top" type="CollisionShape2D" parent="Barriers"]
+position = Vector2(2290, -54)
+shape = SubResource("RectangleShape2D_5mrt3")
+metadata/_edit_lock_ = true
+
+[node name="Bottom" type="CollisionShape2D" parent="Barriers"]
+position = Vector2(2378, 1500)
+shape = SubResource("RectangleShape2D_5mrt3")
+metadata/_edit_lock_ = true
+
+[node name="Right" type="CollisionShape2D" parent="Barriers"]
+position = Vector2(3000, 1433)
+shape = SubResource("RectangleShape2D_rwowx")
+metadata/_edit_lock_ = true
+
+[node name="Left" type="CollisionShape2D" parent="Barriers"]
+position = Vector2(-128, 1331)
+shape = SubResource("RectangleShape2D_rwowx")
+metadata/_edit_lock_ = true
+
+[node name="Collision_coulours" type="Node2D" parent="."]
+
+[node name="Top" type="ColorRect" parent="Collision_coulours"]
+offset_left = -1240.0
+offset_top = -1001.0
+offset_right = 5912.0
+offset_bottom = -14.0
+color = Color(1, 0, 0, 0.172549)
+metadata/_edit_use_anchors_ = true
+metadata/_edit_lock_ = true
+
+[node name="Bottom" type="ColorRect" parent="Collision_coulours"]
+offset_left = 10.0
+offset_top = 1460.0
+offset_right = 2860.0
+offset_bottom = 2447.0
+color = Color(1, 0, 0, 0.172549)
+metadata/_edit_use_anchors_ = true
+
+[node name="Right" type="ColorRect" parent="Collision_coulours"]
+offset_left = 2860.0
+offset_top = -14.0
+offset_right = 4246.0
+offset_bottom = 2684.0
+color = Color(1, 0, 0, 0.172549)
+metadata/_edit_use_anchors_ = true
+metadata/_edit_lock_ = true
+
+[node name="Left" type="ColorRect" parent="Collision_coulours"]
+offset_left = -1244.0
+offset_top = -14.0
+offset_right = 11.0
+offset_bottom = 2684.0
+color = Color(1, 0, 0, 0.172549)
+metadata/_edit_use_anchors_ = true
+metadata/_edit_lock_ = true
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HUD"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -900.0
+offset_top = -400.0
+offset_right = 900.0
+offset_bottom = -31.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Name" type="Label" parent="HUD/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("7_5a8oa")
+theme_override_font_sizes/font_size = 30
+text = "INST Johnson"
+
+[node name="ColorRect" type="ColorRect" parent="HUD/VBoxContainer"]
+custom_minimum_size = Vector2(500, 200)
+layout_mode = 2
+color = Color(0, 0, 0, 0.243137)
+
+[node name="PlayerHealth" type="ColorRect" parent="HUD"]
+visible = false
+offset_left = 1513.0
+offset_top = 27.0
+offset_right = 1793.0
+offset_bottom = 58.0
+scale = Vector2(2, 2)
+color = Color(0.752941, 0.752941, 0.752941, 1)
+
+[node name="HealthBar" type="ProgressBar" parent="HUD/PlayerHealth"]
+modulate = Color(0.054902, 0.827451, 0, 1)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -276.5
+offset_top = 1.5
+offset_right = -3.5
+offset_bottom = 28.5
+grow_horizontal = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+value = 100.0
+
+[node name="PlasmaBlastCooldown" type="ColorRect" parent="HUD"]
+visible = false
+offset_left = 1532.0
+offset_top = 1162.0
+offset_right = 1812.0
+offset_bottom = 1193.0
+scale = Vector2(2, 2)
+color = Color(0.752941, 0.752941, 0.752941, 1)
+
+[node name="Label" type="Label" parent="HUD/PlasmaBlastCooldown"]
+layout_mode = 0
+offset_left = 44.0
+offset_top = 6.0
+offset_right = 241.0
+offset_bottom = 30.0
+theme_override_colors/font_color = Color(0.459598, 0.471955, 1, 1)
+theme_override_fonts/font = ExtResource("6_54c2w")
+text = "PLASMA-BLAST READY"
+
+[node name="plasma_countdown" type="ProgressBar" parent="HUD/PlasmaBlastCooldown"]
+modulate = Color(0.0173024, 0.285851, 1, 1)
+layout_mode = 0
+offset_left = 3.5
+offset_top = 2.0
+offset_right = 276.5
+offset_bottom = 29.0
+show_percentage = false
+
+[node name="SpeedBoostCooldown" type="ColorRect" parent="HUD"]
+visible = false
+offset_left = 5.0
+offset_top = 1162.0
+offset_right = 285.0
+offset_bottom = 1193.0
+scale = Vector2(2, 2)
+color = Color(0.752941, 0.752941, 0.752941, 1)
+
+[node name="Label" type="Label" parent="HUD/SpeedBoostCooldown"]
+layout_mode = 0
+offset_left = 44.0
+offset_top = 6.0
+offset_right = 241.0
+offset_bottom = 30.0
+theme_override_colors/font_color = Color(0.459598, 0.471955, 1, 1)
+theme_override_fonts/font = ExtResource("6_54c2w")
+text = "SPEED-BOOST READY"
+
+[node name="SpeedBoost_countdown" type="ProgressBar" parent="HUD/SpeedBoostCooldown"]
+modulate = Color(0.0173024, 0.285851, 1, 1)
+layout_mode = 0
+offset_left = 3.5
+offset_top = 2.0
+offset_right = 276.5
+offset_bottom = 29.0
+show_percentage = false
+
+[node name="Explanation_Text" type="Label" parent="HUD"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -848.0
+offset_top = -338.0
+offset_right = 848.0
+offset_bottom = -130.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("7_5a8oa")
+theme_override_font_sizes/font_size = 30
+text = "LORES IPSUMLORES IPSUMLORES IPSUMLORES IPSUMLORES IPSUMLORES IPSUMLORES IPSUMLORES IPSUM"
+horizontal_alignment = 1
+
+[node name="Pause menu" parent="." instance=ExtResource("7_3v663")]
+visible = false
+
+[node name="Input_cooldown" type="Timer" parent="."]
+
+[node name="Spawnpoint" type="Marker2D" parent="."]
+position = Vector2(1500, 700)
+
+[connection signal="laser" from="Player" to="." method="_on_player_laser"]
+[connection signal="plasma_countdown" from="Player" to="." method="_on_player_plasma_countdown"]
+[connection signal="speed_boost_countdown" from="Player" to="." method="_on_player_speed_boost_countdown"]
+[connection signal="unpause_game" from="Pause menu" to="." method="_on_pause_menu_unpause_game"]
+[connection signal="timeout" from="Input_cooldown" to="." method="_on_input_cooldown_timeout"]

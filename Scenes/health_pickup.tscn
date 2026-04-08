@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://cwr4xwibbldoq"]
+
+[ext_resource type="Texture2D" uid="uid://ddvg6u8e1lthv" path="res://assets/PNG/Power-ups/powerupGreen_shield.png" id="1_gvws8"]
+[ext_resource type="Script" uid="uid://derggid2orlu6" path="res://Scripts/health_pickup.gd" id="1_lj2jr"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lj2jr"]
+size = Vector2(36, 36)
+
+[node name="Health_Pickup" type="Node2D"]
+scale = Vector2(1.25, 1.25)
+script = ExtResource("1_lj2jr")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_gvws8")
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(-0.5, 0)
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_lj2jr")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

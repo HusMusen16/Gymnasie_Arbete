@@ -9,6 +9,8 @@ var can_shoot_plasma: bool = true
 var dead: bool = false
 var has_died: bool = false
 var speed_boost_allowed: bool = true
+var shield_active: bool = false
+var unlimited_power: bool = false
 
 """
 Lägg till en rektangel till spelaren där meteorer och fiender 
@@ -26,12 +28,15 @@ inte kan spawna
 @onready var anim: AnimationPlayer = $Explosion_animation
 @onready var player_sprite: Sprite2D = $Sprite2D
 @onready var speed_boost_timer: Timer = $Speed_Boost
+@onready var ram_area: Area2D = $RamArea
+@onready var unlimited_plasma_reset_timer: Timer = $Unlimited_Plasma_Reset_Timer
+@onready var shield_sprite: Sprite2D = $ShieldSprite
 
 signal player_hit(type)
 signal laser(type, pos, dir)
 signal plasma_countdown(time)
 signal speed_boost_countdown(time)
-
+signal picked_up_item(type)
 
 ############### GENERAL FUNKTIONS ###############
 func _movement(delta: float) -> void:
@@ -51,7 +56,8 @@ func _movement(delta: float) -> void:
 	if direction[0] != 0 or direction[1] != 0:
 		thrusters.emitting = true
 	else:
-		thrusters.emitting = false
+		pass
+		#thrusters.emitting = false
 	
 	
  	#Horizontal och vertikal rotation
@@ -95,9 +101,15 @@ func _physics_process(delta: float) -> void:
 			else:
 				speed_boost_countdown.emit(0)
 
+
 func _speed_boost():
 	#Möjliga vinklar 0, 180, 90, -90, 45, -45, 135, -135
+	#faktorn för att öka topp hastigheten
 	var boost_factor = 2
+	
+	shield_active = true
+	
+	
 	if self.global_rotation_degrees == 0:
 		velocity.y = move_toward(velocity.y, -speed * boost_factor, ACC)
 		
@@ -118,6 +130,9 @@ func _speed_boost():
 		velocity.y = move_toward(velocity.y, speed * direction * boost_factor, ACC)
 		
 	move_and_slide()
+	anim.play("shield_activated")
+	await anim.animation_finished
+	shield_active = false
 
 
 ################### DAMAGE FUNKTIONS ###################
@@ -129,24 +144,40 @@ func _shooting():
 		flash_duration.start(0)
 		gun_flash.emitting = true
 	
-	if Input.is_action_just_pressed("shoot_plasma") and can_shoot_plasma:
-		laser.emit("plasma", laser_source.global_position, self.rotation_degrees)
+	elif Input.is_action_just_pressed("shoot_plasma"):
+		if unlimited_power:
+			laser.emit("plasma", laser_source.global_position, self.rotation_degrees)
+			plasma_gun_audio.play()
+			
+		elif can_shoot_plasma:
+			laser.emit("plasma", laser_source.global_position, self.rotation_degrees)
 		
-		plasma_gun_audio.play()
-		shoot_timer.start(0)
-		can_shoot_plasma = false
+			plasma_gun_audio.play()
+			shoot_timer.start(0)
+			can_shoot_plasma = false
 
 
 func damage(type):
-	player_hit.emit(type)
+	if not shield_active:
+		player_hit.emit(type)
 
 
 func destroyed():
+	shield_sprite.hide()
 	explosion_pic.show()
 	player_sprite.hide()
 	anim.play("exploding")
 	await anim.animation_finished
 
+
+func _on_ram_area_body_entered(body: Node2D) -> void:
+	if body is ENEMY or body is ENEMY_CHASER or body is METEOR:
+		body.explode()
+
+
+func unlimited_plasma_blast():
+	unlimited_power = true
+	unlimited_plasma_reset_timer.start(-1)
 
 ###################### TIMERS ###################
 func _on_shoot_timer_timeout() -> void:
@@ -159,3 +190,7 @@ func _on_flash_duration_timeout() -> void:
 
 func _on_speed_boost_timeout() -> void:
 	speed_boost_allowed = true
+
+
+func _on_unlimited_plasma_reset_timer_timeout() -> void:
+	unlimited_power = false

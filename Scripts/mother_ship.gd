@@ -9,6 +9,7 @@ var player_lost: bool = false
 
 var health = 5
 var just_spawned: bool = true
+var tutorial: bool = false
 
 #Gun scenes
 @onready var gun1 = $Guns/Gun
@@ -52,6 +53,7 @@ func _physics_process(_delta: float) -> void:
 		rotation_checked = true
 	if player_lost:
 		_on_player_data_timer_timeout()
+
 
 
 ################# DAMAGE FUNKTIONS ##############
@@ -105,9 +107,9 @@ func damage():
 
 func ftl_jump():
 	if just_spawned:
-		self.visible = true
 		FTL_jump_sound_player.play()
 		big_explosion_anim.play("FTL-Jump in")
+		self.visible = true
 		just_spawned = false
 	else:
 		big_explosion_anim.play("FTL-Jump out")
@@ -129,5 +131,5 @@ func _on_player_data_timer_timeout() -> void:
 
 
 func _on_escape_timer_timeout() -> void:
-	if health > 0:
+	if health > 0 and not tutorial:
 		ftl_jump()

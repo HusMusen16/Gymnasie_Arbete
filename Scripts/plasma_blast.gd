@@ -10,6 +10,7 @@ const SPEED = 1500
 @onready var explosion_area: Area2D = $ExplosionArea
 
 var moving: bool = true
+var mothership_damaged: bool = false
 
 
 
@@ -50,7 +51,8 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 		body.explode()
 	if body is METEOR:
 		body.explode()
-	if body is MOTHERSHIP:
+	if body is MOTHERSHIP and not mothership_damaged:
+		mothership_damaged = true
 		body.damage()
 
 

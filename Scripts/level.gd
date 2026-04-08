@@ -11,9 +11,13 @@ var victory_screen: PackedScene = load("res://Scenes/victory_screen.tscn")
 var defeat_screen: PackedScene = load("res://Scenes/defeat_screen.tscn")
 var spacestation_scene: PackedScene = load("res://Scenes/space_station.tscn")
 var chaser_scene: PackedScene = load("res://Scenes/enemy_chaser.tscn")
-
+var health_pickup: PackedScene = load("res://Scenes/health_pickup.tscn")
+var unlimited_plasma_pickup: PackedScene = load("res://Scenes/unlimited_plasma_pickup.tscn")
 
 @onready var pause_scene = $"Pause menu"
+@onready var bg_purple = $BG/BG_Purple
+@onready var items = $Items
+@onready var item_spawn_timer: Timer = $Item_Spawn_Timer
 
 #Player nodes
 @onready var player: PLAYER = $Player
@@ -23,6 +27,8 @@ var chaser_scene: PackedScene = load("res://Scenes/enemy_chaser.tscn")
 @onready var damage_audio: AudioStreamPlayer = $DamageSound
 @onready var speed_boost_countdown_bar: ProgressBar = $HUD/SpeedBoostCooldown/SpeedBoost_countdown
 @onready var speed_boost_label: Label = $HUD/SpeedBoostCooldown/Label
+@onready var bonus_health_bar: ProgressBar = $HUD/PlayerBonusHealth/BonusHealthBar
+@onready var bonus_health_bg: ColorRect = $HUD/PlayerBonusHealth
 
 #Plasma Nodes
 @onready var plasmas: Node = $Plasmas
@@ -38,27 +44,30 @@ var chaser_scene: PackedScene = load("res://Scenes/enemy_chaser.tscn")
 @onready var enemy_timer: Timer = $Enemy_Timer
 
 #Mothership Nodes
-@onready var motherships: Node = $MotherPath/PathFollower/MotherShips
 @onready var mother_timer: Timer = $Mother_Timer
-@onready var path_follower: PathFollow2D = $MotherPath/PathFollower
+@onready var motherships: PathFollow2D = $MotherPath/MotherShips
 
 #Nodes specific for level 1
+@onready var bigstar1 = $BG/BigStar1
+@onready var bigstar2 = $BG/BigStar2
 @onready var kills_text = $HUD/Kills/KillsText
 @onready var kills_text_bg = $HUD/Kills
 @onready var difficulty_timer = $Difficulty_timer
 
 #Nodes specific for level 2
-@onready var surge_follower: PathFollow2D = $MotherPath/SurgeFollower
-@onready var surge_motherships: Node2D = $MotherPath/SurgeFollower/SurgeMotherShips
+@onready var blackhole = $BG/BlackHole
+@onready var surge_motherships: PathFollow2D = $MotherPath/Surge_MotherShips
 @onready var surge_mother_timer: Timer = $Surge_Mother_Timer
 @onready var kill_progress: Label = $HUD/MothershipKills/Label
 @onready var kill_progress_bg: ColorRect = $HUD/MothershipKills
 
 #Nodes specific for level 3
+@onready var galaxy = $BG/Galaxy
 @onready var chasers: Node = $Chasers
 @onready var chaser_timer: Timer = $Chaser_Timer
 @onready var space_station_health_bar = $HUD/SpaceStationHealth/SpaceStationHealthBar
 @onready var space_station_health_bar_bg = $HUD/SpaceStationHealth
+@onready var time_left_label:Label = $HUD/SpaceStationHealth/time_left_label
 
 
 """
@@ -77,8 +86,11 @@ level_number = 3  Defend space station mode
 @export var mothership_spawnrate: float = 10
 ##Spawnrate of the meteors in seconds.
 @export var meteor_spawnrate: float = 2
-##Time until spawnrates increase in seconds. Is stackable.
+##Spawnrate of items in seconds. A max of 10 can be active at a time.
+@export var item_spawnrate: float = 20
+##Time until spawnrates increase in seconds. Is stackable. Does not affect items.
 @export var difficulty_timer_time: float = 50
+
 
 var health = 100
 var allow_mothership_spawn: bool = true
@@ -109,18 +121,28 @@ func _ready() -> void:
 	surge_mother_timer.wait_time = mothership_spawnrate
 	meteor_timer.wait_time = meteor_spawnrate
 	chaser_timer.wait_time = chaser_spawnrate
+	item_spawn_timer.wait_time = item_spawnrate
 	
 	if level_number == 1:
 		kills_text_bg.show()
+		bigstar1.show()
+		bigstar1.play("default")
+		bigstar2.show()
+		bigstar2.play("default")
 		
 		chaser_timer.autostart = true
 		chaser_timer.start(-1)
 	
 	elif level_number == 2:
+		#bg_purple.play("default")
 		kill_progress_bg.show()
-	
+		blackhole.show()
+		blackhole.play("default")
+		
 	elif level_number == 3:
 		space_station_health_bar_bg.show()
+		galaxy.show()
+		galaxy.play("default")
 		
 		mother_timer.stop()
 		
@@ -135,7 +157,7 @@ func _ready() -> void:
 		#Time until you win
 		win_timer = Timer.new()
 		add_child(win_timer)
-		win_timer.wait_time = 180
+		win_timer.wait_time = LevelManager.spacestation_survival_time
 		win_timer.one_shot = true
 		win_timer.start()
 		win_timer.timeout.connect(_on_win_timer_timeout)
@@ -144,8 +166,8 @@ func _ready() -> void:
 func _physics_process(_delta: float) -> void:
 	############# GENERAL ###############
 	if level_number != 3 and not paused:
-		path_follower.progress_ratio += 0.0002
-		motherships.global_position = path_follower.global_position
+		motherships.progress_ratio += 0.0002
+		#motherships.global_position = path_follower.global_position
 	
 	if not victorious and level_number != 3:
 		_mothership_spawn_manager()
@@ -161,11 +183,13 @@ func _physics_process(_delta: float) -> void:
 	############ LEVEL 2 ##############
 	elif level_number == 2:
 		mothership_kills = LevelManager.mothership_kills
-		kill_progress.text = (str(mothership_kills) + "/3 motherships")
+		kill_progress.text = (str(mothership_kills) + "/" + str(LevelManager.mothership_kill_goal) + " motherships")
+		if kill_progress_bg.size.x <= kill_progress.size.x + 10:
+			kill_progress_bg.size.x = kill_progress.size.x + 24
 		if not paused:
-			surge_follower.progress_ratio += 0.0002
-			surge_motherships.global_position = surge_follower.global_position
-		if mothership_kills >= 3 and not victorious:
+			surge_motherships.progress_ratio += 0.0002
+			#surge_motherships.global_position = surge_follower.global_position
+		if mothership_kills >= LevelManager.mothership_kill_goal and not victorious:
 			victorious = true
 			_victory()
 			
@@ -173,8 +197,10 @@ func _physics_process(_delta: float) -> void:
 	elif level_number == 3:
 		if spacestation.health <= 0 and not has_lost:
 			has_lost = true
+			win_timer.paused = true
 			_defeat()
 		space_station_health_bar.value = spacestation.health
+		time_left_label.text = "time left: " + str(round(win_timer.time_left))
 
 
 func _victory():
@@ -240,6 +266,9 @@ func _defeat():
 		for i in range(len(surge_mothership)):
 			surge_mothership[i].player = null
 			surge_mothership[i].player_lost = true
+	
+	if level_number == 3 and spacestation != null:
+		spacestation.explode()
 			
 	has_lost = true
 	player.dead = true
@@ -253,9 +282,11 @@ func _defeat():
 
 
 func _pause_game():
-	if not paused and not has_lost:
-			for child in self.get_children():
+	if not paused and not has_lost and not victorious:
+		for child in self.get_children():
+			if is_instance_valid(child):
 				child.process_mode = Node.PROCESS_MODE_DISABLED
+		if is_instance_valid(pause_scene):
 			pause_scene.process_mode = Node.PROCESS_MODE_INHERIT
 			paused = true
 			pause_scene.show()
@@ -287,7 +318,7 @@ func _spawn_mothership():
 		motherships.add_child(mother_ship)
 		if not has_lost:
 			mother_ship.player = player
-		mother_ship.rotation_comparison = path_follower
+		mother_ship.rotation_comparison = motherships
 		mother_ship.ftl_jump()
 
 
@@ -298,7 +329,7 @@ func _spawn_surge_mothership():
 		surge_motherships.add_child(surge_mothership)
 		if not has_lost:
 			surge_mothership.player = player
-		surge_mothership.rotation_comparison = surge_follower
+		surge_mothership.rotation_comparison = surge_motherships
 		surge_mothership.ftl_jump()
 
 
@@ -382,6 +413,22 @@ func _on_win_timer_timeout():
 	_victory()
 
 
+func _on_item_spawn_timer_timeout() -> void:
+	if len(items.get_children()) <= 10:
+		
+		var type_decider = randi() % 3
+		if (type_decider == 1 or type_decider == 2) and level_number != 3 or level_number == 2 :
+			var item = health_pickup.instantiate()
+			items.add_child(item)
+			item.global_position.x = randf_range(0, 4600)
+			item.global_position.y = randf_range(0,2650)
+		elif type_decider == 0 and level_number != 2 or level_number == 3:
+			var item = unlimited_plasma_pickup.instantiate()
+			items.add_child(item)
+			item.global_position.x = randf_range(0, 4600)
+			item.global_position.y = randf_range(0,2650)
+
+
 ###################### SIGNALS ###########################
 func _on_player_laser(type: Variant, pos: Variant, dir: Variant) -> void:
 	if type == "laser":
@@ -405,7 +452,7 @@ func _on_player_plasma_countdown(time: Variant) -> void:
 
 
 func _on_player_player_hit(type: Variant) -> void:
-	if not safe and not victorious:
+	if not safe and not victorious and not has_lost:
 		if type == ENEMY:
 			health -= 3
 			damage_audio.play()
@@ -418,7 +465,13 @@ func _on_player_player_hit(type: Variant) -> void:
 		elif type == MOTHERSHIP:
 			health -= 7
 			damage_audio.play()
-		health_bar.value = health
+			
+		if health <= 100:
+			health_bar.value = health
+			bonus_health_bar.value = 0
+		else:
+			health_bar.value = 100
+			bonus_health_bar.value = (health - 100)*2
 		
 		if health <= 0 and level_number != 3 and not has_lost :
 			_defeat()
@@ -456,3 +509,17 @@ func _on_player_speed_boost_countdown(time: Variant) -> void:
 		speed_boost_label.show()
 	else:
 		speed_boost_label.hide()
+
+
+func _on_player_picked_up_item(type: Variant) -> void:
+	if type == "health" and health <= 150:
+		health += 20
+		if health > 150:
+			health = 150
+			
+		if health <= 100:
+			health_bar.value = health
+			bonus_health_bar.value = 0
+		else:
+			health_bar.value = 100
+			bonus_health_bar.value = (health - 100)*2

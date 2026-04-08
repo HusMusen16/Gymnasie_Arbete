@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://7l486sw4a2l0"]
+[gd_scene load_steps=27 format=3 uid="uid://7l486sw4a2l0"]
 
 [ext_resource type="Texture2D" uid="uid://b4vdcg2tawstj" path="res://assets/PNG/Parts/beamLong1.png" id="1_xo6ra"]
 [ext_resource type="Script" uid="uid://ub0epl7kbm2" path="res://Scripts/space_station.gd" id="1_xqfik"]
@@ -6,6 +6,8 @@
 [ext_resource type="Texture2D" uid="uid://cftochexo5abc" path="res://assets/PNG/Parts/cockpitYellow_0.png" id="3_y30kr"]
 [ext_resource type="Texture2D" uid="uid://dg8q48kiqd7r8" path="res://assets/PNG/Parts/turretBase_small.png" id="4_y30kr"]
 [ext_resource type="Texture2D" uid="uid://1b5r4ldw2q6v" path="res://assets/PNG/Parts/gun03.png" id="5_xqfik"]
+[ext_resource type="Texture2D" uid="uid://buk40s8iosbyo" path="res://assets/explosion pack 1/Explosions pack/explosion-1-f/Sprites.png" id="7_rvk3e"]
+[ext_resource type="Texture2D" uid="uid://g3h4vxary3np" path="res://assets/explosion pack 1/Explosions pack/explosion-1-g/spritesheet.png" id="8_0egax"]
 
 [sub_resource type="Animation" id="Animation_xqfik"]
 length = 0.001
@@ -45,6 +47,214 @@ _data = {
 &"RESET": SubResource("Animation_xqfik"),
 &"Rotation": SubResource("Animation_y30kr")
 }
+
+[sub_resource type="Animation" id="Animation_oog52"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Explosion_sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_dt54a"]
+resource_name = "explosion"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Explosion_sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7]
+}
+
+[sub_resource type="Animation" id="Animation_rvk3e"]
+resource_name = "fade out"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4lh22"]
+_data = {
+&"RESET": SubResource("Animation_oog52"),
+&"explosion": SubResource("Animation_dt54a"),
+&"fade out": SubResource("Animation_rvk3e")
+}
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nvrc2"]
+atlas = ExtResource("8_0egax")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hbexp"]
+atlas = ExtResource("8_0egax")
+region = Rect2(48, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vpish"]
+atlas = ExtResource("8_0egax")
+region = Rect2(96, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jthdx"]
+atlas = ExtResource("8_0egax")
+region = Rect2(144, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b3q26"]
+atlas = ExtResource("8_0egax")
+region = Rect2(192, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rmx2b"]
+atlas = ExtResource("8_0egax")
+region = Rect2(240, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wu4lk"]
+atlas = ExtResource("8_0egax")
+region = Rect2(288, 0, 48, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0ohgo"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nvrc2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hbexp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vpish")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jthdx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b3q26")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rmx2b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wu4lk")
+}],
+"loop": false,
+"name": &"default",
+"speed": 15.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_40r38"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nvrc2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hbexp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vpish")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jthdx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b3q26")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rmx2b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wu4lk")
+}],
+"loop": false,
+"name": &"default",
+"speed": 12.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_nygwi"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nvrc2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hbexp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vpish")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jthdx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b3q26")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rmx2b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wu4lk")
+}],
+"loop": false,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5g7fh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nvrc2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hbexp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vpish")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jthdx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b3q26")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rmx2b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wu4lk")
+}],
+"loop": false,
+"name": &"default",
+"speed": 12.0
+}]
 
 [node name="Space Station" type="CharacterBody2D"]
 scale = Vector2(5, 5)
@@ -248,8 +458,45 @@ position = Vector2(0, -10)
 rotation = 3.14159
 texture = ExtResource("5_xqfik")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="RotationAnim" type="AnimationPlayer" parent="."]
 libraries = {
 &"": SubResource("AnimationLibrary_41kta")
 }
 autoplay = "Rotation"
+
+[node name="ExplosionAnim" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_4lh22")
+}
+
+[node name="Explosion_sprite" type="Sprite2D" parent="."]
+visible = false
+scale = Vector2(2.5, 2.5)
+texture = ExtResource("7_rvk3e")
+hframes = 8
+
+[node name="Sub_explosion_sprites" type="Node2D" parent="."]
+
+[node name="Sub_explosion_sprite1" type="AnimatedSprite2D" parent="Sub_explosion_sprites"]
+visible = false
+position = Vector2(35.3426, 56.1233)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_0ohgo")
+
+[node name="Sub_explosion_sprite2" type="AnimatedSprite2D" parent="Sub_explosion_sprites"]
+visible = false
+position = Vector2(-62.4675, -7.51052)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_40r38")
+
+[node name="Sub_explosion_sprite3" type="AnimatedSprite2D" parent="Sub_explosion_sprites"]
+visible = false
+position = Vector2(60.8112, 3.91378)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_nygwi")
+
+[node name="Sub_explosion_sprite4" type="AnimatedSprite2D" parent="Sub_explosion_sprites"]
+visible = false
+position = Vector2(0.3913, -53.584)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_5g7fh")

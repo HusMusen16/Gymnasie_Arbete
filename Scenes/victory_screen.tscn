@@ -5,6 +5,7 @@
 [ext_resource type="FontFile" uid="uid://cxd5mqvh2vjyw" path="res://assets/Sounds and fonts/kenvector_future_thin.ttf" id="2_mubwb"]
 
 [node name="VictoryScreen" type="CanvasLayer"]
+layer = 3
 script = ExtResource("1_fmvqe")
 type = "victory"
 
@@ -32,6 +33,7 @@ layout_mode = 2
 theme_override_fonts/font = ExtResource("1_oq8vb")
 theme_override_font_sizes/font_size = 120
 text = "VICTORY"
+horizontal_alignment = 1
 
 [node name="Play again" type="Button" parent="VBoxContainer"]
 layout_mode = 2

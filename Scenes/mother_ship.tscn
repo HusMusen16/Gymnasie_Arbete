@@ -10,7 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://braampgyjejg1" path="res://assets/PNG/Parts/turretBase_big.png" id="7_utb55"]
 [ext_resource type="PackedScene" uid="uid://br7moiw78kg5o" path="res://Scenes/gun.tscn" id="8_01so7"]
 [ext_resource type="Texture2D" uid="uid://g3h4vxary3np" path="res://assets/explosion pack 1/Explosions pack/explosion-1-g/spritesheet.png" id="10_ictbq"]
-[ext_resource type="Texture2D" uid="uid://iecu470emrjw" path="res://assets/PNG/Damage/playerShip1_damage3.png" id="11_m5xac"]
+[ext_resource type="Texture2D" uid="uid://iecu470emrjw" path="res://assets/Damage/playerShip1_damage3.png" id="11_m5xac"]
 [ext_resource type="Texture2D" uid="uid://cu1c5ku4rrloo" path="res://assets/explosion pack 1/Explosions pack/explosion-1-d/spritsheet.png" id="12_3vnfb"]
 [ext_resource type="AudioStream" uid="uid://bgesaftmjy0d8" path="res://assets/Used Sounds/FEETMisc_STEP-Boots on Concrete Dungeon_HY_PC-006.wav" id="14_himb8"]
 [ext_resource type="AudioStream" uid="uid://q1whoklg602k" path="res://assets/Used Sounds/freesound_community-low-impactwav-14905.mp3" id="15_6dmrb"]
@@ -102,7 +102,19 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.3, 0.4),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector2(0, -2000), Vector2(0, -100), Vector2(0, 0)]
+"values": [Vector2(-4000, 0), Vector2(-100, 0), Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.11),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_6dmrb"]
@@ -118,7 +130,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.1, 0.3, 0.4),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
-"values": [Vector2(0, 0), Vector2(0, 100), Vector2(0, 2000), Vector2(0, 2100)]
+"values": [Vector2(0, 0), Vector2(100, 0), Vector2(2000, 0), Vector2(2100, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_himb8"]
@@ -145,7 +157,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Color(1, 1, 1, 1)]
+"values": [Color(1, 1, 1, 0)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -157,7 +169,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(0, -1000)]
+"values": [Vector2(0, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_3vnfb"]
@@ -185,7 +197,8 @@ _data = {
 }
 
 [node name="MotherShip" type="CharacterBody2D"]
-position = Vector2(0, -1000)
+modulate = Color(1, 1, 1, 0)
+rotation = -1.5708
 scale = Vector2(2, 2)
 collision_layer = 32
 collision_mask = 0
@@ -373,8 +386,9 @@ position = Vector2(0, -134)
 [node name="GunParticles" type="GPUParticles2D" parent="Guns"]
 position = Vector2(0, -134)
 emitting = false
-amount = 30
+amount = 20
 randomness = 0.87
+fixed_fps = 15
 process_material = SubResource("ParticleProcessMaterial_ictbq")
 
 [node name="Gun2" parent="Guns" instance=ExtResource("8_01so7")]
@@ -383,8 +397,9 @@ position = Vector2(0, -82)
 [node name="Gun2Particles" type="GPUParticles2D" parent="Guns"]
 position = Vector2(0, -82)
 emitting = false
-amount = 30
+amount = 20
 randomness = 0.87
+fixed_fps = 15
 process_material = SubResource("ParticleProcessMaterial_ictbq")
 
 [node name="Gun3" parent="Guns" instance=ExtResource("8_01so7")]
@@ -393,8 +408,9 @@ position = Vector2(0, -30)
 [node name="Gun3Particles" type="GPUParticles2D" parent="Guns"]
 position = Vector2(0, -30)
 emitting = false
-amount = 30
+amount = 20
 randomness = 0.87
+fixed_fps = 15
 process_material = SubResource("ParticleProcessMaterial_ictbq")
 
 [node name="Gun_explosion_pic" type="Sprite2D" parent="Guns"]

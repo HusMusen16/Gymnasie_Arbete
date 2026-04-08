@@ -29,6 +29,7 @@ position = Vector2(0, 27)
 rotation = 3.14159
 target_position = Vector2(4.89568e-06, 56)
 collision_mask = 35
+hit_from_inside = true
 
 [node name="Dissipation Timer" type="Timer" parent="."]
 wait_time = 3.0

@@ -4,7 +4,10 @@
 
 [node name="LEVEL_3" instance=ExtResource("1_ng0s0")]
 level_number = 3
-enemy_spawnrate = 5.0
-chaser_spawnrate = 14.0
+enemy_spawnrate = 1.0
+chaser_spawnrate = 4.0
 meteor_spawnrate = 10.0
 difficulty_timer_time = 40.0
+
+[node name="Surge_MotherShips" parent="MotherPath" index="1"]
+position = Vector2(4377, 2556)

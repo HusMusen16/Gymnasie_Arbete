@@ -62,7 +62,7 @@ func _on_explosion_radius_body_entered(body: Node2D) -> void:
 		body.damage(ENEMY_CHASER)
 
 	elif body is SPACESTATION:
-		body.health -= 5
+		body.health -= 10
 		
 	elif body is METEOR:
 		body.explode()
