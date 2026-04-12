@@ -1,16 +1,19 @@
 extends CharacterBody2D
 class_name  MOTHERSHIP
 
-var player = null
-var number = 0
-var rotation_comparison = null
-var rotation_checked: bool = false
-var player_lost: bool = false
+"""
+EXPLANATION OF THE UNIT
 
-var health = 5
-var just_spawned: bool = true
-var tutorial: bool = false
+The heaviest armed and armored ship of the enemies main
+invasion fleet. Is equipped with thick armour requiring 
+5 plasma blasts to destroy. It is also equipped with 3 
+cannons firing bigger and stronger lasers than normal
+at the player.
+"""
 
+
+
+############################## ON READY VARIABLES ##############################
 #Gun scenes
 @onready var gun1 = $Guns/Gun
 @onready var gun2 = $Guns/Gun2
@@ -44,20 +47,27 @@ var tutorial: bool = false
 @onready var destruction_audio_player: AudioStreamPlayer2D = $Destruction_Audio
 
 
-############### GENERAL FUNKTIOSN ###############
-func _physics_process(_delta: float) -> void:
-	if rotation_comparison != null and not rotation_checked: 
-		gun1.rotation_adjustment = rotation_comparison
-		gun2.rotation_adjustment = rotation_comparison
-		gun3.rotation_adjustment = rotation_comparison
-		rotation_checked = true
-	if player_lost:
-		_on_player_data_timer_timeout()
+
+################################## VARIABLES ###################################
+var player = null
+var number = 0
+var rotation_comparison = null
+var rotation_checked: bool = false
+
+var health = 5
+var just_spawned: bool = true
+var tutorial: bool = false
+
 
 
 
 ################# DAMAGE FUNKTIONS ##############
 func _damage_progress():
+	"""
+	The damage progression of the ship. The first and last damage does nothing 
+	visually. The 3 after that however removes one gun each with an animation
+	and also adds visual damage to the hull of the ship. 
+	"""
 	if health == 3:
 		gun1.hide()
 		gun_anim.play("Gun_Explosion")
@@ -85,6 +95,10 @@ func _damage_progress():
 
 
 func damage():
+	"""
+	the funktion that removes the ships health when damaged. Also kills the ship
+	when the health reaches 0. Here is also where _damage_progress() is called.
+	"""
 	if health > 0:
 		health -= 1
 		damage_sound_player.play()
@@ -106,6 +120,11 @@ func damage():
 
 
 func ftl_jump():
+	"""
+	plays the animation for when the ship first enters the game area. Also has 
+	an animation if it escapes from combat. When it first spawns in the ship
+	is not visible as you otherwise can see it teleport to its actual position.
+	"""
 	if just_spawned:
 		FTL_jump_sound_player.play()
 		big_explosion_anim.play("FTL-Jump in")
@@ -117,13 +136,28 @@ func ftl_jump():
 		await big_explosion_anim.animation_finished
 		queue_free()
 
+
+
 #################### TIMERS ##################
 func _on_player_data_timer_timeout() -> void:
+	"""
+	When the timer runs out the ship will be able to give its guns references for 
+	the player and the ships parent node motherships (in the level scene) for 
+	a reference to when the rotation of the ship changes (rotation_comparison), 
+	otherwise the cannons will not point in the correct direction.
+	It is also called when the player dies to remove the reference to the player
+	from the guns. 
+	The funktion is necessary as the _ready() funktion refuses to give the guns
+	the reference to the player.  
+	"""
+	if rotation_comparison != null: 
+		gun1.rotation_adjustment = rotation_comparison
+		gun2.rotation_adjustment = rotation_comparison
+		gun3.rotation_adjustment = rotation_comparison
 	if player != null:
 		gun1.player = player
 		gun2.player = player
 		gun3.player = player
-		player_data_timer.stop()
 	else:
 		gun1.player = null
 		gun2.player = null
@@ -131,5 +165,10 @@ func _on_player_data_timer_timeout() -> void:
 
 
 func _on_escape_timer_timeout() -> void:
+	"""
+	this timer activates in the _damage_progess() funktion and will cause the
+	ship to escape after a certain amount of time when no cannons are left to
+	defend it. It will not do this in the tutorial though.
+ 	"""
 	if health > 0 and not tutorial:
 		ftl_jump()

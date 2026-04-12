@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://i5qfxx08x3nd"]
 
 [ext_resource type="Texture2D" uid="uid://d3p8crc2gdqo6" path="res://assets/PNG/Power-ups/powerupBlue_bolt.png" id="1_3udgi"]
-[ext_resource type="Script" uid="uid://s3252wrbt2uw" path="res://Scripts/unlimited_plasma_pickup.gd" id="1_qd00r"]
+[ext_resource type="Script" uid="uid://s3252wrbt2uw" path="res://Scripts/unlimited_plasma_powerup.gd" id="1_qd00r"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qd00r"]
 size = Vector2(36, 36)

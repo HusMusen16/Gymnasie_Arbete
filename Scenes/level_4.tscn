@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://d0b70vgsfllp8"]
+[gd_scene load_steps=26 format=3 uid="uid://d0b70vgsfllp8"]
 
 [ext_resource type="Script" uid="uid://oiobsy3iu82p" path="res://Scripts/tutorial.gd" id="1_wk15n"]
 [ext_resource type="AudioStream" uid="uid://csdfjmx0om1c5" path="res://assets/Used Sounds/DSGNImpt_EXPLOSION-Laser Impact_HY_PC-006.wav" id="2_5a8oa"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://bbarwl0lj48df" path="res://assets/Foozle_2DS0015_Void_EnvironmentPack/Backgrounds/PNGs/Split up/Starry background  - Layer 03 - Stars.png" id="4_7huqf"]
 [ext_resource type="PackedScene" uid="uid://drqkl0c1bf0f8" path="res://Scenes/player.tscn" id="5_di0d6"]
 [ext_resource type="FontFile" uid="uid://cxd5mqvh2vjyw" path="res://assets/Sounds and fonts/kenvector_future_thin.ttf" id="6_54c2w"]
+[ext_resource type="FontFile" uid="uid://dpe8uao72ch2i" path="res://assets/Sounds and fonts/PixeloidSansBold-1jpBg.ttf" id="7_3ntyy"]
 [ext_resource type="PackedScene" uid="uid://dmp7uigcx27sy" path="res://Scenes/pause_menu.tscn" id="7_3v663"]
 [ext_resource type="FontFile" uid="uid://char6vsrnv4ll" path="res://assets/Sounds and fonts/PixeloidSans-lxa3y.ttf" id="7_5a8oa"]
 
@@ -283,6 +284,31 @@ grow_horizontal = 0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 value = 100.0
 
+[node name="PlayerBonusHealth" type="ColorRect" parent="HUD"]
+visible = false
+offset_left = 1513.0
+offset_top = 100.0
+offset_right = 1656.0
+offset_bottom = 120.0
+scale = Vector2(2, 2)
+color = Color(0.752941, 0.752941, 0.752941, 1)
+
+[node name="BonusHealthBar" type="ProgressBar" parent="HUD/PlayerBonusHealth"]
+modulate = Color(0.054902, 0.827451, 0, 1)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -139.0
+offset_top = 2.0
+offset_right = -3.0
+offset_bottom = 18.0
+grow_horizontal = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("7_3ntyy")
+theme_override_font_sizes/font_size = 10
+show_percentage = false
+
 [node name="PlasmaBlastCooldown" type="ColorRect" parent="HUD"]
 visible = false
 offset_left = 1532.0
@@ -353,7 +379,6 @@ grow_horizontal = 2
 grow_vertical = 0
 theme_override_fonts/font = ExtResource("7_5a8oa")
 theme_override_font_sizes/font_size = 30
-text = "LORES IPSUMLORES IPSUMLORES IPSUMLORES IPSUMLORES IPSUMLORES IPSUMLORES IPSUMLORES IPSUM"
 horizontal_alignment = 1
 
 [node name="Pause menu" parent="." instance=ExtResource("7_3v663")]

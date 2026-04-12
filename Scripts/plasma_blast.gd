@@ -1,21 +1,44 @@
 extends Line2D
 class_name PLASMA
 
-const SPEED = 1500
 
+"""
+EXPLANATION OF THE UNIT
+
+A experimental explosive weapon with a fuse from the 
+Federation of Earth. It is a powerful plasma round that 
+explodes upon impact or after a certain time capable
+of penetrating even the strongest of armour.
+"""
+
+
+########################### ON READY VARIABLES #################################
 @onready var explosion_timer: Timer = $explosion_timer
 @onready var ray_cast: RayCast2D = $RayCast2D
 @onready var explosion_picture: Sprite2D = $Explosion_picture
 @onready var anim: AnimationPlayer = $ExplosionAnimation
 @onready var explosion_area: Area2D = $ExplosionArea
 
+
+
+############################### VARIABLES ######################################
 var moving: bool = true
 var mothership_damaged: bool = false
 
 
 
+############################# CONSTANTS ########################################
+const SPEED = 1500
+
+
+
 ################# MOVEMENT FUNKTIONS #################
 func _plasma_movement(delta: float):
+	"""
+	The basic movement of the plasma bolt. Checks its rotation and moves it
+	in that direction. Rotation is inherited from the player. This funktion is
+	identical to that of _laser_movement() in the laser script.
+	"""
 	if rotation_degrees == 0:
 		global_position[1] -= SPEED * delta
 		
@@ -37,6 +60,10 @@ func _plasma_movement(delta: float):
 
 ################ GENERAL FUNKTIONS ################
 func _physics_process(delta: float):
+	"""
+	Makes sure the plasma bolt keeps moving until it explodes.
+	Also checks if it is colliding.
+	"""
 	if moving:
 		_plasma_movement(delta)
 	if ray_cast.is_colliding():
@@ -47,6 +74,12 @@ func _physics_process(delta: float):
 
 ############### DAMAGE FUNKTIONS #################
 func _on_area_2d_body_entered(body: Node2D) -> void:
+	"""
+	The explosion area for the plasma blast. If a enemy of any sort is inside it,
+	it will be damaged/destroyed.
+	Importanlty also checks if it has already damaged a mothership as it otherwise
+	will repeatably damage it if the game is repeatably paused and unpaused. 
+	"""
 	if body is ENEMY or body is ENEMY_CHASER:
 		body.explode()
 	if body is METEOR:
@@ -59,6 +92,12 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 
 #################### TIMERS ####################
 func _on_explosion_timer_timeout() -> void:
+	"""
+	The fuse of the plasma blast. When this timer times out it will make
+	the projectile explode even if no enemy is nearby. It also makes sure to
+	stop the movement of the explosion and activates the area that monitors 
+	if any enemy is inside.
+	"""
 	moving = false
 	explosion_area.monitoring = true
 	self.self_modulate = Color(0,0,0,0)

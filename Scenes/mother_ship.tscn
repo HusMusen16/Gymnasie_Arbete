@@ -426,6 +426,7 @@ libraries = {
 }
 
 [node name="Player_Data_Timer" type="Timer" parent="."]
+one_shot = true
 autostart = true
 
 [node name="Escape_Timer" type="Timer" parent="."]

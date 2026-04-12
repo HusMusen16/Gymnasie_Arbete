@@ -24,6 +24,7 @@ LevelManager="*res://Scenes/level_manager.tscn"
 window/size/viewport_width=2100
 window/size/viewport_height=1250
 window/stretch/mode="canvas_items"
+mouse_cursor/custom_image="uid://d0ynron16hkb5"
 window/max_fps=0
 
 [input]

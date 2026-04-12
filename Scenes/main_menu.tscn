@@ -1,4 +1,4 @@
-[gd_scene load_steps=134 format=3 uid="uid://dk18b3myes2o1"]
+[gd_scene load_steps=136 format=3 uid="uid://dk18b3myes2o1"]
 
 [ext_resource type="Texture2D" uid="uid://dsxkk6qsvn0hw" path="res://assets/Foozle_2DS0015_Void_EnvironmentPack/Backgrounds/PNGs/Condesed/Starry background  - Layer 01 - Void.png" id="1_28flt"]
 [ext_resource type="Script" uid="uid://c6a4rmqyoh03m" path="res://Scripts/main_menu.gd" id="1_ce3w2"]
@@ -11,6 +11,8 @@
 [ext_resource type="FontFile" uid="uid://char6vsrnv4ll" path="res://assets/Sounds and fonts/PixeloidSans-lxa3y.ttf" id="6_vr1f0"]
 [ext_resource type="Texture2D" uid="uid://cnfxn1urs5gab" path="res://assets/Foozle_2DS0015_Void_EnvironmentPack/Backgrounds/PNGs/Split up/Starry background - Layer X -Black hole.png" id="6_yhxw7"]
 [ext_resource type="Texture2D" uid="uid://crwkd14m38y2m" path="res://assets/Foozle_2DS0015_Void_EnvironmentPack/Backgrounds/PNGs/Split up/Starry background - Layer X - Big Star 2.png" id="7_vr1f0"]
+[ext_resource type="Texture2D" uid="uid://8qoweuncn1qv" path="res://assets/PNG/UI/buttonRed.png" id="11_t1dhk"]
+[ext_resource type="Texture2D" uid="uid://bbqo8hpwlfjo0" path="res://assets/PNG/UI/buttonYellow.png" id="12_5egv6"]
 
 [sub_resource type="Animation" id="Animation_ce3w2"]
 length = 0.001
@@ -931,7 +933,7 @@ offset_bottom = 98.0
 grow_horizontal = 2
 theme_override_fonts/font = ExtResource("5_16hvj")
 theme_override_font_sizes/font_size = 80
-text = "VALK   RIES OF THE STARS"
+text = "VALK   RIES OF THE SKIES"
 horizontal_alignment = 1
 
 [node name="Endless_button" type="TextureButton" parent="UI"]
@@ -1069,8 +1071,55 @@ sprite_frames = SubResource("SpriteFrames_hpy5d")
 autoplay = "default"
 frame_progress = 0.351029
 
+[node name="VBoxContainer" type="VBoxContainer" parent="UI"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 50.0
+offset_top = -200.0
+offset_right = 272.0
+offset_bottom = -118.0
+grow_vertical = 0
+scale = Vector2(2, 2)
+
+[node name="Quit_button" type="TextureButton" parent="UI/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+texture_normal = ExtResource("11_t1dhk")
+
+[node name="Label" type="Label" parent="UI/VBoxContainer/Quit_button"]
+layout_mode = 0
+offset_left = 25.0
+offset_top = 5.0
+offset_right = 200.0
+offset_bottom = 36.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_16hvj")
+theme_override_font_sizes/font_size = 25
+text = "Quit Game?"
+horizontal_alignment = 1
+
+[node name="Reset_Highscore_button" type="TextureButton" parent="UI/VBoxContainer"]
+custom_minimum_size = Vector2(334, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+texture_normal = ExtResource("12_5egv6")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="UI/VBoxContainer/Reset_Highscore_button"]
+offset_left = 25.0
+offset_top = 5.0
+offset_right = 309.0
+offset_bottom = 46.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_16hvj")
+theme_override_font_sizes/font_size = 25
+text = "Reset Highscore?"
+horizontal_alignment = 1
+
 [node name="Player" parent="." instance=ExtResource("5_n45e2")]
-position = Vector2(687, 79)
+position = Vector2(695, 78)
 rotation = 3.14159
 
 [node name="Lasers" type="Node" parent="."]
@@ -1081,4 +1130,6 @@ rotation = 3.14159
 [connection signal="pressed" from="UI/Mothership_surge_button" to="." method="_on_mothership_surge_button_pressed"]
 [connection signal="pressed" from="UI/Spacestation_defense_button" to="." method="_on_spacestation_defense_button_pressed"]
 [connection signal="pressed" from="UI/Tutorial_button" to="." method="_on_tutorial_button_pressed"]
+[connection signal="pressed" from="UI/VBoxContainer/Quit_button" to="." method="_on_quit_button_pressed"]
+[connection signal="pressed" from="UI/VBoxContainer/Reset_Highscore_button" to="." method="_on_reset_highscore_button_pressed"]
 [connection signal="laser" from="Player" to="." method="_on_player_laser"]
